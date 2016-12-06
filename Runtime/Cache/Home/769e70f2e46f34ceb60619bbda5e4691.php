@@ -1,10 +1,8 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 <title><?php echo C('WEB_SITE_TITLE');?></title>
-<meta charset="utf-8">
-<title>一哥车业</title>
 <meta name="keywords" content="wsg,hth">
 <meta name="description" content="ASW">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
@@ -100,12 +98,9 @@
         <div class="w1200">
             <div class="daoh_1 fl">
                 <ul>
-                    <li><a class="a1" href="index.php">首页</a></li>
-                    <li><a href="sell.php">二手车出售</a></li>
-                    <li><a href="purchase.php">二手车求购</a></li>
-                    <li><a href="news.php">新闻资讯</a></li>
-                    <li><a href="about.php">关于我们</a></li>
-                    <li><a href="contact.php">联系我们</a></li>
+                <?php $__NAV__ = M('Channel')->field(true)->where("status=1")->order("sort")->select();$__NAV__ = list_to_tree($__NAV__, "id", "pid", "_"); if(is_array($__NAV__)): $i = 0; $__LIST__ = $__NAV__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$nav): $mod = ($i % 2 );++$i; $daoh = split('/',$nav['url']); ?>
+                    <?php if(($nav["pid"]) == "0"): ?><li><a  href="<?php echo (get_nav_url($nav["url"])); ?>" <?php if($daoh[0] == CONTROLLER_NAME): ?>class="a1"<?php endif; ?>><?php echo ($nav["title"]); ?></a></li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+
                 </ul>
                 <div class="clear"></div>
             </div>
@@ -591,7 +586,7 @@
 </div>
 <div class="bottom1">
     <div class="w1200">
-        <p class="fl">Copyright© 深圳市车缘汇二手车交易有限公司粤ICP备12011307号 QBTECH.All Rights Reserved.</p>
+        <p class="fl"><?php echo C('WEB_SITE_ICP');?></p>
         <p class="fr"><a href="">二手车出售</a><em>|</em><a href="">二手车求购</a></p>
     </div>
 </div>
