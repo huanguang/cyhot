@@ -27,7 +27,7 @@ class UcenterMemberModel extends Model{
 	/* 用户模型自动验证 */
 	protected $_validate = array(
 		/* 验证用户名 */
-		array('username', '1,30', -1, self::EXISTS_VALIDATE, 'length'), //用户名长度不合法
+		array('username', '11', -1, self::EXISTS_VALIDATE, 'length'), //用户名长度不合法
 		array('username', 'checkDenyMember', -2, self::EXISTS_VALIDATE, 'callback'), //用户名禁止注册
 		array('username', '', -3, self::EXISTS_VALIDATE, 'unique'), //用户名被占用
 
@@ -41,9 +41,9 @@ class UcenterMemberModel extends Model{
 		array('email', '', -8, self::EXISTS_VALIDATE, 'unique'), //邮箱被占用
 
 		/* 验证手机号码 */
-		array('mobile', '//', -9, self::EXISTS_VALIDATE), //手机格式不正确 TODO:
-		array('mobile', 'checkDenyMobile', -10, self::EXISTS_VALIDATE, 'callback'), //手机禁止注册
-		array('mobile', '', -11, self::EXISTS_VALIDATE, 'unique'), //手机号被占用
+//		array('phone', '//', -9, self::EXISTS_VALIDATE), //手机格式不正确 TODO:
+//		array('phone', 'checkDenyMobile', -10, self::EXISTS_VALIDATE, 'callback'), //手机禁止注册
+//		array('phone', '', -11, self::EXISTS_VALIDATE, 'unique'), //手机号被占用
 	);
 
 	/* 用户模型自动完成 */

@@ -18,11 +18,11 @@ class UserController extends HomeController {
 
 	/* 用户中心首页 */
 	public function index(){
-		
+
 	}
 
 	/* 注册页面 */
-	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
+	public function register($phone = '', $password = '', $repassword = '', $email = '', $verify = ''){
         if(!C('USER_ALLOW_REGISTER')){
             $this->error('注册已关闭');
         }
@@ -35,11 +35,11 @@ class UserController extends HomeController {
 			/* 检测密码 */
 			if($password != $repassword){
 				$this->error('密码和重复密码不一致！');
-			}			
+			}
 
 			/* 调用注册接口注册用户 */
             $User = new UserApi;
-			$uid = $User->register($username, $password, $email);
+			$uid = $User->register($phone, $password, $email);
 			if(0 < $uid){ //注册成功
 				//TODO: 发送验证邮件
 				$this->success('注册成功！',U('login'));
@@ -53,22 +53,32 @@ class UserController extends HomeController {
 	}
 
 	/* 登录页面 */
-	public function login($username = '', $password = '', $verify = ''){
+	public function login($phone = '', $password = '', $verify = ''){
 		if(IS_POST){ //登录验证
 			/* 检测验证码 */
 			if(!check_verify($verify)){
 				$this->error('验证码输入错误！');
 			}
+                                /*判断是手机号登录 还是邮箱登录*/
 
-			/* 调用UC登录接口登录 */
-			$user = new UserApi;
-			$uid = $user->login($username, $password);
+                                if($_POST['phone']){
+                                        /* 调用UC登录接口登录 */
+                                        $user = new UserApi;
+                                        $uid = $user->login($phone, $password);
+
+                                }elseif($_POST['email']){
+
+                                     /* 调用UC登录接口登录 */
+                                        $user = new UserApi;
+                                        $type = 2;
+                                        $uid = $user->login($username, $password,$type);
+                                }
 			if(0 < $uid){ //UC登录成功
 				/* 登录用户 */
 				$Member = D('Member');
 				if($Member->login($uid)){ //登录用户
 					//TODO:跳转到登录前页面
-					$this->success('登录成功！',U('Home/Index/index'));
+					$this->success('登录成功！',U('Home/User/news'));
 				} else {
 					$this->error($Member->getError());
 				}
@@ -110,17 +120,17 @@ class UserController extends HomeController {
 	 */
 	private function showRegError($code = 0){
 		switch ($code) {
-			case -1:  $error = '用户名长度必须在16个字符以内！'; break;
-			case -2:  $error = '用户名被禁止注册！'; break;
-			case -3:  $error = '用户名被占用！'; break;
+			case -1:  $error = '手机号码长度必须在16个字符！'; break;
+			case -2:  $error = '手机号码被禁止注册！'; break;
+			case -3:  $error = '手机号码被占用！'; break;
 			case -4:  $error = '密码长度必须在6-30个字符之间！'; break;
 			case -5:  $error = '邮箱格式不正确！'; break;
 			case -6:  $error = '邮箱长度必须在1-32个字符之间！'; break;
 			case -7:  $error = '邮箱被禁止注册！'; break;
 			case -8:  $error = '邮箱被占用！'; break;
-			case -9:  $error = '手机格式不正确！'; break;
-			case -10: $error = '手机被禁止注册！'; break;
-			case -11: $error = '手机号被占用！'; break;
+//			case -9:  $error = '手机格式不正确！'; break;
+//			case -10: $error = '手机被禁止注册！'; break;
+//			case -11: $error = '手机号被占用！'; break;
 			default:  $error = '未知错误';
 		}
 		return $error;
@@ -160,5 +170,13 @@ class UserController extends HomeController {
             $this->display();
         }
     }
+
+//  我的消息
+
+public function news(){
+
+     $this->display('User/user_news');
+}
+
 
 }

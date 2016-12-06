@@ -1,4 +1,5 @@
-    <div class="head w1200">
+<block name="header">
+<div class="head w1200">
         <ul>
             <li class="li1"><a href="index.php"><img src="__IMG__/logo.png" alt=""></a></li>
             <li class="li2">
@@ -78,11 +79,12 @@
             </div>
             <div class="daoh_2 fr">
                 <ul>
-                    <li><a class="a1" href="sign_in.php">登录</a></li>
-                    <li><a href="register.php">注册</a></li>
+                    <li><a class="a1" href="{:U('User/login')}">登录</a></li>
+                    <li><a href="{:U('User/register')}">注册</a></li>
                 </ul>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
         </div>
     </div>
+    </block>
