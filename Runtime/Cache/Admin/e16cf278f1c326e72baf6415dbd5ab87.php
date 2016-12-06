@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo ($meta_title); ?>|OneThink管理平台</title>
-    <link href="/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="/Public/Admin/css/base.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/Public/Admin/css/common.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/Public/Admin/css/module.css">
-    <link rel="stylesheet" type="text/css" href="/Public/Admin/css/style.css" media="all">
-	<link rel="stylesheet" type="text/css" href="/Public/Admin/css/<?php echo (C("COLOR_STYLE")); ?>.css" media="all">
+    <link href="/ot/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="/ot/Public/Admin/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/ot/Public/Admin/css/common.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/ot/Public/Admin/css/module.css">
+    <link rel="stylesheet" type="text/css" href="/ot/Public/Admin/css/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/ot/Public/Admin/css/<?php echo (C("COLOR_STYLE")); ?>.css" media="all">
      <!--[if lt IE 9]>
-    <script type="text/javascript" src="/Public/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/ot/Public/static/jquery-1.10.2.min.js"></script>
     <![endif]--><!--[if gte IE 9]><!-->
-    <script type="text/javascript" src="/Public/static/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="/Public/Admin/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="/ot/Public/static/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/ot/Public/Admin/js/jquery.mousewheel.js"></script>
     <!--<![endif]-->
     
 </head>
@@ -143,7 +143,7 @@
             
 
             
-	<script type="text/javascript" src="/Public/static/uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript" src="/ot/Public/static/uploadify/jquery.uploadify.min.js"></script>
 	<div class="main-title cf">
 		<h2>
 			新增<?php echo (get_document_model($info["model_id"],'title')); ?> [
@@ -201,7 +201,7 @@
 							    /* 初始化上传插件 */
 								$("#upload_picture_<?php echo ($field["name"]); ?>").uploadify({
 							        "height"          : 30,
-							        "swf"             : "/Public/static/uploadify/uploadify.swf",
+							        "swf"             : "/ot/Public/static/uploadify/uploadify.swf",
 							        "fileObjName"     : "download",
 							        "buttonText"      : "上传图片",
 							        "uploader"        : "<?php echo U('File/uploadPicture',array('session_id'=>session_id()));?>",
@@ -218,7 +218,7 @@
 							    	var src = '';
 							        if(data.status){
 							        	$("#cover_id_<?php echo ($field["name"]); ?>").val(data.id);
-							        	src = data.url || '' + data.path
+							        	src = data.url || '/ot' + data.path
 							        	$("#cover_id_<?php echo ($field["name"]); ?>").parent().find('.upload-img-box').html(
 							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
 							        	);
@@ -243,7 +243,7 @@
 							    /* 初始化上传插件 */
 								$("#upload_file_<?php echo ($field["name"]); ?>").uploadify({
 							        "height"          : 30,
-							        "swf"             : "/Public/static/uploadify/uploadify.swf",
+							        "swf"             : "/ot/Public/static/uploadify/uploadify.swf",
 							        "fileObjName"     : "download",
 							        "buttonText"      : "上传附件",
 							        "uploader"        : "<?php echo U('File/upload',array('session_id'=>session_id()));?>",
@@ -305,17 +305,17 @@
     <script type="text/javascript">
     (function(){
         var ThinkPHP = window.Think = {
-            "ROOT"   : "", //当前网站地址
-            "APP"    : "/admin.php?s=", //当前项目地址
-            "PUBLIC" : "/Public", //项目公共目录地址
+            "ROOT"   : "/ot", //当前网站地址
+            "APP"    : "/ot/admin.php?s=", //当前项目地址
+            "PUBLIC" : "/ot/Public", //项目公共目录地址
             "DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
             "MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
             "VAR"    : ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"]
         }
     })();
     </script>
-    <script type="text/javascript" src="/Public/static/think.js"></script>
-    <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
+    <script type="text/javascript" src="/ot/Public/static/think.js"></script>
+    <script type="text/javascript" src="/ot/Public/Admin/js/common.js"></script>
     <script type="text/javascript">
         +function(){
             var $window = $(window), $subnav = $("#subnav"), url;
@@ -387,11 +387,11 @@
         }();
     </script>
     
-<link href="/Public/static/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
-<?php if(C('COLOR_STYLE')=='blue_color') echo '<link href="/Public/static/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">'; ?>
-<link href="/Public/static/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="/Public/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/Public/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<link href="/ot/Public/static/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<?php if(C('COLOR_STYLE')=='blue_color') echo '<link href="/ot/Public/static/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">'; ?>
+<link href="/ot/Public/static/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/ot/Public/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/ot/Public/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
 
 $('#submit').click(function(){

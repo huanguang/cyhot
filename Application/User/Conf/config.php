@@ -15,5 +15,5 @@
 define('UC_APP_ID', 1); //应用ID
 define('UC_API_TYPE', 'Model'); //可选值 Model / Service
 define('UC_AUTH_KEY', '9{#D".|vn]8pdQzI2j><hf3!KGb?5=o^CSg0P,$l'); //加密KEY
-define('UC_DB_DSN', 'mysql://qbteigze:Web2012!@localhost:3306/qbt_dome'); // 数据库连接，使用Model方式调用API必须配置此项
+define('UC_DB_DSN', 'mysql://root:@localhost:3306/qbt_ot'); // 数据库连接，使用Model方式调用API必须配置此项
 define('UC_TABLE_PREFIX', 'onethink_'); // 数据表前缀，使用Model方式调用API必须配置此项
