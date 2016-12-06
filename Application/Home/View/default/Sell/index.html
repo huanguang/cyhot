@@ -1,0 +1,128 @@
+<extend name="Base/common"/>
+<block name="head">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<script type="text/javascript" src="__JS__/script.js"></script><!-- 筛选 -->
+<link rel="stylesheet" type="text/css" href="__CSS__/select.css"><!-- 筛选 -->
+</block>
+<block name="body">
+<div class="brand lujin_div">
+	<div class="w1200 brand_div">
+		<div class="lujin">
+			<ul>
+				<li>二手车出售</li>
+				<li class="li1"><a href="{:U('Sell/add')}">免费发布信息</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>		
+	</div>
+</div>
+<div class="screen_div w1200">
+	<ul class="select">
+		<li class="select-list">
+			<dl id="select1">
+				<dt>类型：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">轿车</a></dd>
+				<dd><a href="#">越野车/SUV</a></dd>
+				<dd><a href="#">MPV</a></dd>
+				<dd><a href="#">跑车</a></dd>
+				<dd><a href="#">客车</a></dd>
+				<dd><a href="#">面包车</a></dd>
+				<dd><a href="#">新能源</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select2">
+				<dt>品牌：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">大众</a></dd>
+				<dd><a href="#">本田</a></dd>
+				<dd><a href="#">别克</a></dd>
+				<dd><a href="#">丰田</a></dd>
+				<dd><a href="#">宝马</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select3">
+				<dt>价格：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">3万以下</a></dd>
+				<dd><a href="#">3-5万</a></dd>
+				<dd><a href="#">5-7万</a></dd>
+				<dd><a href="#">7-9万</a></dd>
+				<dd><a href="#">9-12万</a></dd>
+				<dd><a href="#">13-20万</a></dd>
+				<dd><a href="#">20万以上</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select4">
+				<dt>车龄：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">1年以内</a></dd>
+				<dd><a href="#">1-3年</a></dd>
+				<dd><a href="#">3-5年</a></dd>
+				<dd><a href="#">5-7年</a></dd>
+				<dd><a href="#">7-9年</a></dd>
+				<dd><a href="#">10年以上</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select5">
+				<dt>变速箱：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">手动</a></dd>
+				<dd><a href="#">自动</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select6">
+				<dt>排量：</dt>
+				<dd class="select-all selected"><a href="#">不限</a></dd>
+				<dd><a href="#">1.0以下</a></dd>
+				<dd><a href="#">1.0-1.6</a></dd>
+				<dd><a href="#">1.6-2.0</a></dd>
+				<dd><a href="#">2.0-2.5</a></dd>
+				<dd><a href="#">2.5-3.0</a></dd>
+				<dd><a href="#">3.0-4.0</a></dd>
+				<dd><a href="#">4.0以上</a></dd>
+			</dl>
+		</li>
+		<li class="select-result">
+			<dl>
+				<dt>已选条件：</dt>
+				<dd class="select-no">暂时没有选择过滤条件</dd>
+			</dl>
+		</li>
+	</ul>	
+</div>
+<div class="blank40"></div>
+<div class="slide_box hot_div w1200">
+	<ul class="hot_ul product_ul">
+		<volist name="selllist" id="val">
+		<li>
+			<a href="{:U('Sell/details',array('id'=>$val['id']))}">
+				<img src="Uploads/sellimg/{$val.imgurl}" />
+				<span class="span_poa">新</span>
+				<div class="li_product">
+					<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+					<p class="p1">{$val.years}上牌 | 行驶11.7万公里</p>
+					<p class="p2"><b>{$val.sfer_price}万</b> <em>13.90万</em><i>认证</i></p>
+				</div>
+			</a>
+		</li>
+		</volist>
+
+
+		
+	</ul>
+	<div class="clear"></div>
+</div>
+{$page}
+<div class="blank30"></div>
+</block>
