@@ -1,0 +1,309 @@
+
+
+<extend name="Base/common"/>
+
+
+<block name="head">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/magnifier.css" rel="stylesheet" type="text/css"><!-- 放大镜特效 -->
+<script src="__JS__/magnifier.js"></script><!-- 放大镜特效 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+</block>
+<block name="body">
+<div class="brand lujin_div">
+	<div class="w1200 brand_div">
+		<div class="lujin">
+			<ul>
+				<li>二手车出售</li>
+				<li><i>></i></li>
+				<li><a href="">海马</a></li>
+				<li><i>></i></li>
+				<li><a href="">海南马自达323</a></li>
+				<li class="li1"><a href="{:U('Sell/add')}">免费发布信息</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>		
+	</div>
+</div>
+<div class="blank30"></div>
+<div class="w1200">
+	<div class="sell_details_fl">
+		<div id="MagnifierWrap2">
+			<div class="MagnifierMain"><!-- 图片尺寸 600*450 -->
+			<volist name="imglist" id="imgval">
+				<if condition='$key == 0'>
+				<img class="MagTargetImg" src="Uploads/sellimg/{$imgval.imgurl}"> 
+				</if>
+			</volist>
+			</div>
+			<span class="spe_leftBtn">&lt;</span>
+			<span class="spe_rightBtn on">&gt;</span>
+			<div class="spec-items"> 
+				<ul>
+				<volist name="imglist" id="imgval">
+					<li <if condition='$key == 0'>class="on" </if>><img src="Uploads/sellimg/{$imgval.imgurl}"></li>
+				</volist>
+					
+				</ul>
+			</div>
+		</div>	
+	</div>
+	<div class="sell_details_fr">
+		<h2>海马 2002款 1.8 手动 舒适型</h2>
+		<div class="div1">
+			<div class="fl div1_1">￥{$sellinfo.sfer_price}万</div>
+			<div class="fl div1_2">
+				<p>为您节省0万</p>
+				<p>新车价：0万+0万（购置税）</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="div2">
+			<div class="div2_1 div2_11">
+				<p class="p1">{$sellinfo.driven}万公里</p>
+				<p class="p2">行驶里程</p>
+			</div>
+			<div class="div2_1 div2_12">
+				<p class="p1">{$sellinfo.years}</p>
+				<p class="p2">首次上牌</p>
+			</div>
+			<div class="div2_1 div2_13">
+				<p class="p1">2.0L/自动</p>
+				<p class="p2">排量／变速箱</p>
+			</div>
+			<div class="clear"></div>			
+		</div>
+		<div class="div3">
+			<span></span>{$sellinfo.contact_number}
+			<div class="clear"></div>
+		</div>
+		<div class="div4">
+			<p>商家： 周龙</p>
+			<p>看车地址： {$sellinfo.address}</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="blank35"></div>
+<div class="w1200">
+	<div class="w900 fl slide_box">
+		<div class="hd sell_cy">
+			<ul class="ul_1"><li>车辆信息</li><!-- <li>车源图片</li> --></ul>
+			<div class="clear"></div>
+		</div>
+		<div class="blank20"></div>
+		<div class="bd">
+			<div>
+				<div class="sell_cy1" style="border-bottom:1px solid #ddd">
+					<h2>基本信息</h2>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sell_ta">
+					  <tr>
+					    <td><p>上牌时间：2015年6月</p></td>
+					    <td><p>行驶里程：1.5万公里</p></td>
+					    <td><p>车辆颜色：白</p></td>
+					    <td><p>交强险到期：2017年6月</p></td>
+					  </tr>
+					  <tr>
+					    <td><p>维修保养：4S店维修保养 </p></td>
+					    <td><p>年检到期：2021年6月</p></td>
+					    <td><p>商业险到期：2017年6月</p></td>
+					    <td>&nbsp;</td>
+					  </tr>
+					</table>
+				</div>
+				<div class="sell_cy1">
+					<h2>配置信息</h2>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sell_ta">
+					  <tr>
+					    <td><p>排量： 2.0L </p></td>
+					    <td><p>长宽高： 4878*1925*1734</p></td>
+					    <td><p>驱动方式： 前置前驱</p></td>
+					    <td><p>变速箱： 6档 自动  </p></td>
+					  </tr>
+					  <tr>
+					    <td colspan="4">
+					    	<p>车辆描述</p>
+					    	<p>价格不贵，有需要的朋友，及时来电！</p>
+					    </td>
+				      </tr>
+					</table>
+					<div class="sell_cy2">
+					<img src="images/q1.png" alt="">
+					<img src="images/q1.png" alt="">
+				</div>
+				</div>				
+			</div>
+			<!-- <div>
+				
+			</div> -->
+		</div>
+		<script type="text/javascript">jQuery(".slide_box").slide({trigger:"click"});</script>
+		<div class="clear"></div>
+		<div class="rmtj">
+			<h2 class="h2_title">同品牌推荐</h2>
+			<div class="blank30"></div>
+			<ul class="hot_ul product_ul">
+				<?php for($i=0;$i<2;$i++){?> 
+				<li>
+					<a href="">
+						<img src="images/1.jpg" />
+						<span class="span_poa">新</span>
+						<div class="li_product">
+							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/2.jpg" />
+						<span class="span_poa">新</span>
+						<div class="li_product">
+							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="images/3.jpg" />
+						<span class="span_poa">新</span>
+						<div class="li_product">
+							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+						</div>
+					</a>
+				</li>
+
+				<?php }?>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="w245 fr">
+		<h2 class="h2_title">热门二手车推荐</h2>
+		<div class="blank20"></div>
+		<ul class="hot_ul product_ul">
+			
+			<li>
+				<a href="">
+					<img src="images/1.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/2.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/3.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>			
+			<li>
+				<a href="">
+					<img src="images/4.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="images/3.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>			
+			<li>
+				<a href="">
+					<img src="images/4.jpg" />
+					<span class="span_poa">新</span>
+					<div class="li_product">
+						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+					</div>
+				</a>
+			</li>
+			
+		</ul>
+		<div class="clear"></div>		
+	</div>
+	
+
+
+
+	<div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="blank40"></div>
+</block>
