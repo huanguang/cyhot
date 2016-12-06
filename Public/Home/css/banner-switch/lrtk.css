@@ -1,0 +1,28 @@
+
+
+/*本例css*/
+.bannerbox { width: 570px; height: 535px; margin:0; position: relative; overflow:hidden; margin-bottom: 15px; }
+
+/*数字按钮样式*/
+.bannerbox .num { overflow:hidden; height: 15px; position: absolute; bottom:12px; left:50%; zoom:1; z-index:3;margin-left:-70px;}
+.bannerbox .num li { width: 15px; height: 15px; line-height: 15px; text-align: center; font-weight: 400; font-family: "微软雅黑", Arial; color: #FFFFFF; 
+background: #444444; margin-right: 10px; border-radius:50%; cursor:pointer; float: left;text-indent:999px;opacity:0.7;}
+.bannerbox .num li.on { background: #e5e5e5;opacity:1;} /*当前项*/
+
+/*上一个  下一个*/
+.bannerbox .prev,
+.bannerbox .next { display: none; width: 40px; height: 100px; background: url(../banner-switch/images/btn.png) no-repeat; position: absolute; top: 50%; margin-top:-50px;}
+.bannerbox .prev { left: 0; }
+.bannerbox .next { right: 0; background-position: right }
+
+
+.bannerbox1 { width:100%; height:425px; position: relative; overflow:hidden; }
+.bannerbox1 .num { overflow:hidden; height: 15px; position: absolute; bottom:12px; left:50%; zoom:1; z-index:3;margin-left:-60px;}
+.bannerbox1 .num li { width: 15px; height: 15px; line-height: 15px; text-align: center; font-weight: 400; font-family: "微软雅黑", Arial; color: #FFFFFF; background: #444444; margin-right: 10px; border-radius:50%; cursor:pointer; float: left;text-indent:999px;opacity:0.7;}
+.bannerbox1 .num li.on { background: #e5e5e5;opacity:1;}
+.bannerbox1 .prev,.bannerbox1 .next{display:none;width:40px;height:100px;background:url(../banner-switch/images/btn.png) no-repeat;position:absolute;top:155px;}
+.bannerbox1 .prev { left: 0; }
+.bannerbox1 .next { right: 0; background-position: right }
+.bannerpic1 li{height:425px;width:100%;background-size:100% 100%;}
+.bannerpic1 li a{display:block;height:100%;}
+

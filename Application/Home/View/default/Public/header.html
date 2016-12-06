@@ -1,47 +1,85 @@
-<!-- 导航条
-================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="{:U('index/index')}">OneThink</a>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <think:nav name="nav">
-                    	<eq name="nav.pid" value="0">
-                        <li>
-                            <a href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}</a>
-                        </li>
-                        </eq>
-                    </think:nav>
+    <div class="head w1200">
+        <ul>
+            <li class="li1"><a href="index.php"><img src="__IMG__/logo.png" alt=""></a></li>
+            <li class="li2">
+                <div class="nice-select" name="nice-select">
+                    <input type="text" value="深圳" readonly>
+                    <ul>
+                        <li data-value="1">深圳</li>
+                        <li data-value="2">广州</li>
+                        <li data-value="3">上海</li>
+                        <li data-value="4">北京</li>
+                    </ul>
+                </div>
+                <script>
+                    $('[name="nice-select"]').click(function(e){
+                        $('[name="nice-select"]').find('ul').hide();
+                        $(this).find('ul').show();
+                        e.stopPropagation();
+                    });
+                    $('[name="nice-select"] li').hover(function(e){
+                        $(this).toggleClass('on');
+                        e.stopPropagation();
+                    });
+                    $('[name="nice-select"] li').click(function(e){
+                        var val = $(this).text();
+                        $(this).parents('[name="nice-select"]').find('input').val(val);
+                        $('[name="nice-select"] ul').hide();
+                        e.stopPropagation();
+                    });
+                    $(document).click(function(){
+                        $('[name="nice-select"] ul').hide();
+                    });
+                </script>
+            </li>
+            <li class="li3">
+                <div class="inp_div">
+                    <form action="" method="post">
+                        <input type="text" name="" class="inp_1 fl" placeholder="请输入您想要的车">
+                        <input type="submit" name="" class="inp_anv fr" value="">
+                    </form>
+                    <div class="clear"></div>
+                </div>
+                <p class="p1">
+                    <a href="">大众</a>
+                    <a href="">丰田</a>
+                    <a href="">本田</a>
+                    <a href="">奔驰</a>
+                    <a href="">奥迪</a>
+                    <a href="">宝马</a>
+                </p>
+            </li>
+            <li class="li4">
+                <a href="">手机版
+                    <div class="div_poa">
+                        <img src="__IMG__/head_ewm.png" alt="">
+                    </div>
+                </a>
+            </li>
+            <li class="li5">0755-36631111</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="navigation">
+        <div class="w1200">
+            <div class="daoh_1 fl">
+                <ul>
+                    <li><a class="a1" href="index.php">首页</a></li>
+                    <li><a href="sell.php">二手车出售</a></li>
+                    <li><a href="purchase.php">二手车求购</a></li>
+                    <li><a href="news.php">新闻资讯</a></li>
+                    <li><a href="about.php">关于我们</a></li>
+                    <li><a href="contact.php">联系我们</a></li>
                 </ul>
+                <div class="clear"></div>
             </div>
-            <div class="nav-collapse collapse pull-right">
-                <if condition="is_login()">
-                    <ul class="nav" style="margin-right:0">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{:U('User/profile')}">修改密码</a></li>
-                                <li><a href="{:U('User/logout')}">退出</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                <else/>
-                    <ul class="nav" style="margin-right:0">
-                        <li>
-                            <a href="{:U('User/login')}">登录</a>
-                        </li>
-                        <li>
-                            <a href="{:U('User/register')}" style="padding-left:0;padding-right:0">注册</a>
-                        </li>
-                    </ul>
-                </if>
+            <div class="daoh_2 fr">
+                <ul>
+                    <li><a class="a1" href="sign_in.php">登录</a></li>
+                    <li><a href="register.php">注册</a></li>
+                </ul>
+                <div class="clear"></div>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
-</div>

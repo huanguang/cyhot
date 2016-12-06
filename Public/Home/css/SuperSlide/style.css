@@ -1,0 +1,37 @@
+/* css 重置 */
+
+        /* 本例子css */
+     
+        .slide_box .hd .ul_1 li.on{ border-bottom: 2px solid #0264c6; color: #0264c6;cursor: pointer }
+        
+
+
+
+                .picScroll{ width:450px;  overflow:hidden; position:relative;  border:1px solid #ccc;   }
+                .picScroll .hd{ overflow:hidden;  height:30px; background:#f4f4f4; padding:0 10px;  }
+                .picScroll .hd .prev,.picScroll .hd .next{ display:block;  width:5px; height:9px; float:right; margin-right:5px; margin-top:10px;  overflow:hidden;cursor:pointer; background:url("../SuperSlide/images/arrow.png") no-repeat;}
+                .picScroll .hd .next{background-position:0 -50px;}
+                .picScroll .hd .prevStop{ background-position:-60px 0; }
+                .picScroll .hd .nextStop{ background-position:-60px -50px; }
+                .picScroll .hd ul{ float:right; overflow:hidden; zoom:1; margin-top:10px; zoom:1; }
+                .picScroll .hd ul li{ float:left;  width:9px; height:9px; overflow:hidden; margin-right:5px; text-indent:-999px; cursor:pointer; background:url("../SuperSlide/images/icoCircle.gif") 0 -9px no-repeat; }
+                .picScroll .hd ul li.on{ background-position:0 0; }
+                .picScroll .bd{ padding:10px;}
+                .picScroll .bd ul{ overflow:hidden; zoom:1; }
+                .picScroll .bd ul li{ margin:0 8px; float:left; _display:inline; overflow:hidden; text-align:center;  }
+                .picScroll .bd ul li .pic{ text-align:center; }
+                .picScroll .bd ul li .pic img{ width:120px; height:90px; display:block;  padding:2px; border:1px solid #ccc; }
+                .picScroll .bd ul li .pic a:hover img{ border-color:#999;  }
+                .picScroll .bd ul li .title{ line-height:24px;   }
+
+                .txtScroll-top{ width:450px;  overflow:hidden; position:relative;  border:1px solid #ccc;   }
+                .txtScroll-top .hd{ overflow:hidden;  height:30px; background:#f4f4f4; padding:0 10px;  }
+                .txtScroll-top .hd .prev,.txtScroll-top .hd .next{ display:block;  width:9px; height:5px; float:right; margin-right:5px; margin-top:12px;  overflow:hidden;
+                         cursor:pointer; background:url("../SuperSlide/images/icoUp.gif") no-repeat;}
+                .txtScroll-top .hd .next{ background:url("../SuperSlide/images/icoDown.gif") no-repeat;  }
+                .txtScroll-top .hd ul{ float:right; overflow:hidden; zoom:1; margin-top:10px; }
+                .txtScroll-top .hd ul li{ float:left;  width:9px; height:9px; overflow:hidden; margin-right:5px; text-indent:-999px; cursor:pointer; background:url("../SuperSlide/images/icoCircle.gif") 0 -9px no-repeat; }
+                .txtScroll-top .hd ul li.on{ background-position:0 0; }
+                .txtScroll-top .bd{ padding:15px;  }
+                .txtScroll-top .infoList li{ height:24px; line-height:24px;   }
+                .txtScroll-top .infoList li .date{ float:right; color:#999;  }

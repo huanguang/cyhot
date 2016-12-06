@@ -1,47 +1,386 @@
 <extend name="Base/common"/>
 
-<block name="header">
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-            <h2>源自相同起点，演绎不同精彩！</h2>
-            <p class="lead"></p>
-        </div>
-    </header>
-</block>
-
-<block name="side">
-<!-- 左侧 nav
-================================================== -->
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-            {:W('Category/lists', array(1, true))}
-        </ul>
-    </div>
-</block>
-
 <block name="body">
-    <div class="span9">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-            <article:list name="article" category="1" child="true">
-                <div class="">
-                    <h3><a href="{:U('Article/detail?id='.$article['id'])}">{$article.title}</a></h3>
-                </div>
-                <div>
-                    <p class="lead">{$article.description}</p>
-                </div>
-                <div>
-                    <span><a href="{:U('Article/detail?id='.$article['id'])}">查看全文</a></span>
-                    <span class="pull-right">
-                        <span class="author">{$article.uid|get_username}</span>
-                        <span>于 {$article.create_time|date='Y-m-d H:i',###}</span> 发表在 <span>
-                        <a href="{:U('Article/lists?category='.get_category_name($article['category_id']))}">{$article.category_id|get_category_title}</a></span> ( 阅读：{$article.view} )
-                    </span>
-                </div>
-                <hr/>
-            </article:list>
-
-        </section>
+  <div class="bannerbox1">
+    <ul class="bannerpic1"><!--1920*425-->
+        <li style="background: url(__IMG__/banner.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
+        <li style="background: url(__IMG__/01.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
+        <li style="background: url(__IMG__/banner.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
+        <li style="background: url(__IMG__/03.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
+    </ul>
+    <a class="prev" href="javascript:void(0)"></a>
+    <a class="next" href="javascript:void(0)"></a>
+    <div class="num" style="display:none">
+        <ul></ul>
     </div>
+    <div class="ksmc">
+        <h2>快速卖车<span>已有<em>293460</em>人成功卖车</span></h2>
+        <form action="" method="post">
+            <input class="inp_2" type="text" name="" placeholder="请输入您的手机号">
+            <input class="inp_mc" name="" type="submit" value="我要卖车">
+        </form>
+    </div>
+</div>
+<script>
+    $(".bannerbox1").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".bannerbox1").slide({titCell:".num ul",mainCell:".bannerpic1",effect:"fold",autoPlay:true,delayTime:700,autoPage:true,trigger:"click"});
+</script>
+<!--banner end-->
+<div class="brand">
+    <div class="w1200 brand_div">
+        <h2 class="h2_title">热门品牌</h2>
+        <div class="div_sx">
+            <a href="">A</a>
+            <a href="">B</a>
+            <a href="">C</a>
+            <a href="">D</a>
+            <a href="">E</a>
+            <a href="">F</a>
+            <a href="">G</a>
+            <a href="">H</a>
+            <a href="">I</a>
+            <a href="">J</a>
+            <a href="">K</a>
+            <a href="">L</a>
+            <a href="">M</a>
+            <a href="">N</a>
+            <a href="">O</a>
+            <a href="">P</a>
+            <a href="">Q</a>
+            <a href="">R</a>
+            <a href="">S</a>
+            <a href="">T</a>
+            <a href="">U</a>
+            <a href="">V</a>
+            <a href="">W</a>
+            <a href="">X</a>
+            <a href="">Y</a>
+            <a href="">Z</a>
+        </div>
+    </div>
+</div>
+<div class="brand1">
+    <div class="w1200">
+        <div class="bra_cx1">
+            <ul>
+                <li><a href=""><img src="__IMG__/ico_1.png" alt=""><p>大众</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_2.png" alt=""><p>沃尔沃</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_3.png" alt=""><p>日产</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_4.png" alt=""><p>本田</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_5.png" alt=""><p>丰田</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_6.png" alt=""><p>奥迪</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_7.png" alt=""><p>别克</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_8.png" alt=""><p>福特</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_9.png" alt=""><p>宝马</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_10.png" alt=""><p>奔驰</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_11.png" alt=""><p>马自达</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_12.png" alt=""><p>现代</p></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="bra_cx2">
+            <ul>
+                <li><a href="">低首付</a></li>
+                <li><a href="">零月供</a></li>
+                <li><a href="">5万以内</a></li>
+                <li><a href="">5-10万</a></li>
+                <li><a href="">10-15万</a></li>
+                <li><a href="">15-20万</a></li>
+                <li><a href="">20-30万</a></li>
+                <li><a href="">30-50万</a></li>
+                <li><a href="">50万以上</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="bra_cx3">
+            <ul>
+                <li><a href=""><img src="__IMG__/ico_a1.png" alt=""><p>SUV</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_a2.png" alt=""><p>面包车</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_a3.png" alt=""><p>跑车</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_a4.png" alt=""><p>MPV</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_a5.png" alt=""><p>皮卡</p></a></li>
+                <li><a href=""><img src="__IMG__/ico_a6.png" alt=""><p>商务</p></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="recommend">
+    <div class="w1200">
+        <h2 class="h2_title">热门推荐</h2>
+        <div class="blank20"></div>
+            <!--切换-->
+            <div class="scrollBox" style="margin:0 auto">
+            <div class="ohbox">
+                    <ul class="piclist hot_ul">
+                        <li>
+                        <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/1.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/2.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/3.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/4.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                        </a>
+                        </li>
+                        <li>
+                            <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/5.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/6.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/7.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sell_xx.php" target="_blank">
+                                <img src="__IMG__/8.jpg" />
+                                <span class="span_poa">新</span>
+                                <div class="li_product">
+                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+            </div>
+            <div class="pageBtn">
+                <span class="prev">&lt;</span>
+                <span class="next">&gt;</span>
+                <ul class="list" style="display:none"><li>0</li><li>1</li></ul>
+            </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(".scrollBox").slide({ titCell:".list li", mainCell:".piclist", effect:"left",vis:4,scroll:4,delayTime:800,trigger:"click",easing:"easeOutCirc"});
+    </script>
+
+    </div>
+</div>
+
+<div class="slide_box hot_div w1200">
+    <div class="hd hot_sx">
+        <h2 class="h2_title">热门好车</h2>
+        <ul class="ul_1"><li>最新车源</li><li>最热车源</li></ul>
+    </div>
+    <div class="blank30"></div>
+    <div class="bd">
+        <div>
+            <ul class="hot_ul product_ul">
+                <?php for($i=0;$i<4;$i++){?>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/1.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/2.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/3.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/4.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <?php }?>
+            </ul>
+            <div class="clear"></div>
+            <div class="div_anv"><a href="">查看更多</a></div>
+        </div>
+        <div>
+            <ul class="hot_ul product_ul">
+                <?php for($i=0;$i<4;$i++){?>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/8.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/7.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/6.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="sell_xx.php">
+                        <img src="__IMG__/5.jpg" />
+                        <span class="span_poa">新</span>
+                        <div class="li_product">
+                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
+                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
+                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                        </div>
+                    </a>
+                </li>
+                <?php }?>
+            </ul>
+            <div class="clear"></div>
+            <div class="div_anv"><a href="">查看更多</a></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">jQuery(".slide_box").slide({trigger:"click"});</script>
+<div class="blank45"></div>
+<div class="w1200 article">
+    <div class="article_fl">
+        <div class="redian_article">
+            <span class="span_poa"><img src="__IMG__/biaot_1.jpg" alt=""></span>
+            <div class="div1"><img src="__IMG__/t1.jpg" alt=""></div>
+            <div class="div2">
+                <ul>
+                    <li><a href="">QuestMobile二手车电商数据解读</a></li>
+                    <li><a href="">完成D轮1.5亿美元融资 王思聪参投</a></li>
+                    <li><a href="">用户自述两次购车经历：人人车，靠谱！</a></li>
+                    <li><a href="">没什么比善良更重要，产品也是</a></li>
+                    <li><a href="">二手车电商大战，，凭什么？</a></li>
+                    <li><a href="">完成D轮1.5亿美元融资 王思聪参投</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="article_fr">
+        <a href=""><div class="selected_div">
+            <span class="span_poa"><img src="__IMG__/biaot_2.jpg" alt=""></span>
+            <div class="div1 fl"><img src="__IMG__/t2.jpg" alt=""></div>
+            <div class="div2 fr">
+                <h2>帅到飞起，用十年二手老车漂出绝尘弧线</h2>
+                <p>帅气有型的头部，硬朗不失动感的身姿，少见的原装尾翼，大鹏眼中永远的驾驶者之车。高智商学霸仅花3天购车，他的经验是？老李，对风险和不可靠因素有着灵敏的嗅觉。2016年8月他在得一辆大众迈腾。</p>
+            </div>
+            <div class="clear"></div>
+        </div></a>
+        <div class="blank45"></div>
+        <a href=""><div class="selected_div">
+            <span class="span_poa"><img src="__IMG__/biaot_3.jpg" alt=""></span>
+            <div class="div1 fl"><img src="__IMG__/t3.jpg" alt=""></div>
+            <div class="div2 fr">
+                <h2>帅到飞起，用十年二手老车漂出绝尘弧线</h2>
+                <p>帅气有型的头部，硬朗不失动感的身姿，少见的原装尾翼，大鹏眼中永远的驾驶者之车。高智商学霸仅花3天购车，他的经验是？老李，对风险和不可靠因素有着灵敏的嗅觉。2016年8月他在得一辆大众迈腾。</p>
+            </div>
+            <div class="clear"></div>
+        </div></a>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="blank40"></div>
 </block>
