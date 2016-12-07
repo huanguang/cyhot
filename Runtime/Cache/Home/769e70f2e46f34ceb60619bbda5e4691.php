@@ -1,7 +1,8 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
+	
+<meta charset="utf-8">
 <title><?php echo C('WEB_SITE_TITLE');?></title>
 <meta name="keywords" content="wsg,hth">
 <meta name="description" content="ASW">
@@ -29,10 +30,13 @@
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
 <?php echo hook('pageHeader');?>
 
+
+
 </head>
 <body>
 	<!-- 头部 -->
-	    <div class="head w1200">
+	
+<div class="head w1200">
         <ul>
             <li class="li1"><a href="index.php"><img src="/ot/Public/Home/images/logo.png" alt=""></a></li>
             <li class="li2">
@@ -106,32 +110,20 @@
             </div>
             <div class="daoh_2 fr">
                 <ul>
-                    <li><a class="a1" href="sign_in.php">登录</a></li>
-                    <li><a href="register.php">注册</a></li>
+                    <li><a class="a1" href="<?php echo U('User/login');?>">登录</a></li>
+                    <li><a href="<?php echo U('User/register');?>">注册</a></li>
                 </ul>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
         </div>
     </div>
+    
 
 	<!-- /头部 -->
 	
 	<!-- 主体 -->
 	
-<div id="main-container" class="container">
-    <div class="row">
-        
-        <!-- 左侧 nav
-        ================================================== -->
-            <div class="span3 bs-docs-sidebar">
-                
-                <ul class="nav nav-list bs-docs-sidenav">
-                    <?php echo W('Category/lists', array($category['id'], ACTION_NAME == 'index'));?>
-                </ul>
-            </div>
-        
-        
   <div class="bannerbox1">
     <ul class="bannerpic1"><!--1920*425-->
         <li style="background: url(/ot/Public/Home/images/banner.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
@@ -515,20 +507,12 @@
 </div>
 <div class="blank40"></div>
 
-    </div>
-</div>
 
-<script type="text/javascript">
-    $(function(){
-        $(window).resize(function(){
-            $("#main-container").css("min-height", $(window).height() - 343);
-        }).resize();
-    })
-</script>
 	<!-- /主体 -->
 
 	<!-- 底部 -->
-	<div class="bottom">
+	
+<div class="bottom">
     <div class="w1200">
         <div class="bot_1">
             <ul>

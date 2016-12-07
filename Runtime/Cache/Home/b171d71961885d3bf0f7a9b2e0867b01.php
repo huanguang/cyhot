@@ -1,206 +1,279 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
-<title><?php echo C('WEB_SITE_TITLE');?></title>
-<link href="/ot/Public/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="/ot/Public/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="/ot/Public/static/bootstrap/css/docs.css" rel="stylesheet">
-<link href="/ot/Public/static/bootstrap/css/onethink.css" rel="stylesheet">
+	
+      <meta charset="utf-8">
+      <title>一哥车业</title>
+      <meta name="keywords" content="wsg,hth">
+      <meta name="description" content="ASW">
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="keywords" content="一哥车业">
+      <Meta name="description" Content="一哥车业">
+      <link href="/ot/Public/Home/css/css.css" rel="stylesheet" type="text/css">
+      <link href="/ot/Public/Home/css/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+      <script src="/ot/Public/Home/js/jquery.js"></script><!-- 统一调用js -->
+      <link href="/ot/Public/Home/css/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+      <script src="/ot/Public/Home/js/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+      <link href="/ot/Public/Home/css/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+      <link rel="stylesheet" href="/ot/Public/Home/css/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
+      <link href="/ot/Public/Home/css/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
+     <!--  <script type="text/javascript" src="css/Validform/js/Validform_v5.3.2_min.js"></script> --><!-- 13.0 表单提交验证 -->
+      <script type="text/javascript" src="/ot/Public/Home/css/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
+      <link href="/ot/Public/Home/css/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="/ot/Public/static/bootstrap/js/html5shiv.js"></script>
-<![endif]-->
 
-<!--[if lt IE 9]>
-<script type="text/javascript" src="/ot/Public/static/jquery-1.10.2.min.js"></script>
-<![endif]-->
-<!--[if gte IE 9]><!-->
-<script type="text/javascript" src="/ot/Public/static/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="/ot/Public/static/bootstrap/js/bootstrap.min.js"></script>
-<!--<![endif]-->
-<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
-<?php echo hook('pageHeader');?>
 
 </head>
 <body>
 	<!-- 头部 -->
-	<!-- 导航条
-================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="<?php echo U('index/index');?>">OneThink</a>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <?php $__NAV__ = M('Channel')->field(true)->where("status=1")->order("sort")->select(); if(is_array($__NAV__)): $i = 0; $__LIST__ = $__NAV__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$nav): $mod = ($i % 2 );++$i; if(($nav["pid"]) == "0"): ?><li>
-                            <a href="<?php echo (get_nav_url($nav["url"])); ?>" target="<?php if(($nav["target"]) == "1"): ?>_blank<?php else: ?>_self<?php endif; ?>"><?php echo ($nav["title"]); ?></a>
-                        </li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-                </ul>
-            </div>
-            <div class="nav-collapse collapse pull-right">
-                <?php if(is_login()): ?><ul class="nav" style="margin-right:0">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0"><?php echo get_username();?> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo U('User/profile');?>">修改密码</a></li>
-                                <li><a href="<?php echo U('User/logout');?>">退出</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                <?php else: ?>
-                    <ul class="nav" style="margin-right:0">
-                        <li>
-                            <a href="<?php echo U('User/login');?>">登录</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo U('User/register');?>" style="padding-left:0;padding-right:0">注册</a>
-                        </li>
-                    </ul><?php endif; ?>
-            </div>
+	
+      <div class="sign_top w1200">
+        <ul class="fl">
+          <li class="li1"><a href="index.php"><img src="/ot/Public/Home/images/logo.png" alt=""></a></li>
+          <!-- <li class="li2"><a href="forget.php">忘记密码</a></li> -->
+        </ul>
+        <div class="fr">
+          <div class="div1 fr">0755-36631111</div>
+          <div class="div2 fr"><a href="index.php">返回首页</a></div>
+          <div class="clear"></div>
         </div>
-    </div>
-</div>
+        <div class="clear"></div>
+      </div>
+
 
 	<!-- /头部 -->
 	
 	<!-- 主体 -->
 	
-<header class="jumbotron subhead" id="overview">
-  <div class="container">
-    <h2>用户登录</h2>
-    <p><span><span class="pull-left"><span>还没有账号? <a href="<?php echo U('User/register');?>">立即注册</a></span> </span></p>
-  </div>
-</header>
+      <div class="sign_center">
+    <div class="slide_box sign_div">
+      <div class="hd">
+        <ul>
+          <li class="li1 fl">手机登录</li>
+          <li class="li2 fr">邮箱登录</li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="bd">
+        <div>
+          <form action="/ot/index.php?s=/Home/User/login.html" method="post"  class="login-form">
+            <table width="500" border="0" cellspacing="0" cellpadding="0" class="sign_table">
+                <tr>
+                  <td class="td1">手机号</td>
+                  <td class="td2">
+                    <div class="div1">
+                          <input type="text" value="" class="sign_inp inp_s1" name="phone" datatype="n6-18" placeholder="请输入手机号码" errormsg="手机号码有误！" />
+                        </div>
+                        <div class="Validform_checktip"></div>
+                      </td>
+                </tr>
+                <tr>
+                  <td class="td1">密码</td>
+                  <td class="td2">
+                    <div class="div1">
+                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="n6-18" placeholder="请输入密码" errormsg="密码有误！" />
+                    </div>
+                    <div class="Validform_checktip"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1">验证码</td>
+                  <td class="td2">
+                    <div class="div1">
+                      <input type="password" value="" class="sign_inp inp_s1" name="verify" datatype="n6-18" placeholder="请输入验证码" errormsg="验证码有误！"
+                      style="width:40%" />
+                     <a href="javascript:void(0)"><span  class="agy14_1"><img class="verifyimgs" src="<?php echo U('verify');?>" alt=""></span>看不清？</a>
+                    </div>
+                    <div class="Validform_checktip"></div>
+                  </td>
+                </tr>
 
-<div id="main-container" class="container">
-    <div class="row">
-         
-        
-<section>
-	<div class="span12">
-        <form class="login-form" action="/ot/index.php?s=/Home/User/login.html" method="post">
-          <div class="control-group">
-            <label class="control-label" for="inputEmail">用户名</label>
-            <div class="controls">
-              <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">密码</label>
-            <div class="controls">
-              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">验证码</label>
-            <div class="controls">
-              <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('verify');?>" style="cursor:pointer;">
-            </div>
-            <div class="controls Validform_checktip text-warning"></div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> 自动登陆
-              </label>
-              <button type="submit" class="btn">登 陆</button>
-            </div>
-          </div>
-        </form>
-	</div>
-</section>
+                <tr>
+                  <td class="td1">&nbsp;</td>
+                  <td class="td2"><input class="inp_anv1" name="" type="submit" value="登录"></td>
+                </tr>
+                <tr>
+                  <td class="td1">&nbsp;</td>
+                  <td class="td2 td_xy">
+                  <a class="a2 fl" href="wjmm.php">忘记密码</a>
+                    <a class="a3 fr" href="register.php">还没有账号,马上注册！</a>
 
+                  </td>
+                </tr>
+            </table>
+          </form>
+        </div>
+        <div>
+          <form action="/ot/index.php?s=/Home/User/login.html" method="post" class="registerform">
+            <table width="500" border="0" cellspacing="0" cellpadding="0" class="sign_table">
+                <tr>
+                  <td class="td1">电子邮箱</td>
+                  <td class="td2">
+                    <div class="div1">
+                          <input type="text" value="" class="sign_inp inp_s1" name="email" datatype="n6-18" placeholder="请输入邮箱地址" errormsg="邮箱有误！" />
+                        </div>
+                        <div class="Validform_checktip"></div>
+                      </td>
+                </tr>
+                <tr>
+                  <td class="td1">密码</td>
+                  <td class="td2">
+                    <div class="div1">
+                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="n6-18" placeholder="请输入密码" errormsg="密码有误！" />
+                    </div>
+                    <div class="Validform_checktip"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1">验证码</td>
+                  <td class="td2">
+                    <div class="div1">
+                      <input type="password" value="" class="sign_inp inp_s1" name="verify" datatype="n6-18" placeholder="请输入验证码" errormsg="验证码有误！"
+                      style="width:40%" />
+                     <a href="javascript:void(0)"><span  class="agy14_1"><img class="verifyimgs" src="<?php echo U('verify');?>" alt=""></span>看不清？</a>
+                    </div>
+                    <div class="Validform_checktip"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1">&nbsp;</td>
+                  <td class="td2"><input class="inp_anv1" name="" type="submit" value="登录"></td>
+                </tr>
+                <tr>
+                  <td class="td1">&nbsp;</td>
+                  <td class="td2 td_xy">
+                  <a class="a2 fl" href="wjmm.php">忘记密码</a>
+                    <a class="a3 fr" href="register.php">还没有账号,马上注册！</a>
+                  </td>
+                </tr>
+            </table>
+          </form>
+
+        </div>
+      </div>
     </div>
-</div>
-
+  </div>
+<script type="text/javascript">jQuery(".slide_box").slide({trigger:"click"});</script>
 <script type="text/javascript">
-    $(function(){
-        $(window).resize(function(){
-            $("#main-container").css("min-height", $(window).height() - 343);
-        }).resize();
-    })
+$(function(){
+  //$(".registerform").Validform();  //就这一行代码！;
+
+  $(".registerform").Validform({
+    tiptype:2,
+    datatype:{
+      oldpassword:function(gets){
+        if(gets==$("#passwordold").val()){
+          return "新密码不能与旧密码一致！";
+        }
+      }
+    },
+    ajaxPost:true
+  });
+})
+
+  $(document)
+        .ajaxStart(function(){
+          $("button:submit").addClass("log-in").attr("disabled", true);
+        })
+        .ajaxStop(function(){
+          $("button:submit").removeClass("log-in").attr("disabled", false);
+        });
+
+
+      $("form").submit(function(){
+        var self = $(this);
+        $.post(self.attr("action"), self.serialize(), success, "json");
+        return false;
+
+        function success(data){
+          if(data.status){
+            window.location.href = data.url;
+          } else {
+            //self.find(".Validform_checktip").text(data.info);
+            alert(data.info);
+            //刷新验证码
+            $(".agy14_1").click();
+          }
+        }
+      });
+
+
+
+
+                    $(".agy14_1").click(function(){
+                      var verifyimg = $(".verifyimgs").attr("src");
+                       $(".verifyimgs").attr("src", verifyimg+'&random='+Math.random());
+
+                    });
 </script>
+
+
 	<!-- /主体 -->
 
 	<!-- 底部 -->
 	
-    <!-- 底部
-    ================================================== -->
-    <footer class="footer">
-      <div class="container">
-          <p> 本站由 <strong><a href="http://www.onethink.cn" target="_blank">OneThink</a></strong> 强力驱动</p>
-      </div>
-    </footer>
+<div class="bottom">
+    <div class="w1200">
+        <div class="bot_1">
+            <ul>
+                <li class="li_1">关于我们</li>
+                <li><a href="">公司介绍</a></li>
+                <li><a href="">公司荣誉</a></li>
+                <li><a href="">加入我们</a></li>
+            </ul>
+            <ul>
+                <li class="li_1">联系我们</li>
+                <li><a href="">联系电话</a></li>
+            </ul>
+            <ul>
+                <li class="li_1">新闻资讯</li>
+                <li><a href="">公司新闻</a></li>
+                <li><a href="">行业新闻</a></li>
+            </ul>
 
-<script type="text/javascript">
-(function(){
-	var ThinkPHP = window.Think = {
-		"ROOT"   : "/ot", //当前网站地址
-		"APP"    : "/ot/index.php?s=", //当前项目地址
-		"PUBLIC" : "/ot/Public", //项目公共目录地址
-		"DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
-		"MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
-		"VAR"    : ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"]
-	}
-})();
-</script>
-
-	<script type="text/javascript">
-
-    	$(document)
-	    	.ajaxStart(function(){
-	    		$("button:submit").addClass("log-in").attr("disabled", true);
-	    	})
-	    	.ajaxStop(function(){
-	    		$("button:submit").removeClass("log-in").attr("disabled", false);
-	    	});
-
-
-    	$("form").submit(function(){
-    		var self = $(this);
-    		$.post(self.attr("action"), self.serialize(), success, "json");
-    		return false;
-
-    		function success(data){
-    			if(data.status){
-    				window.location.href = data.url;
-    			} else {
-    				self.find(".Validform_checktip").text(data.info);
-    				//刷新验证码
-    				$(".reloadverify").click();
-    			}
-    		}
-    	});
-
-		$(function(){
-			var verifyimg = $(".verifyimg").attr("src");
-            $(".reloadverify").click(function(){
-                if( verifyimg.indexOf('?')>0){
-                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
-                }else{
-                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
-                }
-            });
-		});
-	</script>
- <!-- 用于加载js代码 -->
-<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
-<?php echo hook('pageFooter', 'widget');?>
-<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
-	
+            <div class="clear"></div>
+        </div>
+        <div class="bot_2">
+            <div class="div1 fl">
+                <img src="/ot/Public/Home/images/ewm.jpg" alt="">
+                <p>关注微信公众号</p>
+            </div>
+            <div class="div1 fr">
+                <img src="/ot/Public/Home/images/ewm.jpg" alt="">
+                <p>关注一哥车业手机版</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bot_3">
+            <h2>0755-36631111</h2>
+            <p>免费咨询(咨询、建议、投诉)</p>
+            <p>周一至周六 9:00-19:00</p>
+        </div>
+        <div class="clear"></div>
+        <div class="yqlj_div">
+            <div class="div1 fl">友情链接 :</div>
+            <div class="div2 fl">
+                <a href="">深圳二手车</a>
+                <a href="">深圳人才网</a>
+                <a href="">深圳二手车</a>
+                <a href="">深圳写字楼</a>
+                <a href="">深圳二手车估价</a>
+                <a href="">西游车展</a>
+                <a href="">深圳二手车</a>
+                <a href="">跟谁学深圳站</a>
+                <a href="">深圳汽车网</a>
+                <a href="">深圳家政</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="bottom1">
+    <div class="w1200">
+        <p class="fl"><?php echo C('WEB_SITE_ICP');?></p>
+        <p class="fr"><a href="">二手车出售</a><em>|</em><a href="">二手车求购</a></p>
+    </div>
 </div>
 
 	<!-- /底部 -->
