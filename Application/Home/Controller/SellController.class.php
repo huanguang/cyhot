@@ -20,20 +20,116 @@ class SellController extends HomeController {
     public function index(){
 
         $lists    = D('Document')->lists(null);
+        $Document = M('document');
+        $category = M('category');
+        //查询品牌出来
+        $brandlist = $category->where('pid = 41')->select();
+        
+        $this->assign('brandlist',$brandlist);
+        $get = I('get.');//接受筛选条件
+        $type_id = 0;
+        $brand_id = 0;
+        $gearbox_id = 0;
+        $carage_id = 0;
+        $driven_id = 0;
+        $price_id = 0;
+        $displacement_id = 0;
+        $where = array();
+        $where_html = '';
+        if(!empty($get['type_id'])){
+        	$where['type_id'] = $get['type_id'];
+        	$type_id = $get['type_id'];
+        	$type_title = $Document->where('id = '.$type_id)->getField('title');
+        	
+        }
+        if(!empty($get['displacement_id'])){
+        	$where['displacement_id'] = $get['displacement_id'];
+        	$displacement_id = $get['displacement_id'];
+        	$displacement_title = $Document->where('id = '.$displacement_id)->getField('title');
+        	
+        }
+        if(!empty($get['brand_id'])){
+        	$where['brand_id'] = $get['brand_id'];
+        	//$where .= " AND brand_id = ".$get['brand_id'];
+        	$brand_id = $get['brand_id'];
+        	$brand_title = $category->where('id = '.$brand_id)->getField('title');
+        	
+        }
+        if(!empty($get['gearbox_id'])){
+        	$where['gearbox_id'] = $get['gearbox_id'];
+        	//$where .= " AND gearbox_id = ".$get['gearbox_id'];
+        	$gearbox_id = $get['gearbox_id'];
+        	$gearbox_title = $Document->where('id = '.$gearbox_id)->getField('title');
+        	
+        }
+        if(!empty($get['carage_id'])){
+        	$where['carage_id'] = $get['carage_id'];
+        	//$where .= " AND carage_id = ".$get['carage_id'];
+        	$carage_id = $get['carage_id'];
+        	$carage_title = $Document->where('id = '.$carage_id)->getField('title');
+        	
+        }
+        if(!empty($get['driven_id'])){
+        	$where['driven_id'] = $get['driven_id'];
+        	//$where .= " AND driven_id = ".$get['driven_id'];
+        	$driven_id = $get['driven_id'];
+        	$driven_title = $Document->where('id = '.$driven_id)->getField('title');
+        	
+        }
+        if(!empty($get['price_id'])){
+        	$where['price_id'] = $get['price_id'];
+        	//$where .= " AND price_id = ".$get['price_id'];
+        	$price_id = $get['price_id'];
+        	$price_title = $Document->where('id = '.$price_id)->getField('title');
+        	
+
+        }
+
+        if(!empty($get['type_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>0,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id)).'">'.$type_title.'</a></dd>';
+
+        if(!empty($get['brand_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>$type_id,'brand_id'=>0,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id)).'">'.$brand_title.'</a></dd>';
+
+        if(!empty($get['gearbox_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>0,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id)).'">'.$gearbox_title.'</a></dd>';
+
+        if(!empty($get['carage_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>0,'driven_id'=>$driven_id,'price_id'=>$price_id)).'">'.$carage_title.'</a></dd>';
+
+        if(!empty($get['driven_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>0,'price_id'=>$price_id)).'">'.$driven_title.'</a></dd>';
+
+        if(!empty($get['price_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>0)).'">'.$price_title.'</a></dd>';
+
+        if(!empty($get['displacement_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Sell/index',array('type_id'=>0,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id)).'">'.$displacement_title.'</a></dd>';
+
+
+        //把对应的选中的信息查出来
+        $this->assign('type_id',$type_id);
+        $this->assign('brand_id',$brand_id);
+        $this->assign('gearbox_id',$gearbox_id);
+        $this->assign('carage_id',$carage_id);
+        $this->assign('driven_id',$driven_id);
+        $this->assign('price_id',$price_id);
+        $this->assign('displacement_id',$displacement_id);
+        $this->assign('where_html',$where_html);
 
         $this->assign('lists',$lists);//列表
         $User = M('sell'); // 实例化User对象
-		$count      = $User->count();// 查询满足要求的总记录数
+		$count      = $User->where($where)->count();// 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 		$show       = $Page->show();// 分页显示输出
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-		$selllist = $User->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$selllist = $User->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
+		$category  = M('category');
 		foreach ($selllist as $key => $value) {
 				$selllist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
+				$selllist[$key]['gearbox'] =  $Document->where('id = '.$value['gearbox_id'])->getField('title');
+				$selllist[$key]['brand_model'] =  $Document->where('id = '.$value['brand_model'])->getField('title');
+				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
+				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
+
 		}
+
 		$this->assign('selllist',$selllist);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
 
@@ -44,11 +140,29 @@ class SellController extends HomeController {
 
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
+		$Category  = M('category');
+		$list = $Category->where('pid = 41')->select();
+
+		$this->assign('list',$list);//品牌
+
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
         $this->assign('page',D('Document')->page);//分页
 
         $this->display();
+    }
+    //获取品牌下的类型车
+    public function brandsubordinate(){
+    	$post = I('post.');
+    	$document  = M('document');
+    	$list = $document->where('category_id = '.$post['id'])->select();
+    	if(!empty($list)){
+    		$arr = array('list'=>$list,'error'=>0,'msg'=>'获取成功');
+    		echo json_encode($list);die;
+    	}else{
+    		$arr = array('list'=>array(),'error'=>1,'msg'=>'没有获取到数据');
+    		echo json_encode($list);die;
+    	}
     }
 
     //信息详情
@@ -56,11 +170,58 @@ class SellController extends HomeController {
 
        $get = I('get.');
        $albumtable  = M('album');
+       $Document = M('document');
+       $category = M('category');
        $imglist = $albumtable->where('sell_id = '.$get['id'])->select();
        $this->assign('imglist',$imglist);//相册
        $selltable  = M('sell');
        $sellinfo = $selltable->where('id = '.$get['id'])->find();
+       $sellinfo['displacement'] = $Document->where('id = '.$sellinfo['displacement_id'])->getField('title') ? :'';
+       $sellinfo['gearbox'] = $Document->where('id = '.$sellinfo['gearbox_id'])->getField('title') ? :'';
+       $sellinfo['brand_model_title'] = $Document->where('id = '.$sellinfo['brand_model'])->getField('title') ? :'';
+       $sellinfo['level'] = $Document->where('id = '.$sellinfo['level_id'])->getField('title') ? :'';
+       $sellinfo['brand'] = $category->where('id = '.$sellinfo['brand_id'])->getField('title') ? :'';
+ 		
+       //查询同品牌信息
+       $sellbrandlist = $selltable->where('brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
+       foreach ($sellbrandlist as $key => $value) {
+       			//查询第一张图片
+       			$sellbrandlist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
+				$sellbrandlist[$key]['type'] =  $Document->where('id = '.$value['type_id'])->getField('title') ? :'';
+				$sellbrandlist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title') ? :'';
+				$sellbrandlist[$key]['gearbox'] =  $Document->where('id = '.$value['gearbox_id'])->getField('title') ? :'';
+				$sellbrandlist[$key]['carage'] =  $Document->where('id = '.$value['carage_id'])->getField('title') ? :'';
+
+				$sellbrandlist[$key]['brand_model_title'] =  $Document->where('id = '.$value['brand_model'])->getField('title') ? :'';
+				$sellbrandlist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title') ? :'';
+				$sellbrandlist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
+				if($value['id'] == $get['id']){
+					unset($sellbrandlist[$key]);
+				}
+			}
+
+			//查询同类型的热门二手车推荐
+			$selltypelist = $selltable->where('type_id = '.$sellinfo['type_id'])->order('add_time desc')->limit(6)->select();
+			foreach ($sellbrandlist as $key => $value) {
+       			//查询第一张图片
+       			$selltypelist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
+				$selltypelist[$key]['type'] =  $Document->where('id = '.$value['type_id'])->getField('title') ? :'';
+				$selltypelist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title') ? :'';
+				$selltypelist[$key]['gearbox'] =  $Document->where('id = '.$value['gearbox_id'])->getField('title') ? :'';
+				$selltypelist[$key]['carage'] =  $Document->where('id = '.$value['carage_id'])->getField('title') ? :'';
+				$selltypelist[$key]['brand_model_title'] =  $Document->where('id = '.$value['brand_model'])->getField('title') ? :'';
+				$selltypelist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title') ? :'';
+
+
+				$selltypelist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
+				if($value['id'] == $get['id']){
+					unset($selltypelist[$key]);
+				}
+			}
+
        $this->assign('sellinfo',$sellinfo);
+       $this->assign('selltypelist',$selltypelist);
+       $this->assign('sellbrandlist',$sellbrandlist);
         $this->display();
     }
 
@@ -76,6 +237,22 @@ class SellController extends HomeController {
     	if(empty($post['brand_id'])){
     		$this->error('车辆品牌必须选择');
     	}
+    	if(empty($post['brand_model'])){
+    		$this->error('车辆品牌型号必须选择');
+    	}
+    	if(empty($post['level_id'])){
+    		$this->error('车辆级别必须填写');
+    	}
+
+    	if(empty($post['year_id'])){
+    		$this->error('车辆级别必须填写');
+    	}
+    	
+    	if(empty($post['gearbox_id'])){
+    		$this->error('车辆变速箱必须填写');
+    	}
+
+    	
     	if($post['colour'] == ''){
     		$this->error('车辆颜色必须选择');
     	}
@@ -85,8 +262,25 @@ class SellController extends HomeController {
     	if($post['driven'] == ''){
     		$this->error('车辆行驶里程必须填写');
     	}
+
+    	if(empty($post['displacement_id'])){
+    		$this->error('车辆排量必须填写');
+    	}
+    	if(empty($post['insurance_endtime'])){
+    		$this->error('交强险到期时间必须填写');
+    	}
+    	if(empty($post['inspection_endtime'])){
+    		$this->error('年检到期时间必须填写');
+    	}
+    	if(empty($post['business_endtime'])){
+    		$this->error('商业险到期时间必须填写');
+    	}
+
     	if($post['sfer_price'] == ''){
     		$this->error('车辆转让价格必须填写');
+    	}
+    	if($post['new_price'] == ''){
+    		$this->error('新车价格必须填写');
     	}
     	if($post['description'] == ''){
     		$this->error('车辆补充说明必须填写');
@@ -156,7 +350,7 @@ class SellController extends HomeController {
 				$a->add($arr);
 			}
 
-			$this->sussecc('提交成功！！',U('Sell/index'));
+			$this->success('提交成功！！',U('Sell/index'));
 			
 
 
@@ -190,7 +384,7 @@ class SellController extends HomeController {
 		    if($up -> upload("file")) {
 		        //获取上传后文件名子
 		        $imgname = $up->getFileName();
-		        $arr = array("imgname"=>$imgname,'error'=>'0','msg'=>'上传成功！');
+		        $arr = array("imgname"=>$lu.'/'.$imgname,'error'=>'0','msg'=>'上传成功！');
 		        echo json_encode($arr);die; 
 		        //echo '</pre>';
 		    } else {

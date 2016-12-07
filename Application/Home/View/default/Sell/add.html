@@ -34,10 +34,9 @@
 	    		<div class="nice-select" name="select" style="width:170px; float:left">
 				<input type="text"  value="请选择品牌" readonly>
 				<ul>
-					<foreach name="lists" item="vo" >
-						<if condition="$vo.category_id  eq '41' ">
-						<li data-value="{$vo['id']}">{$vo['title']}</li>
-						</if>
+					<foreach name="list" item="vo" >
+						
+						<li data-value="{$vo['id']}" brandsubordinate="{$vo['id']}">{$vo['title']}</li>
 					</foreach>
 
 				</ul>
@@ -59,12 +58,190 @@
 					$(this).parents('[name="select"]').find('input').val(val);
 					var value = $(this).attr('data-value');
 					$("#brand_id").val(value);
+					$("#ppxh").val('请选择品牌型号');
+					$("#brand_model").val(0);
+					var brandsubordinate = $(this).attr('brandsubordinate');
+						$.ajax({
+				             type: "POST",
+				             url: "{:U('Sell/brandsubordinate')}",
+				             data: {id:brandsubordinate},
+				             dataType: "json",
+				             success: function(data){
+
+						           		var str = '';
+		                         	 for (var i = 0; i < data.length; i++) {
+		                         	 	str += '<li data-value="'+data[i].id+'" onclick="chose(this)" >'+data[i].title+'</li>';
+		                         	 }
+		                         	 $('#dd').html(str);
+		                         	 
+		                         	 
+		                      }
+         				});
 					$('[name="select"] ul').hide();
 					
 					e.stopPropagation();
 				});
 				$(document).click(function(){
 					$('[name="select"] ul').hide();
+				});
+			</script>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>品牌型号</td>
+	    <td><input class="inp_ty" name="brand_model" id="brand_model" type="hidden" value="0">
+	    		<div class="nice-select" id="pinpai" name="select50" style="width:170px; float:left">
+				<input type="text" id="ppxh" value="请选择品牌型号" readonly>
+				<ul id="dd">
+					
+
+				</ul>
+			</div>
+			<span style="float:left; margin-top:7px; margin-left:10px;"></span>
+			<script>
+				$("#ppxh").click(function(){
+					$("#dd").show();
+
+				});
+
+				$("#dd").find("li").each().hover(function(){
+					$(this).toggleClass('on');
+				});
+
+
+				
+				function chose(obj){
+					var data_value = $(obj).attr("data-value");
+					var val = $(obj).text();
+					$("#ppxh").val(val);
+					$("#brand_model").val(data_value);
+					$("#dd").hide();
+					
+					
+				}
+
+			</script>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>级别</td>
+	    <td><input class="inp_ty" name="level_id" id="level_id" type="hidden" value="0">
+	    		<div class="nice-select" name="select12" style="width:170px; float:left">
+				<input type="text"  value="请选择车辆级别" readonly>
+				<ul>
+					<foreach name="lists" item="vo" >
+						<if condition="$vo.category_id  eq '49' ">
+						<li data-value="{$vo['id']}">{$vo['title']}</li>
+						</if>
+					</foreach>
+
+				</ul>
+			</div>
+			<span style="float:left; margin-top:7px; margin-left:10px;"></span>
+			<script>
+				$('[name="select12"]').click(function(e){
+				    $('[name="select12"]').find('ul').hide();
+				    $(this).find('ul').show();
+					e.stopPropagation();
+
+				});
+				$('[name="select12"] li').hover(function(e){
+					$(this).toggleClass('on');
+					e.stopPropagation();
+				});
+				$('[name="select12"] li').click(function(e){
+					var val = $(this).text();
+					$(this).parents('[name="select12"]').find('input').val(val);
+					var value = $(this).attr('data-value');
+					$("#level_id").val(value);
+					$('[name="select12"] ul').hide();
+					
+					e.stopPropagation();
+				});
+				$(document).click(function(){
+					$('[name="select12"] ul').hide();
+				});
+			</script>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>年份</td>
+	    <td>
+	    		<div class="nice-select" name="select6" style="width:170px; float:left">
+				<input type="text" name="year_id"  value="请选择年份" readonly>
+				<ul>
+
+						<li data-value="2016">2016</li>
+						<li data-value="2015">2015</li>
+						<li data-value="2014">2014</li>
+
+
+				</ul>
+			</div>
+			<span style="float:left; margin-top:7px; margin-left:10px;"></span>
+			<script>
+				$('[name="select6"]').click(function(e){
+				    $('[name="select6"]').find('ul').hide();
+				    $(this).find('ul').show();
+					e.stopPropagation();
+
+				});
+				$('[name="select6"] li').hover(function(e){
+					$(this).toggleClass('on');
+					e.stopPropagation();
+				});
+				$('[name="select6"] li').click(function(e){
+					var val = $(this).text();
+					$(this).parents('[name="select6"]').find('input').val(val);
+					var value = $(this).attr('data-value');
+					
+					$('[name="select6"] ul').hide();
+					
+					e.stopPropagation();
+				});
+				$(document).click(function(){
+					$('[name="select"] ul').hide();
+				});
+			</script>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>变速箱</td>
+	    <td><input class="inp_ty" name="gearbox_id" id="gearbox_id" type="hidden" value="0">
+	    		<div class="nice-select" name="select7" style="width:170px; float:left">
+				<input type="text"  value="请选择变速箱" readonly>
+				<ul>
+					<foreach name="lists" item="vo" >
+						<if condition="$vo.category_id  eq '44' ">
+						<li data-value="{$vo['id']}">{$vo['title']}</li>
+						</if>
+					</foreach>
+
+				</ul>
+			</div>
+			<span style="float:left; margin-top:7px; margin-left:10px;"></span>
+			<script>
+				$('[name="select7"]').click(function(e){
+				    $('[name="select7"]').find('ul').hide();
+				    $(this).find('ul').show();
+					e.stopPropagation();
+
+				});
+				$('[name="select7"] li').hover(function(e){
+					$(this).toggleClass('on');
+					e.stopPropagation();
+				});
+				$('[name="select7"] li').click(function(e){
+					var val = $(this).text();
+					$(this).parents('[name="select7"]').find('input').val(val);
+					var value = $(this).attr('data-value');
+					$("#gearbox_id").val(value);
+					$('[name="select7"] ul').hide();
+					
+					e.stopPropagation();
+				});
+				$(document).click(function(){
+					$('[name="select7"] ul').hide();
 				});
 			</script>
 	    </td>
@@ -99,51 +276,41 @@
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>首次上牌时间</td>
-	    <td>
-		    <div class="nice-select" name="nice-select" style="width:170px; float:left">
-				<input type="text" name="years" value="请选择上牌时间" readonly>
-				<ul>
-					<li data-value="1"></li>
-					<li data-value="2">相关年份2</li>
-					<li data-value="3">相关年份3</li>
-					<li data-value="4">相关年份4</li>
-				</ul>
-			</div>
-			<span style="float:left; margin-top:7px; margin-left:10px;">年</span>
-			<script>
-				$('[name="nice-select"]').click(function(e){
-				    $('[name="nice-select"]').find('ul').hide();
-				    $(this).find('ul').show();
-					e.stopPropagation();
-
-				});
-				$('[name="nice-select"] li').hover(function(e){
-					$(this).toggleClass('on');
-					e.stopPropagation();
-				});
-				$('[name="nice-select"] li').click(function(e){
-					var val = $(this).text();
-					$(this).parents('[name="nice-select"]').find('input').val(val);
-					$('[name="nice-select"] ul').hide();
-					
-					e.stopPropagation();
-				});
-				$(document).click(function(){
-					$('[name="nice-select"] ul').hide();
-				});
-			</script>
-		</td>
+	    <td><div class="div1"><input class="inp_gls" name="years" type="text">年/月</div></td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>行驶里程</td>
 	    <td><div class="div1"><input class="inp_gls" name="driven" type="text">万公里</div></td>
 	  </tr>
 	  <tr>
+	    <td class="rele_td"><i>*</i>排量</td>
+	    <td><div class="div1"><input class="inp_gls" name="displacement_id" type="text">L</div></td>
+	  </tr>
+
+	  <tr>
+	    <td class="rele_td"><i>*</i>交强险到期时间</td>
+	    <td><div class="div1"><input class="inp_gls" name="insurance_endtime" type="text">年/月</div></td>
+	  </tr>
+
+	  <tr>
+	    <td class="rele_td"><i>*</i>年检到期时间</td>
+	    <td><div class="div1"><input class="inp_gls" name="inspection_endtime" type="text">年/月</div></td>
+	  </tr>
+
+	  <tr>
+	    <td class="rele_td"><i>*</i>商业险到期时间</td>
+	    <td><div class="div1"><input class="inp_gls" name="business_endtime" type="text">年/月</div></td>
+	  </tr>
+	  <tr>
 	    <td class="rele_td"><i>*</i>转让价格</td>
 	    <td><div class="div1"><input class="inp_gls" name="sfer_price" type="text">万元</div>
 	    <span style="float:left; margin-top:7px; margin-left:10px;">
-	    <input name="transferfee" type="checkbox" value="1" style="float:left; margin-top:5px; margin-right:5px;">
+	    <input name="transferfee"  checked="true" type="checkbox" value="1" style="float:left; margin-top:5px; margin-right:5px;">
 	    包含过户费用</span></td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>新车价格</td>
+	    <td><div class="div1"><input class="inp_gls" name="new_price" type="text">万元</div></td>
 	  </tr>
 	  <tr>
 	    <td valign="top" class="rele_td"><i>*</i>补充说明</td>
@@ -211,7 +378,7 @@
 	  <tr>
 	    <td class="rele_td"><i>*</i>是否定期4S店保养</td>
 	    <td>
-        	<label for="" style="margin-right:20px"><input name="maintenance" value="1" type="radio" id="checkbox_a1" class="chk_1 inp_fx" /><label for="checkbox_a1"></label>是</label>
+        	<label for="" style="margin-right:20px"><input name="maintenance" value="1" checked="true" type="radio" id="checkbox_a1" class="chk_1 inp_fx" /><label for="checkbox_a1"></label>是</label>
         	<label for=""><input name="maintenance" type="radio" value="0" id="checkbox_a2" class="chk_1 inp_fx" /><label for="checkbox_a2"></label>否</label>
         </td>
 	  </tr>
@@ -219,7 +386,7 @@
 	    <td class="rele_td"><i>*</i>联系人</td>
 	    <td>
 	    	<input class="inp_ty" name="contacts" type="text">
-			<label for="" style="margin:0 20px 0 10px"><input name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" /><label for="checkbox_a3"></label>个人</label>
+			<label for="" style="margin:0 20px 0 10px"><input  checked="true" name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" /><label for="checkbox_a3"></label>个人</label>
         	<label for=""><input name="danx1" type="radio" id="checkbox_a4" class="chk_1 inp_fx" /><label for="checkbox_a4"></label>商家</label>
 	    </td>
 	  </tr>

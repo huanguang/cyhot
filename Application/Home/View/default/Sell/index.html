@@ -26,77 +26,79 @@
 		<li class="select-list">
 			<dl id="select1">
 				<dt>类型：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">轿车</a></dd>
-				<dd><a href="#">越野车/SUV</a></dd>
-				<dd><a href="#">MPV</a></dd>
-				<dd><a href="#">跑车</a></dd>
-				<dd><a href="#">客车</a></dd>
-				<dd><a href="#">面包车</a></dd>
-				<dd><a href="#">新能源</a></dd>
+				<dd <if condition="$type_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>0,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '40' ">
+					<dd <if condition="$vo.id  eq $type_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$vo['id'],'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-list">
 			<dl id="select2">
 				<dt>品牌：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">大众</a></dd>
-				<dd><a href="#">本田</a></dd>
-				<dd><a href="#">别克</a></dd>
-				<dd><a href="#">丰田</a></dd>
-				<dd><a href="#">宝马</a></dd>
+				<dd <if condition="$brand_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>0,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="brandlist" item="vo" >
+
+					<dd <if condition="$vo.id  eq $brand_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-list">
 			<dl id="select3">
 				<dt>价格：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">3万以下</a></dd>
-				<dd><a href="#">3-5万</a></dd>
-				<dd><a href="#">5-7万</a></dd>
-				<dd><a href="#">7-9万</a></dd>
-				<dd><a href="#">9-12万</a></dd>
-				<dd><a href="#">13-20万</a></dd>
-				<dd><a href="#">20万以上</a></dd>
+				<dd <if condition="$price_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>0))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '42' ">
+					<dd <if condition="$vo.id  eq $price_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$vo['id']))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-list">
 			<dl id="select4">
 				<dt>车龄：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">1年以内</a></dd>
-				<dd><a href="#">1-3年</a></dd>
-				<dd><a href="#">3-5年</a></dd>
-				<dd><a href="#">5-7年</a></dd>
-				<dd><a href="#">7-9年</a></dd>
-				<dd><a href="#">10年以上</a></dd>
+				<dd <if condition="$carage_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>0,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '43' ">
+					<dd <if condition="$vo.id  eq $carage_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$vo['id'],'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-list">
 			<dl id="select5">
 				<dt>变速箱：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">手动</a></dd>
-				<dd><a href="#">自动</a></dd>
+				<dd <if condition="$gearbox_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>0,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '44' ">
+					<dd <if condition="$vo.id  eq $gearbox_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$vo['id'],'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-list">
 			<dl id="select6">
 				<dt>排量：</dt>
-				<dd class="select-all selected"><a href="#">不限</a></dd>
-				<dd><a href="#">1.0以下</a></dd>
-				<dd><a href="#">1.0-1.6</a></dd>
-				<dd><a href="#">1.6-2.0</a></dd>
-				<dd><a href="#">2.0-2.5</a></dd>
-				<dd><a href="#">2.5-3.0</a></dd>
-				<dd><a href="#">3.0-4.0</a></dd>
-				<dd><a href="#">4.0以上</a></dd>
+				<dd <if condition="$displacement_id eq '0'">class="select-all selected"</if>><a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>0,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '45' ">
+					<dd <if condition="$vo.id  eq $displacement_id ">class="select-all selected"</if>>
+					<a href="{:U('Sell/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id,'displacement_id'=>$vo['id']))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
 			</dl>
 		</li>
 		<li class="select-result">
 			<dl>
 				<dt>已选条件：</dt>
-				<dd class="select-no">暂时没有选择过滤条件</dd>
+				<dd class="select-no" <if condition="$where_html neq ''">style="display:none;"</if>>暂时没有选择过滤条件</dd>
+				{$where_html}
 			</dl>
 		</li>
 	</ul>	
@@ -110,9 +112,9 @@
 				<img src="Uploads/sellimg/{$val.imgurl}" />
 				<span class="span_poa">新</span>
 				<div class="li_product">
-					<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-					<p class="p1">{$val.years}上牌 | 行驶11.7万公里</p>
-					<p class="p2"><b>{$val.sfer_price}万</b> <em>13.90万</em><i>认证</i></p>
+					<h2>{$val.brand}{$val.brand_model} {$val.year_id}款  {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+					<p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+					<p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
 				</div>
 			</a>
 		</li>

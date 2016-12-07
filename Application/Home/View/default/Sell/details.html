@@ -19,9 +19,9 @@
 			<ul>
 				<li>二手车出售</li>
 				<li><i>></i></li>
-				<li><a href="">海马</a></li>
+				<li><a href="javascript:;">{$sellinfo.brand}</a></li>
 				<li><i>></i></li>
-				<li><a href="">海南马自达323</a></li>
+				<li><a href="javascript:;">{$sellinfo.brand}{$sellinfo.brand_model_title}</a></li>
 				<li class="li1"><a href="{:U('Sell/add')}">免费发布信息</a></li>
 			</ul>
 			<div class="clear"></div>
@@ -52,12 +52,12 @@
 		</div>	
 	</div>
 	<div class="sell_details_fr">
-		<h2>海马 2002款 1.8 手动 舒适型</h2>
+		<h2>{$sellinfo.brand} {$sellinfo.year_id}款 {$sellinfo.displacement_id} {$sellinfo.gearbox} {$sellinfo.level}</h2>
 		<div class="div1">
 			<div class="fl div1_1">￥{$sellinfo.sfer_price}万</div>
 			<div class="fl div1_2">
 				<p>为您节省0万</p>
-				<p>新车价：0万+0万（购置税）</p>
+				<p>新车价：{$sellinfo.new_price}万+0万（购置税）</p>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -71,7 +71,7 @@
 				<p class="p2">首次上牌</p>
 			</div>
 			<div class="div2_1 div2_13">
-				<p class="p1">2.0L/自动</p>
+				<p class="p1">{$sellinfo.displacement_id}/{$sellinfo.gearbox}</p>
 				<p class="p2">排量／变速箱</p>
 			</div>
 			<div class="clear"></div>			
@@ -81,7 +81,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="div4">
-			<p>商家： 周龙</p>
+			<p>商家： {$sellinfo.contacts}</p>
 			<p>看车地址： {$sellinfo.address}</p>
 		</div>
 	</div>
@@ -101,15 +101,15 @@
 					<h2>基本信息</h2>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sell_ta">
 					  <tr>
-					    <td><p>上牌时间：2015年6月</p></td>
-					    <td><p>行驶里程：1.5万公里</p></td>
-					    <td><p>车辆颜色：白</p></td>
-					    <td><p>交强险到期：2017年6月</p></td>
+					    <td><p>上牌时间：{$sellinfo.years}</p></td>
+					    <td><p>行驶里程：{$sellinfo.driven}万公里</p></td>
+					    <td><p>车辆颜色：{$sellinfo.colour}</p></td>
+					    <td><p>交强险到期：{$sellinfo.insurance_endtime}</p></td>
 					  </tr>
 					  <tr>
 					    <td><p>维修保养：4S店维修保养 </p></td>
-					    <td><p>年检到期：2021年6月</p></td>
-					    <td><p>商业险到期：2017年6月</p></td>
+					    <td><p>年检到期：{$sellinfo.inspection_endtime}</p></td>
+					    <td><p>商业险到期：{$sellinfo.business_endtime}</p></td>
 					    <td>&nbsp;</td>
 					  </tr>
 					</table>
@@ -118,22 +118,19 @@
 					<h2>配置信息</h2>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sell_ta">
 					  <tr>
-					    <td><p>排量： 2.0L </p></td>
+					    <td><p>排量： {$sellinfo.displacement_id} </p></td>
 					    <td><p>长宽高： 4878*1925*1734</p></td>
 					    <td><p>驱动方式： 前置前驱</p></td>
-					    <td><p>变速箱： 6档 自动  </p></td>
+					    <td><p>变速箱： {$sellinfo.gearbox}  </p></td>
 					  </tr>
 					  <tr>
 					    <td colspan="4">
 					    	<p>车辆描述</p>
-					    	<p>价格不贵，有需要的朋友，及时来电！</p>
+					    	<p>{$sellinfo.description}</p>
 					    </td>
 				      </tr>
 					</table>
-					<div class="sell_cy2">
-					<img src="images/q1.png" alt="">
-					<img src="images/q1.png" alt="">
-				</div>
+
 				</div>				
 			</div>
 			<!-- <div>
@@ -146,42 +143,21 @@
 			<h2 class="h2_title">同品牌推荐</h2>
 			<div class="blank30"></div>
 			<ul class="hot_ul product_ul">
-				<?php for($i=0;$i<2;$i++){?> 
+			<volist name="sellbrandlist" id="val">
 				<li>
-					<a href="">
-						<img src="images/1.jpg" />
+					<a href="{:U('Sell/details',array('id'=>$val['id']))}">
+						<img src="Uploads/sellimg/{$val.imgurl}" />
 						<span class="span_poa">新</span>
 						<div class="li_product">
-							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+							<h2>{$val.brand} {$val.year_id}款 {$val.brand_model_title} {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+						<p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+						<p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
 						</div>
 					</a>
 				</li>
-				<li>
-					<a href="">
-						<img src="images/2.jpg" />
-						<span class="span_poa">新</span>
-						<div class="li_product">
-							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<img src="images/3.jpg" />
-						<span class="span_poa">新</span>
-						<div class="li_product">
-							<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-							<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-							<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-						</div>
-					</a>
-				</li>
+				</volist>
 
-				<?php }?>
+
 			</ul>
 			<div class="clear"></div>
 		</div>
@@ -190,73 +166,19 @@
 		<h2 class="h2_title">热门二手车推荐</h2>
 		<div class="blank20"></div>
 		<ul class="hot_ul product_ul">
-			
+			<volist name="sellbrandlist" id="val">
 			<li>
-				<a href="">
-					<img src="images/1.jpg" />
+				<a href="{:U('Sell/details',array('id'=>$val['id']))}">
+					<img src="Uploads/sellimg/{$val.imgurl}" />
 					<span class="span_poa">新</span>
 					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+						<h2>{$val.brand} {$val.year_id}款 {$val.brand_model_title} {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+						<p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+						<p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
 					</div>
 				</a>
 			</li>
-			<li>
-				<a href="">
-					<img src="images/2.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="images/3.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>			
-			<li>
-				<a href="">
-					<img src="images/4.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="images/3.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>			
-			<li>
-				<a href="">
-					<img src="images/4.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
+			</volist>
 			
 		</ul>
 		<div class="clear"></div>		
