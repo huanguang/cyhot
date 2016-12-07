@@ -1,0 +1,135 @@
+<extend name="Base/common"/>
+<block name="head">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<script type="text/javascript" src="__JS__/script.js"></script><!-- 筛选 -->
+<link rel="stylesheet" type="text/css" href="__CSS__/select.css"><!-- 筛选 -->
+</block>
+
+<block name="body">
+<div class="brand lujin_div">
+	<div class="w1200 brand_div">
+		<div class="lujin">
+			<ul>
+				<li>二手车求购</li>
+				<li class="li1"><a href="{:U('Buy/add')}">免费发布信息</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>		
+	</div>
+</div>
+<div class="screen_div w1200">
+	<ul class="select">
+		<li class="select-list">
+			<dl id="select1">
+				<dt>类型：</dt>
+				<dd <if condition="$type_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>0,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '40' ">
+					<dd <if condition="$vo.id  eq $type_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$vo['id'],'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select2">
+				<dt>品牌：</dt>
+				<dd <if condition="$brand_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>0,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '41' ">
+					<dd <if condition="$vo.id  eq $brand_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select3">
+				<dt>变速箱：</dt>
+				<dd <if condition="$gearbox_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>0,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '44' ">
+					<dd <if condition="$vo.id  eq $gearbox_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$vo['id'],'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select4">
+				<dt>车龄：</dt>
+				<dd <if condition="$carage_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>0,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '43' ">
+					<dd <if condition="$vo.id  eq $carage_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$vo['id'],'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select5">
+				<dt>里程：</dt>
+				<dd <if condition="$driven_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>0,'price_id'=>$price_id))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '46' ">
+					<dd <if condition="$vo.id  eq $driven_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$vo['id'],'price_id'=>$price_id))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select6">
+				<dt>价格：</dt>
+				<dd <if condition="$price_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>0))}">不限</a></dd>
+				<foreach name="lists" item="vo" >
+				<if condition="$vo.category_id  eq '42' ">
+					<dd <if condition="$vo.id  eq $price_id ">class="select-all selected"</if>>
+					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$vo['id']))}">{$vo['title']}</a></dd>
+					</if>
+					</foreach>
+			</dl>
+		</li>
+		<li class="select-result">
+			<dl>
+				<dt>已选条件：</dt>
+				<dd class="select-no" <if condition="$where_html neq ''">style="display:none;"</if>>暂时没有选择过滤条件</dd>
+				{$where_html}
+			</dl>
+		</li>
+	</ul>	
+</div>
+<div class="blank35"></div>
+<div class="w1200 purchase_div">
+	<h2 class="h2_title">求购信息</h2>
+	<div class="blank20"></div>
+	<ul>
+		<volist name="buylist" id="value">
+		<li>
+			<a href="{:U('Buy/details',array('id'=>$value['id']))}">
+				<div class="div1 fl">
+					<h2>{$value.type} {$value.brand} {$value.gearbox} {$value.carage} {$value.driven} {$value.price}</h2>	
+					<p>类型 / 品牌 / 变速 / 车龄 / 里程 / 价格</p>
+				</div>	
+				<div class="div2 fr">
+					<p>{$value.add_time}</p>
+					<p>{$value.contacts}</p>
+				</div>
+				<div class="clear"></div>	
+			</a>
+		</li>
+		</volist>		
+
+	</ul>
+	
+</div>
+{$page}
+<div class="blank30"></div>
+
+</block>
