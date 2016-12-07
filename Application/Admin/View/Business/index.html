@@ -1,0 +1,117 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<style type="text/css">
+    img{
+        width: 120px;
+        height:120px;
+    }
+</style>
+    <div class="main-title">
+        <h2>商家审核列表 [ <present name="Think.get.group">
+         <a href="{:U('index')}">全部</a><else/><strong>全部</strong></present>&nbsp;<foreach name="group" item="vo">
+        <neq name="group_id" value="$key">
+         <a href="{:U('index?group='.$key)}">{$vo}</a><else/><strong>{$vo}</strong></neq>&nbsp;
+        </foreach> ]</h2>
+    </div>
+
+    <div class="cf">
+        <!-- <a class="btn" href="{:U('Goods/kadd')}">新 增</a> -->
+    <!--    <button class="btn " url="{:U('Goods/del_goods')}" target-form="ids">删 除</button> -->
+    <button class="btn ajax-post confirm" target-form="ids" url="">删 除</button>
+        <!-- <button class="btn list_sort" url="{:U('sort?group='.I('group'),'','')}">排序</button> -->
+
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="goods_name" class="search-input" value="{:I('shop_name')}" placeholder="请输入商品名称">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Goods/indev')}"><i class="btn-search"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+                <tr>
+                    <th class="row-selected">
+                        <input class="checkbox check-all" type="checkbox">
+                    </th>
+                    <th>ID</th>
+                    <th>店铺名</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="list">
+                <volist name="list" id="shop">
+                 <tr>
+                <td><input class="ids" type="checkbox" name="id[]" value=""></td>
+                        <td>{$shop.id}</td>
+                        <td><a href="{:U('edit?id='.$shop['id'])}">{$shop.shop_name}</a></td>
+                        <td>
+                            <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('edit?id='.$shop['id'])}">编辑</a>|
+                            <eq name="is.status" value="2">
+                            <a href="{:U('Goods/changeStatus?method=forbidUser&id='.$shop['id'])}" class="ajax-get">已审核</a>
+                            <else/>
+                            <a href="{:U('Goods/changeStatus?method=resumeUser&id='.$shop['id'])}" class="ajax-get">待申请</a>
+                            </eq>
+                            <a class="confirm ajax-get" title="删除" href="{:U('del?id='.$shop['id'])}">| 删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+                </notempty>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+$(function(){
+    //搜索功能
+    $("#search").click(function(){
+        var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+        window.location.href = url;
+    });
+    //回车搜索
+    $(".search-input").keyup(function(e){
+        if(e.keyCode === 13){
+            $("#search").click();
+            return false;
+        }
+    });
+    //点击排序
+    $('.list_sort').click(function(){
+        var url = $(this).attr('url');
+        var ids = $('.ids:checked');
+        var param = '';
+        if(ids.length > 0){
+            var str = new Array();
+            ids.each(function(){
+                str.push($(this).val());
+            });
+            param = str.join(',');
+        }
+
+        if(url != undefined && url != ''){
+            window.location.href = url + '/ids/' + param;
+        }
+    });
+});
+</script>
+</block>

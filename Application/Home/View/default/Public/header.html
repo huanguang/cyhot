@@ -79,7 +79,12 @@
             </div>
             <div class="daoh_2 fr">
                 <ul>
+                  <if condition="$user neq '' ">
                     <li><a class="a1" href="{:U('User/login')}">登录</a></li>
+                    <else />
+                    <li><a class="a1" href="{:U('User/logout')}">退出</a></li>
+                    </if>
+
                     <li><a href="{:U('User/register')}">注册</a></li>
                 </ul>
                 <div class="clear"></div>

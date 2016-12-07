@@ -171,12 +171,131 @@ class UserController extends HomeController {
         }
     }
 
-//  我的消息
+    //个人信息
+    public function personal(){
+//检查是否登陆
+         if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
+    $user = M('Ucenter_member');
 
+        if(IS_POST){
+              $uid        =   is_login();
+            $post = I('post.');
+            $data = array(
+                'name'  =>$post['name'],
+                'certificate_type'  =>$post['certificate_type'],
+                'card_num'  =>$post['card_num'],
+                'sex'  =>$post['sex'],
+                'username'  =>$post['username'],
+                'phone'  =>$post['phone'],
+                'email'  =>$post['email'],
+                'the_city'  =>$post['the_city'],
+                'address'  =>$post['address'],
+                );
+            $usr_info = $user->where('id='.$uid)->save($data);
+            if($usr_info){
+                 $this->success('修改个人信息成功!',U('User/personal'));
+            }else{
+                $this->error( '修改失败',U('User/personal') );
+            }
+        }else{
+            $uid        =   is_login();
+            $user_info = $user->where('id='.$uid)->find();
+            $this->assign('user_info',$user_info);
+             $this->display('User/user_personal');
+        }
+
+    }
+
+// 商家认证
+public function business(){
+     $uid        =   is_login();
+    $path = M('Picture');
+    $shop = M('Business');
+    if(IS_POST){
+        $data = array(
+            'path'  => I('post.img_id'),//路径
+            'status'=>1,    //状态
+             'create_time'=>time(),  //时间
+            );
+        $path_id = $path->add($data);
+
+        if($path_id > 0){
+            $data = array(
+                'user_id'  => $uid,
+                'shop_name'  => I('post.shop_name'),
+                'img_id'  =>  $path_id,
+                'status'  => 1,
+                );
+            if( $shop->add($data)){
+                 $this->success('提交成功，正在审核中!',U('User/business'));
+            }
+        }else{
+            $this->error( '图片上失败',U('User/business') );
+        }
+    }else{
+
+        $shop_info = $shop->where('user_id='.$uid)->find();
+
+        if($shop_info['is_status'] == 2){
+             $shop_s = $shop->where('id='.$shop_info['id'])->find();
+             $this->assign('shop_s',$shop_s);
+        }
+
+        $this->assign('shop_info',$shop_info);
+         $this->display('User/user_business');
+    }
+}
+
+
+//  我的消息
 public function news(){
 
      $this->display('User/user_news');
 }
 
+//系统消息
+public function system(){
+
+    $this->display('User/user_system');
+}
+
+ //文件上传
+    public function fileupload(){
+        vendor("FileUpload.FileUpload");
+
+            $up = new \FileUpload;
+
+            //设置属性(上传的位置， 大小， 类型， 名是是否要随机生成)
+
+            $lu = date('Ymd');
+            $mode = '0777';
+            $dir = './Uploads/business/'.$lu.'/';
+            if (!is_dir($dir)){
+                @mkdir($dir, $mode);
+            }
+
+            $up -> set("path",$dir);
+            $up -> set("maxsize", 2000000);
+            $up -> set("allowtype", array("gif", "png", "jpg","jpeg"));
+            $up -> set("israndname", true);
+
+            //使用对象中的upload方法， 就可以上传文件， 方法需要传一个上传表单的名子 pic, 如果成功返回true, 失败返回false
+            if($up -> upload("file")) {
+                //获取上传后文件名子
+                $imgname = $up->getFileName();
+                $arr = array("imgname"=>$dir.$imgname,'error'=>'0','msg'=>'上传成功！');
+                echo json_encode($arr);die;
+                //echo '</pre>';
+            } else {
+
+                //获取上传失败以后的错误提示
+
+                $arr = array("imgname"=>$dir.$imgname,'error'=>1,'msg'=>$up->getErrorMsg());
+                echo json_encode($arr);die;
+            }
+
+    }
 
 }

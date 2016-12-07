@@ -357,7 +357,7 @@ function parse_field_attr($string) {
         // 支持读取配置参数（必须是数组类型）
         return C(substr($string,1,-1));
     }
-    
+
     $array = preg_split('/[,;\r\n]+/', trim($string, ",;\r\n"));
     if(strpos($string,':')){
         $value  =   array();
@@ -428,6 +428,7 @@ function get_action_type($type, $all = false){
     }
     return $list[$type];
 }
+
 //删除指定目录路面的子目录即所有文件
 function deleteAll($path) {
     $op = dir($path);
@@ -444,3 +445,6 @@ function deleteAll($path) {
 
     }
 }
+
+
+
