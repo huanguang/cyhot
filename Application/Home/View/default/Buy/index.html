@@ -40,11 +40,10 @@
 			<dl id="select2">
 				<dt>品牌：</dt>
 				<dd <if condition="$brand_id eq '0'">class="select-all selected"</if>><a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>0,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">不限</a></dd>
-				<foreach name="lists" item="vo" >
-				<if condition="$vo.category_id  eq '41' ">
+				<foreach name="brandlist" item="vo" >
+
 					<dd <if condition="$vo.id  eq $brand_id ">class="select-all selected"</if>>
 					<a href="{:U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>$price_id))}">{$vo['title']}</a></dd>
-					</if>
 					</foreach>
 			</dl>
 		</li>

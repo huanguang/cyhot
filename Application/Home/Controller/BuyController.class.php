@@ -21,6 +21,11 @@ class BuyController extends HomeController {
 
         $lists    = D('Document')->lists(null);
         $Document = M('document');
+        $category = M('category');
+        //查询品牌出来
+        $brandlist = $category->where('pid = 41')->select();
+        
+        $this->assign('brandlist',$brandlist);
         $get = I('get.');//接受筛选条件
         $type_id = 0;
         $brand_id = 0;
@@ -40,7 +45,7 @@ class BuyController extends HomeController {
         	$where['brand_id'] = $get['brand_id'];
         	//$where .= " AND brand_id = ".$get['brand_id'];
         	$brand_id = $get['brand_id'];
-        	$brand_title = $Document->where('id = '.$brand_id)->getField('title');
+        	$brand_title = $category->where('id = '.$brand_id)->getField('title');
         	
         }
         if(!empty($get['gearbox_id'])){
