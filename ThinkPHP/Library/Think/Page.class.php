@@ -95,11 +95,11 @@ class Page{
 
         //上一页
         $up_row  = $this->nowPage - 1;
-        $up_page = $up_row > 0 ? '<li class="li1"><a href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a></li>' : '';
+        $up_page = $up_row > 0 ? '<li class="li1"><a href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a></li>' : '<li class="li1"><a href="javascript:void(0)"></a></li>';
 
         //下一页
         $down_row  = $this->nowPage + 1;
-        $down_page = ($down_row <= $this->totalPages) ? '<li class="li2"><a href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a></li>' : '';
+        $down_page = ($down_row < $this->totalPages) ? '<li class="li2"><a href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a></li>' : ' <li class="li2"><a href="javascript:void(0)"></a></li>';
 
 
 
@@ -128,7 +128,7 @@ class Page{
             if($page > 0 && $page != $this->nowPage){
 
                 if($page <= $this->totalPages){
-                    $link_page .= '<li><a href="' . $this->url($page) . '">' . $page . '</a></li>';
+                    $link_page .= '<li><a href="'. $this->url($page) . '">' . $page .  '</a></li>';
                 }else{
                     break;
                 }

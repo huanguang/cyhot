@@ -1,0 +1,126 @@
+<extend name="Base/common"/>
+<block name="head">
+<meta charset="utf-8">
+<title>一哥车业</title>
+<meta name="keywords" content="wsg,hth">
+<meta name="description" content="ASW">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="一哥车业">
+<Meta name="description" Content="一哥车业">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<script type="text/javascript" src="__JS__/script.js"></script><!-- 筛选 -->
+<link rel="stylesheet" type="text/css" href="__CSS__/select.css"><!-- 筛选 -->
+</block>
+
+<block name="body">
+<div class="brand lujin_div">
+	<div class="w1200 brand_div">
+		<div class="lujin">
+			<ul>
+				<li>新闻资讯</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<div class="blank40"></div>
+<div class="w1200 news_div">
+	<div class="w570">
+		<div class="bannerbox">
+		    <ul class="bannerpic"><!-- 轮播图尺寸570*535 -->
+		    <volist name="news_lun" id="v1">
+		        <li><a href="#"><img src="{$v1.cover_id|get_cover=###,path}" /><p>{$v1.title}</p></a></li>
+		        </volist>
+		    </ul>
+		    <a class="prev" href="javascript:void(0)"></a>
+		    <a class="next" href="javascript:void(0)"></a>
+		    <div class="num" style="display:none">
+		    	<ul></ul>
+		    </div>
+		</div>
+		<script>
+			$(".bannerbox").hover(function(){
+				$(this).find(".prev,.next").fadeTo("show",0.1);
+			},function(){
+				$(this).find(".prev,.next").hide();
+			})
+			$(".prev,.next").hover(function(){
+				$(this).fadeTo("show",0.7);
+			},function(){
+				$(this).fadeTo("show",0.1);
+			})
+			$(".bannerbox").slide({ titCell:".num ul" , mainCell:".bannerpic" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true,trigger:"click" });
+		</script>
+
+
+		<div class="clear"></div>
+	</div>
+	<div class="w580">
+		<ul>
+			<volist name="list" id="vo" key="k">
+			<if condition="$k elt 3">
+			<li>
+				<a href="{:U('News/detail?id='.$vo['id'])}">
+					<h2>{$vo.title_new}</h2>
+					<p class="p1">{$vo.create_time|date='Y-m-d H:i',###}</p>
+					<p class="p2">1{$vo.new_description}</p>
+				</a>
+			</li>
+			</if>
+
+			</volist>
+
+		</ul>
+	</div>
+
+	<div class="clear"></div>
+	<div class="blank20"></div>
+	<div class="news_lieb">
+		<ul>
+		<volist name="list" id="vo" key="k">
+			<if condition="$k gt 3 ">
+			<li>
+				<a href="{:U('News/detail?id='.$vo['id'])}">
+					<h2>{$vo.title_new}</h2>
+					<p class="p1"> {$vo.create_time|date='Y-m-d H:i',###}</p>
+					<p class="p2">{$vo.new_description}</p>
+				</a>
+			</li>
+			</if>
+		</volist>
+		</ul>
+	</div>
+</div>
+
+<div class="blank35"></div>
+<!-- 	<div class="paging_div w1200">
+	<ul>
+		<li class="li1"><a href=""></a></li>
+
+		<li><a class="a1" href="">1</a></li>
+
+		<li><a href="">2</a></li>
+		<li><a href="">3</a></li>
+		<li><a href="">4</a></li>
+		<li><a href="">5</a></li>
+		<li><a href="">6</a></li>
+		<li>...</li>
+
+		<li><a href="">100</a></li>
+
+		<li class="li2"><a href=""></a></li>
+	</ul>
+	<div class="clear"></div>
+</div> -->
+
+
+ <article:page cate="$category['id']" listrow="$category['list_row']" />
+<div class="blank40"></div>
+
+</block>

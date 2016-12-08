@@ -32,6 +32,7 @@ class HomeController extends Controller {
         }
         $user = session('user_auth');
 
+<<<<<<< HEAD
 
 
 
@@ -39,6 +40,8 @@ class HomeController extends Controller {
         $category  = M('category');
         $hot_brand_list =  $category->where('pid = 41 and index_hot = 1')->limit(10)->select();
         $this->assign('hot_brand_list',$hot_brand_list);// 热门推荐品牌
+=======
+>>>>>>> c2e9683d3896fb6807466a3081d016c6a2486945
     }
 
 	/* 用户登录检测 */
