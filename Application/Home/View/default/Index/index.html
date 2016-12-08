@@ -39,32 +39,32 @@
     <div class="w1200 brand_div">
         <h2 class="h2_title">热门品牌</h2>
         <div class="div_sx">
-            <a href="">A</a>
-            <a href="">B</a>
-            <a href="">C</a>
-            <a href="">D</a>
-            <a href="">E</a>
-            <a href="">F</a>
-            <a href="">G</a>
-            <a href="">H</a>
-            <a href="">I</a>
-            <a href="">J</a>
-            <a href="">K</a>
-            <a href="">L</a>
-            <a href="">M</a>
-            <a href="">N</a>
-            <a href="">O</a>
-            <a href="">P</a>
-            <a href="">Q</a>
-            <a href="">R</a>
-            <a href="">S</a>
-            <a href="">T</a>
-            <a href="">U</a>
-            <a href="">V</a>
-            <a href="">W</a>
-            <a href="">X</a>
-            <a href="">Y</a>
-            <a href="">Z</a>
+            <a href="{:U('Index',array('brand_k'=>'a'))}">A</a>
+            <a href="{:U('Index',array('brand_k'=>'b'))}">B</a>
+            <a href="{:U('Index',array('brand_k'=>'c'))}">C</a>
+            <a href="{:U('Index',array('brand_k'=>'d'))}">D</a>
+            <a href="{:U('Index',array('brand_k'=>'e'))}">E</a>
+            <a href="{:U('Index',array('brand_k'=>'f'))}">F</a>
+            <a href="{:U('Index',array('brand_k'=>'g'))}">G</a>
+            <a href="{:U('Index',array('brand_k'=>'h'))}">H</a>
+            <a href="{:U('Index',array('brand_k'=>'i'))}">I</a>
+            <a href="{:U('Index',array('brand_k'=>'j'))}">J</a>
+            <a href="{:U('Index',array('brand_k'=>'k'))}">K</a>
+            <a href="{:U('Index',array('brand_k'=>'l'))}">L</a>
+            <a href="{:U('Index',array('brand_k'=>'m'))}">M</a>
+            <a href="{:U('Index',array('brand_k'=>'n'))}">N</a>
+            <a href="{:U('Index',array('brand_k'=>'o'))}">O</a>
+            <a href="{:U('Index',array('brand_k'=>'p'))}">P</a>
+            <a href="{:U('Index',array('brand_k'=>'q'))}">Q</a>
+            <a href="{:U('Index',array('brand_k'=>'r'))}">R</a>
+            <a href="{:U('Index',array('brand_k'=>'s'))}">S</a>
+            <a href="{:U('Index',array('brand_k'=>'t'))}">T</a>
+            <a href="{:U('Index',array('brand_k'=>'u'))}">U</a>
+            <a href="{:U('Index',array('brand_k'=>'v'))}">V</a>
+            <a href="{:U('Index',array('brand_k'=>'w'))}">W</a>
+            <a href="{:U('Index',array('brand_k'=>'x'))}">X</a>
+            <a href="{:U('Index',array('brand_k'=>'y'))}">Y</a>
+            <a href="{:U('Index',array('brand_k'=>'z'))}">Z</a>
         </div>
     </div>
 </div>
@@ -72,43 +72,32 @@
     <div class="w1200">
         <div class="bra_cx1">
             <ul>
-                <li><a href=""><img src="__IMG__/ico_1.png" alt=""><p>大众</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_2.png" alt=""><p>沃尔沃</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_3.png" alt=""><p>日产</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_4.png" alt=""><p>本田</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_5.png" alt=""><p>丰田</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_6.png" alt=""><p>奥迪</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_7.png" alt=""><p>别克</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_8.png" alt=""><p>福特</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_9.png" alt=""><p>宝马</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_10.png" alt=""><p>奔驰</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_11.png" alt=""><p>马自达</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_12.png" alt=""><p>现代</p></a></li>
+                <volist name="brandlist" id="val">
+                    <li><a href="{:U('Sell/index',array('brand_id'=>$val['id']))}"><img src="{$val.icon|get_cover=###,path}" alt="{$val.title}"><p>{$val.title}</p></a></li>
+                </volist>
             </ul>
             <div class="clear"></div>
         </div>
         <div class="bra_cx2">
             <ul>
-                <li><a href="">低首付</a></li>
-                <li><a href="">零月供</a></li>
-                <li><a href="">5万以内</a></li>
-                <li><a href="">5-10万</a></li>
-                <li><a href="">10-15万</a></li>
-                <li><a href="">15-20万</a></li>
-                <li><a href="">20-30万</a></li>
-                <li><a href="">30-50万</a></li>
-                <li><a href="">50万以上</a></li>
+                <volist name="lists" id="val">
+            <if condition="$val.category_id eq '42' ">
+
+                <li><a href="{:U('Sell/index',array('price_id'=>$val['id']))}">{$val.title}</a></li>
+
+                </if>
+                </volist>
             </ul>
             <div class="clear"></div>
         </div>
         <div class="bra_cx3">
             <ul>
-                <li><a href=""><img src="__IMG__/ico_a1.png" alt=""><p>SUV</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_a2.png" alt=""><p>面包车</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_a3.png" alt=""><p>跑车</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_a4.png" alt=""><p>MPV</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_a5.png" alt=""><p>皮卡</p></a></li>
-                <li><a href=""><img src="__IMG__/ico_a6.png" alt=""><p>商务</p></a></li>
+            <volist name="lists" id="val">
+            <if condition="$val.category_id eq '40' ">
+                <li><a href="{:U('Sell/index',array('type_id'=>$val['id']))}"><img src="{$val.cover_id|get_cover=###,path}" alt=""><p>{$val.title}</p></a></li>
+            </if>
+                </volist>
+
             </ul>
             <div class="clear"></div>
         </div>
@@ -124,94 +113,20 @@
             <div class="scrollBox" style="margin:0 auto">
             <div class="ohbox">
                     <ul class="piclist hot_ul">
+                    <volist name="selllist" id="val">
                         <li>
-                        <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/1.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
+                        <a href="{:U('Sell/details',array('id'=>$val['id']))}">
+                            <img src="Uploads/sellimg/{$val.imgurl}" />
+                            <span class="span_poa">新</span>
+                            <div class="li_product">
+                                <h2>{$val.brand}{$val.brand_model} {$val.year_id}款  {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+                                <p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+                                <p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
+                            </div>
                         </a>
                         </li>
-                        <li>
-                        <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/2.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/3.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/4.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                        </a>
-                        </li>
-                        <li>
-                            <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/5.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/6.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/7.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="sell_xx.php" target="_blank">
-                                <img src="__IMG__/8.jpg" />
-                                <span class="span_poa">新</span>
-                                <div class="li_product">
-                                    <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                                    <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                                    <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                                </div>
-                            </a>
-                        </li>
+                        </volist>
+                        
                     </ul>
             </div>
             <div class="pageBtn">
@@ -236,107 +151,48 @@
     <div class="bd">
         <div>
             <ul class="hot_ul product_ul">
-                <?php for($i=0;$i<4;$i++){?>
+                <volist name="selllist_new" id="val">
                 <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/1.jpg" />
+                    <a href="{:U('Sell/details',array('id'=>$val['id']))}">
+                        <img src="Uploads/sellimg/{$val.imgurl}" />
                         <span class="span_poa">新</span>
                         <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                            <h2>{$val.brand}{$val.brand_model} {$val.year_id}款  {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+                            <p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+                            <p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/2.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/3.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/4.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <?php }?>
+                </volist>
+
+
+                        
+                
+                
             </ul>
             <div class="clear"></div>
-            <div class="div_anv"><a href="">查看更多</a></div>
+            <div class="div_anv"><a href="{:U('Sell/index')}">查看更多</a></div>
         </div>
         <div>
             <ul class="hot_ul product_ul">
-                <?php for($i=0;$i<4;$i++){?>
+                
+                <volist name="selllist_hot" id="val">
                 <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/8.jpg" />
+                    <a href="{:U('Sell/details',array('id'=>$val['id']))}">
+                        <img src="Uploads/sellimg/{$val.imgurl}" />
                         <span class="span_poa">新</span>
                         <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
+                            <h2>{$val.brand}{$val.brand_model} {$val.year_id}款  {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+                            <p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+                            <p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>认证</i></p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/7.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/6.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="sell_xx.php">
-                        <img src="__IMG__/5.jpg" />
-                        <span class="span_poa">新</span>
-                        <div class="li_product">
-                            <h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-                            <p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-                            <p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-                        </div>
-                    </a>
-                </li>
-                <?php }?>
+                </volist>
+                
             </ul>
             <div class="clear"></div>
-            <div class="div_anv"><a href="">查看更多</a></div>
+            <div class="div_anv"><a href="{:U('Sell/index')}">查看更多</a></div>
         </div>
     </div>
 </div>

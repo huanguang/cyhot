@@ -22,9 +22,13 @@ class SellController extends HomeController {
         $lists    = D('Document')->lists(null);
         $Document = M('document');
         $category = M('category');
+        $document_attrib = M('document_attrib');
         //查询品牌出来
         $brandlist = $category->where('pid = 41')->select();
-        
+        //接收搜索条件
+        $post = I('post.');
+
+        //keyword
         $this->assign('brandlist',$brandlist);
         $get = I('get.');//接受筛选条件
         $type_id = 0;
@@ -43,6 +47,21 @@ class SellController extends HomeController {
         	
         }
         if(!empty($get['displacement_id'])){
+
+                $displacement_info = $document_attrib->where('id = '.$get['displacement_id'])->find();
+
+
+            if(!empty($displacement_info)){
+                if($displacement_info['min'] == 0 && $displacement_info['max'] > 0){
+                    $where['displacement_id'] = array('lt',$displacement_info['max']/10);
+                }elseif($displacement_info['max'] == 0 && $displacement_info['min'] > 0){
+                    $where['displacement_id'] = array('gt',$displacement_info['min']/10);
+                }elseif($displacement_info['min'] > 0 && $displacement_info['max'] > 0){
+                    $where['displacement_id'] = array('gt',$displacement_info['min']/10);
+                    $where['displacement_id'] = array('lt',$displacement_info['max']/10);
+                }
+            }
+            //print_r($get['displacement_id']);die;
         	$where['displacement_id'] = $get['displacement_id'];
         	$displacement_id = $get['displacement_id'];
         	$displacement_title = $Document->where('id = '.$displacement_id)->getField('title');
@@ -77,7 +96,20 @@ class SellController extends HomeController {
         	
         }
         if(!empty($get['price_id'])){
-        	$where['price_id'] = $get['price_id'];
+            $document_attrib_info = $document_attrib->where('id = '.$get['price_id'])->find();
+
+            if(!empty($document_attrib_info)){
+                if($document_attrib_info['min'] == 0 && $document_attrib_info['max'] > 0){
+                    $where['sfer_price'] = array('lt',$document_attrib_info['max']/10000);
+                }elseif($document_attrib_info['max'] == 0 && $document_attrib_info['min'] > 0){
+                    $where['sfer_price'] = array('gt',$document_attrib_info['min']/10000);
+                }elseif($document_attrib_info['min'] > 0 && $document_attrib_info['max'] > 0){
+                    $where['sfer_price'] = array('gt',$document_attrib_info['min']/10000);
+                    $where['sfer_price'] = array('lt',$document_attrib_info['max']/10000);
+                }
+            }
+            //print_r($document_attrib_info);die;
+        	//$where['price_id'] = $get['price_id'];
         	//$where .= " AND price_id = ".$get['price_id'];
         	$price_id = $get['price_id'];
         	$price_title = $Document->where('id = '.$price_id)->getField('title');
@@ -110,13 +142,33 @@ class SellController extends HomeController {
         $this->assign('displacement_id',$displacement_id);
         $this->assign('where_html',$where_html);
 
+
+        if($keyword = $post['keyword']){
+            $where1['colour'] = array('like','%'.$keyword.'%');
+            $where1['type'] = array('like','%'.$keyword.'%');
+            $where1['brand_model_title'] = array('like','%'.$keyword.'%');
+            $where1['driven'] = array('like','%'.$keyword.'%');
+            $where1['gearbox'] = array('like','%'.$keyword.'%');
+            $where1['level'] = array('like','%'.$keyword.'%');
+            //$where1['WERWE'] = array('like','%'.$keyword.'%');
+            $where1['_logic'] = 'or';
+
+            $where['_complex'] = $where1;
+            $this->assign('keyword',$keyword);
+        }
+
+        
+
+
         $this->assign('lists',$lists);//列表
         $User = M('sell'); // 实例化User对象
 		$count      = $User->where($where)->count();// 查询满足要求的总记录数
-		$Page       = new \Think\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 		$show       = $Page->show();// 分页显示输出
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-		$selllist = $User->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$selllist = $User->join()->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
+
+        
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
@@ -142,7 +194,7 @@ class SellController extends HomeController {
         $lists    = D('Document')->lists(null);
 		$Category  = M('category');
 		$list = $Category->where('pid = 41')->select();
-
+        //print_r($lists);die;
 		$this->assign('list',$list);//品牌
 
         $this->assign('category',$category);//栏目
@@ -176,6 +228,7 @@ class SellController extends HomeController {
        $this->assign('imglist',$imglist);//相册
        $selltable  = M('sell');
        $sellinfo = $selltable->where('id = '.$get['id'])->find();
+       //print_r($sellinfo);
        $sellinfo['displacement'] = $Document->where('id = '.$sellinfo['displacement_id'])->getField('title') ? :'';
        $sellinfo['gearbox'] = $Document->where('id = '.$sellinfo['gearbox_id'])->getField('title') ? :'';
        $sellinfo['brand_model_title'] = $Document->where('id = '.$sellinfo['brand_model'])->getField('title') ? :'';
@@ -229,7 +282,7 @@ class SellController extends HomeController {
     public function addinfo(){
     	$post = I('post.');
 
-
+        $Document = M('document');
     	if(!$post['img']){
     		$this->error('车辆图片最少上传一张');
     	}
@@ -247,6 +300,9 @@ class SellController extends HomeController {
     	if(empty($post['year_id'])){
     		$this->error('车辆级别必须填写');
     	}
+        if(empty($post['type_id'])){
+            $this->error('车辆类型必须填写');
+        }
     	
     	if(empty($post['gearbox_id'])){
     		$this->error('车辆变速箱必须填写');
@@ -303,6 +359,14 @@ class SellController extends HomeController {
     		$this->error('车辆行驶证图片上传错误，请从新选择图片上传');
     	}
 
+        $Document = M('document');
+        //$category = M('category');
+        $post['type'] = $Document->where('id = '.$post['type_id'])->getField('title') ? :'';
+
+        $post['gearbox'] = $Document->where('id = '.$post['gearbox_id'])->getField('title') ? :'';
+        $post['level'] = $Document->where('id = '.$post['level_id'])->getField('title') ? :'';
+        $post['brand_model_title'] = $Document->where('id = '.$post['brand_model'])->getField('title') ? :'';
+        
     	vendor("FileUpload.FileUpload");
 
 

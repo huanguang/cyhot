@@ -129,6 +129,11 @@ class BuyController extends HomeController {
         $lists    = D('Document')->lists(null);
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
+        $Category  = M('category');
+        $list = $Category->where('pid = 41')->select();
+        
+        //print_r($lists);die;
+        $this->assign('list',$list);//品牌
         //print_r($lists)
         $this->assign('page',D('Document')->page);//分页
 

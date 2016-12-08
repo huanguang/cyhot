@@ -35,19 +35,17 @@
             </li>
             <li class="li3">
                 <div class="inp_div">
-                    <form action="" method="post">
-                        <input type="text" name="" class="inp_1 fl" placeholder="请输入您想要的车">
+                    <form action="{:U('Sell/index')}" method="post">
+                        <input type="text" name="keyword" class="inp_1 fl" placeholder="请输入您想要的车" value="{$keyword}">
                         <input type="submit" name="" class="inp_anv fr" value="">
                     </form>
                     <div class="clear"></div>
                 </div>
                 <p class="p1">
-                    <a href="">大众</a>
-                    <a href="">丰田</a>
-                    <a href="">本田</a>
-                    <a href="">奔驰</a>
-                    <a href="">奥迪</a>
-                    <a href="">宝马</a>
+                <volist name="hot_brand_list" id="val">
+                    <a href="{:U('Sell/index',array('brand_id'=>$val['id']))}">{$val.title}</a>
+                    </volist>
+                    
                 </p>
             </li>
             <li class="li4">

@@ -26,7 +26,7 @@
 <div class="blank30"></div>
 <div class="w1200 release">
 	<h2>基础信息</h2>
-    <form action="{:U('Sell/addinfo')}" method="post" enctype="multipart/form-data">
+    <form action="{:U('Sell/addinfo')}" method="post" enctype="multipart/form-data"  onsubmit="return checke();">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="rele_ta">
 	  <tr>
 	    <td class="rele_td"><i>*</i>品牌</td>
@@ -130,7 +130,7 @@
 				<input type="text"  value="请选择车辆级别" readonly>
 				<ul>
 					<foreach name="lists" item="vo" >
-						<if condition="$vo.category_id  eq '49' ">
+						<if condition="$vo.category_id  eq '52' ">
 						<li data-value="{$vo['id']}">{$vo['title']}</li>
 						</if>
 					</foreach>
@@ -164,6 +164,50 @@
 			</script>
 	    </td>
 	  </tr>
+
+	  <tr>
+	    <td class="rele_td"><i>*</i>类型</td>
+	    <td><input class="inp_ty" name="type_id" id="type_id" type="hidden" value="0">
+	    		<div class="nice-select" name="select13" style="width:170px; float:left">
+				<input type="text"  value="请选择车辆类型" readonly>
+				<ul>
+					<foreach name="lists" item="vo" >
+						<if condition="$vo.category_id  eq '40' ">
+						<li data-value="{$vo['id']}">{$vo['title']}</li>
+						</if>
+					</foreach>
+
+				</ul>
+			</div>
+			<span style="float:left; margin-top:7px; margin-left:10px;"></span>
+			<script>
+				$('[name="select13"]').click(function(e){
+				    $('[name="select13"]').find('ul').hide();
+				    $(this).find('ul').show();
+					e.stopPropagation();
+
+				});
+				$('[name="select13"] li').hover(function(e){
+					$(this).toggleClass('on');
+					e.stopPropagation();
+				});
+				$('[name="select13"] li').click(function(e){
+					var val = $(this).text();
+					$(this).parents('[name="select13"]').find('input').val(val);
+					var value = $(this).attr('data-value');
+					$("#type_id").val(value);
+					$('[name="select13"] ul').hide();
+					
+					e.stopPropagation();
+				});
+				$(document).click(function(){
+					$('[name="select13"] ul').hide();
+				});
+			</script>
+	    </td>
+	  </tr>
+
+
 	  <tr>
 	    <td class="rele_td"><i>*</i>年份</td>
 	    <td>
@@ -316,6 +360,7 @@
 	    <td valign="top" class="rele_td"><i>*</i>补充说明</td>
 	    <td><textarea class="textarea_1" name="description" cols="" rows=""></textarea></td>
 	  </tr>
+	  
 	  <tr>
 	    <td valign="top" class="rele_td"><i>*</i>上传图片</td>
 	    <td>
@@ -331,6 +376,7 @@
 						url:"{:U('Sell/fileupload')}",
 						success:function( data ) {
 							var span =$("<input type='hidden' value='"+data.imgname+"' name='img[]'>");
+							$("#tttt").val(1);
 							$("#test1").append(span);
 						},
 						error:function( err ) {
@@ -376,6 +422,7 @@
 	    </td>
 	  </tr>
 	  <tr>
+	  <input  type="hidden" id="tttt" value="0">
 	    <td class="rele_td"><i>*</i>是否定期4S店保养</td>
 	    <td>
         	<label for="" style="margin-right:20px"><input name="maintenance" value="1" checked="true" type="radio" id="checkbox_a1" class="chk_1 inp_fx" /><label for="checkbox_a1"></label>是</label>
@@ -406,7 +453,102 @@
 	</form>
 	
 </div>
+<script type="text/javascript">
+	function checke(){
+		
+		var frame = $("input[name='frame']").val();//车架码照片
+		var license = $("input[name='license']").val();//行驶证照片
+		var address = $("input[name='address']").val();//看车地址
+		var contact_number = $("input[name='contact_number']").val();//联系电话
+		var contacts = $("input[name='contacts']").val();//联系人
+		var description = $("input[name='description']").val();//补充说明
+		var new_price = $("input[name='new_price']").val();//新车价格
+		var sfer_price = $("input[name='sfer_price']").val();//转让价格
+		var years = $("input[name='years']").val();//首次上牌时间
+		var inspection_endtime = $("input[name='inspection_endtime']").val();//年检到期时间
+		var business_endtime = $("input[name='business_endtime']").val();//商业保险到期时间
+		var insurance_endtime = $("input[name='insurance_endtime']").val();//交强保险到期时间
+		var displacement_id = $("input[name='displacement_id']").val();//排量
+		var driven = $("input[name='driven']").val();//行驶里程
 
+		var brand_id = $("input[name='brand_id']").val();//行驶里程
+		var brand_model = $("input[name='brand_model']").val();//行驶里程
+		var level_id = $("input[name='level_id']").val();//行驶里程
+		var type_id = $("input[name='type_id']").val();//行驶里程
+		var year_id = $("input[name='year_id']").val();//行驶里程
+		var gearbox_id = $("input[name='gearbox_id']").val();//行驶里程
+		var msg = '';
+		if(driven == ''){
+			msg += '行驶里程必须填写\n';
+		}
+		if(displacement_id == ''){
+			msg += '排量必须填写\n';
+		}
+		if($("#tttt").val() == 0){
+			msg += '车辆最少上传一张图片\n';
+		}
+		if(frame == ''){
+			msg += '请上传车架码照片\n';
+		}
+
+		if(license == ''){
+			msg += '请上传行驶证照片\n';
+		}
+		if(years == ''){
+			msg += '首次上牌时间必须填写\n';
+		}
+		if(business_endtime == ''){
+			msg += '商业保险到期时间必须填写\n';
+		}
+		if(inspection_endtime == ''){
+			msg += '年检到期时间必须填写\n';
+		}
+		if(insurance_endtime == ''){
+			msg += '交强保险到期时间必须填写\n';
+		}
+		if(sfer_price == ''){
+			msg += '转让价格必须填写\n';
+		}
+		if(new_price == ''){
+			msg += '新车价格必须填写\n';
+		}
+		if(contacts == ''){
+			msg += '联系人必须填写\n';
+		}
+		if(contact_number == ''){
+			msg += '联系电话必须填写\n';
+		}
+		if(address == ''){
+			msg += '看车地址必须填写\n';
+		}
+		if(description == ''){
+			msg += '补充说明必须填写\n';
+		}
+		if(gearbox_id == 0){
+			msg += '必须选择变速箱\n';
+		}
+		if(year_id == 0){
+			msg += '必须选择车辆所属年份\n';
+		}
+		if(type_id == 0){
+			msg += '必须选择车辆类型\n';
+		}
+		if(level_id == 0){
+			msg += '必须选择车辆级别\n';
+		}
+		if(brand_model == 0){
+			msg += '必须选择车辆品牌所属类型\n';
+		}
+		if(brand_id == 0){
+			msg += '必须选择车辆品牌\n';
+		}
+		if(msg.length > 0){
+			alert(msg);
+			return false;
+		}
+
+	}
+</script>
 
 
 <div class="blank40"></div>

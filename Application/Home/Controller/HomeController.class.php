@@ -31,6 +31,14 @@ class HomeController extends Controller {
             $this->error('站点已经关闭，请稍后访问~');
         }
         $user = session('user_auth');
+
+
+
+
+        //查询热门品牌
+        $category  = M('category');
+        $hot_brand_list =  $category->where('pid = 41 and index_hot = 1')->limit(10)->select();
+        $this->assign('hot_brand_list',$hot_brand_list);// 热门推荐品牌
     }
 
 	/* 用户登录检测 */
