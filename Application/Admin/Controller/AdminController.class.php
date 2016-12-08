@@ -173,8 +173,8 @@ class AdminController extends Controller {
      *
      * @author 朱亚杰  <zhuyajie@topthink.net>
      */
-    protected function resume (  $model , $where = array() , $msg = array( 'success'=>'状态恢复成功！', 'error'=>'状态恢复失败！')){
-        $data    =  array('status' => 1);
+    protected function resume (  $model , $where = array() , $msg = array( 'success'=>'审核通过成功！', 'error'=>'审核失败失败！')){
+        $data    =  array('is_status' => 2);
         $this->editRow(   $model , $data, $where, $msg);
     }
 

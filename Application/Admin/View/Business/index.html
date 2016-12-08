@@ -50,13 +50,13 @@
                         <td>{$shop.id}</td>
                         <td><a href="{:U('edit?id='.$shop['id'])}">{$shop.shop_name}</a></td>
                         <td>
-                            <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('edit?id='.$shop['id'])}">编辑</a>|
-                            <eq name="is.status" value="2">
-                            <a href="{:U('Goods/changeStatus?method=forbidUser&id='.$shop['id'])}" class="ajax-get">已审核</a>
+                            <a title="编辑" href="{:U('edit?id='.$shop['id'])}">查看</a>|
+                            <eq name="shop['is_status']" value="2">
+                            <a href="javascript:void(0);" class="ajax-get">已审核</a>
                             <else/>
-                            <a href="{:U('Goods/changeStatus?method=resumeUser&id='.$shop['id'])}" class="ajax-get">待申请</a>
+                            <a href="{:U('Business/changeStatus?method=resumeUser&id='.$shop['id'])}" class="ajax-get">待申请</a>
                             </eq>
-                            <a class="confirm ajax-get" title="删除" href="{:U('del?id='.$shop['id'])}">| 删除</a>
+                            <a class="confirm ajax-get" title="删除" href="{:U('del_shop?id='.$shop['id'])}">| 删除</a>
                         </td>
                     </tr>
                 </volist>

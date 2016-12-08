@@ -31,6 +31,7 @@ class HomeController extends Controller {
             $this->error('站点已经关闭，请稍后访问~');
         }
         $user = session('user_auth');
+
     }
 
 	/* 用户登录检测 */

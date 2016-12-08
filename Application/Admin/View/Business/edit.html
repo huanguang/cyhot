@@ -1,0 +1,199 @@
+<extend name="Public/base"/>
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>编辑</h2>
+	</div>
+<style>
+.upload-img-boxo .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+
+
+.upload-img-boxs .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-boxl .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-boxa .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-boxb .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+
+.upload-img-boxc .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-boxd .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-boxf .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+
+.upload-img-boxk .upload-pre-item {
+    padding: 1px;
+    width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+</style>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+		</ul>
+		<div class="tab-content">
+			<form action="{:U('Goods/edit')}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					 <div class="form-item">
+					            <label class="item-label">店铺名<span class="check-tips"></span></label>
+					            <div class="controls">
+					                <input type="text" class="text input-large" name="goods_name" value="{$shop_info.shop_name}">
+					            </div>
+					</div>
+					<div class="controls">
+						<label class="item-label">商品列表推荐封面<span class="check-tips">（设为推荐可上传封面图，不设为推荐可不上传,770*363 770*363 396*738）</span></label>
+						<input type="file" id="upload_pictures">
+						<input type="hidden" name="img_id" id="icons" value="{$shop_info['img_id']|default=''}"/>
+						<div class="upload-img-boxs">
+						<notempty name="shop_info['img_id']">
+							<div class="upload-pre-item"><img src="{$shop_info.img_id|get_cover='path'}"/></div>
+						</notempty>
+						</div>
+					</div>
+
+				<script type="text/javascript">
+					//上传图片
+				    /* 初始化上传插件 */
+					$("#upload_pictures").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture,
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					function uploadPicture(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#icons").val(data.id);
+				        	src = data.url || '__ROOT__' + data.path;
+				        	$("#icons").parent().find('.upload-img-boxs').html(
+				        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(that).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>
+				</div>
+				<div class="form-item">
+					<input type="hidden" name="id" value="{$goods_info.id}">
+					<input id="submit" disabled="true" class="btn submit-btn " name="Submit" type="submit"  value="确 定">
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+		<script type="text/javascript">
+		$(function(){
+			$('.time').datetimepicker({
+        				format: 'yyyy-mm-dd hh:ii',
+        				language:"zh-CN",
+        				minView:2,
+        				autoclose:true
+    			});
+			showTab();
+			$("input[name=reply]").change(function(){
+				var $reply = $(".form-item.reply");
+				parseInt(this.value) ? $reply.show() : $reply.hide();
+			}).filter(":checked").change();
+		});
+		//导航高亮
+		highlight_subnav('{:U('Category/index')}');
+	</script>
+
+</block>
