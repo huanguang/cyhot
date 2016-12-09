@@ -39,7 +39,10 @@ class AddressController extends HomeController {
         if(false === $list){
             $this->error('获取列表数据失败！');
         }
-
+        foreach ($list as $key => $value) {
+            $list[$key]['address'] = M('document_address')->where('id='.$value['id'])->getField('address');
+            $list[$key]['phone'] = M('document_address')->where('id='.$value['id'])->getField('phone');
+        }
         /* 模板赋值并渲染模板 */
         $this->assign('category', $category);
         $this->assign('list', $list);
@@ -112,8 +115,25 @@ class AddressController extends HomeController {
     }
 
     public function ditu(){
+        $id = I('get.id');
+        $data = M('document');
+        if($id){
+            $data_info = $data->alias('a')->join('LEFT JOIN onethink_document_address b ON a.id=b.id')->where('a.id='.$id)->find();
+          $modl = split('-',$data_info['title']);
+          $data_info['diqu'] = $modl['1'];
+           $this->assign('data_info',$data_info);
+        }else{
+            $data_info = array(
+                'title'  => '车缘汇-福田区',
+                'diqu'  => '福田区',
+                'address'  => '梅林路58号梅林阁对面-273二手车',
+                'latitude'  => '114.061092',
+                'tude'  => '22.573958',
+            );
 
-    $this->display();
+            $this->assign('data_info',$data_info);
+        }
+    $this->display('Address/cyh_lh');
     }
 
 }

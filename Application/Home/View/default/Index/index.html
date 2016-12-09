@@ -3,10 +3,9 @@
 <block name="body">
   <div class="bannerbox1">
     <ul class="bannerpic1"><!--1920*425-->
-        <li style="background: url(__IMG__/banner.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
-        <li style="background: url(__IMG__/01.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
-        <li style="background: url(__IMG__/banner.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
-        <li style="background: url(__IMG__/03.jpg) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="#"></a></li>
+    <volist name="img" id="vv">
+        <li style="background: url({$vv.cover_id|get_cover=###,path}) 50% 50% no-repeat; position: absolute; width: 100%; left: 0px; top: 0px; display: list-item;"><a href="{$vv.links}"></a></li>
+    </volist>
     </ul>
     <a class="prev" href="javascript:void(0)"></a>
     <a class="next" href="javascript:void(0)"></a>
@@ -126,7 +125,7 @@
                         </a>
                         </li>
                         </volist>
-                        
+
                     </ul>
             </div>
             <div class="pageBtn">
@@ -166,16 +165,16 @@
                 </volist>
 
 
-                        
-                
-                
+
+
+
             </ul>
             <div class="clear"></div>
             <div class="div_anv"><a href="{:U('Sell/index')}">查看更多</a></div>
         </div>
         <div>
             <ul class="hot_ul product_ul">
-                
+
                 <volist name="selllist_hot" id="val">
                 <li>
                     <a href="{:U('Sell/details',array('id'=>$val['id']))}">
@@ -189,7 +188,7 @@
                     </a>
                 </li>
                 </volist>
-                
+
             </ul>
             <div class="clear"></div>
             <div class="div_anv"><a href="{:U('Sell/index')}">查看更多</a></div>

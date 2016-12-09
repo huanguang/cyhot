@@ -4,18 +4,21 @@
         <div class="bot_1">
             <ul>
                 <li class="li_1">关于我们</li>
-                <li><a href="">公司介绍</a></li>
-                <li><a href="">公司荣誉</a></li>
-                <li><a href="">加入我们</a></li>
+            <volist name="channel_info" id="v1">
+                <li><a href="{$v1.url|get_nav_url}">{$v1.title}</a></li>
+            </volist>
             </ul>
             <ul>
                 <li class="li_1">联系我们</li>
-                <li><a href="">联系电话</a></li>
+                <volist name="phone_info" id="v3">
+                <li><a href="{$v3.url|get_nav_url}">{$v3.title}</a></li>
+                </volist>
             </ul>
             <ul>
                 <li class="li_1">新闻资讯</li>
-                <li><a href="">公司新闻</a></li>
-                <li><a href="">行业新闻</a></li>
+                <volist name="news_info" id="v2">
+                <li><a href="{$v2.url|get_nav_url}">{$v2.title}</a></li>
+                </volist>
             </ul>
 
             <div class="clear"></div>
@@ -32,9 +35,9 @@
             <div class="clear"></div>
         </div>
         <div class="bot_3">
-            <h2>0755-36631111</h2>
-            <p>免费咨询(咨询、建议、投诉)</p>
-            <p>周一至周六 9:00-19:00</p>
+            <h2>{$phones.title}</h2>
+            <p>{$phones.miansh}</p>
+            <p>{$phones.time}</p>
         </div>
         <div class="clear"></div>
         <div class="yqlj_div">
