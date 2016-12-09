@@ -18,15 +18,13 @@
     <div class="cf">
         <a style="display:none;" class="btn" href="{:U('Goods/kadd')}">新 增</a>
     <!--    <button class="btn " url="{:U('Goods/del_goods')}" target-form="ids">删 除</button> -->
-    <button class="btn ajax-post confirm" target-form="ids" onclick="checks();">删 除</button>
+    <button class="btn ajax-post confirm" target-form="ids"  onclick="checks();">删 除</button>
         <!-- <button class="btn list_sort" url="{:U('sort?group='.I('group'),'','')}">排序</button> -->
 
         <!-- 高级搜索 -->
+
         <div class="search-form fr cf">
-
-
-
-            <form action="{:U('Sell/index')}" method="post" name="sousuo">
+        <form action="{:U('Buy/index')}" method="post" name="sousuo">
             <div class="sleft">
                 <input type="text" name="k" class="search-input" value="{$k}" placeholder="请输入关键词">
                 <a class="sch-btn" href="javascript:document.sousuo.submit();" id="search"><i class="btn-search"></i></a>
@@ -34,7 +32,7 @@
             </form>
         </div>
     </div>
-<form action="{:U('Sell/del_all')}" method="post" name="tijiao"">
+<form action="{:U('Buy/del_all')}" method="post" name="tijiao"">
     <div class="data-table table-striped">
         <table>
             <thead>
@@ -43,48 +41,41 @@
                         <input class="checkbox check-all" type="checkbox">
                     </th>
                     <th>ID</th>
-                    <th>图片</th>
                     <th>品牌</th>
-                    <th>系列</th>
-                    <th>年份</th>
-                    <th>排量(L)</th>
+                    <th>类型</th>
+                    <th>变速</th>
+                    <th>车龄</th>
+                    <th>里程</th>
+                    <th>价格</th>
                     <th>颜色</th>
-                    <th>转让价格(万元)</th>
-                    <th>首页推荐</th>
-                    <th>首页热门</th>
-                    <th>首页最新</th>
                     <th>添加时间</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                <notempty name="selllist">
-                <volist name="selllist" id="goods">
+                <notempty name="buylist">
+                <volist name="buylist" id="goods">
                     <tr>
                 <td><input class="ids" type="checkbox" name="id[]" value="{$goods.id}"></td>
+
                         <td>{$goods.id}</td>
-                        <td><img src="Uploads/sellimg/{$goods.imgurl}"></td>
+                        <td>{$goods.type}</td>
                         <td>{$goods.brand}</td>
-                        <td>{$goods.brand_model}</td>
-                        <td>{$goods.year_id}</td>
-                        <td>{$goods.displacement_id}</td>
+                        <td>{$goods.gearbox}</td>
+                        <td>{$goods.carage}</td>
+                        <td>{$goods.driven}</td>
+                        <td>{$goods.price}</td>
                         <td>{$goods.colour}</td>
-                        <td>{$goods.sfer_price}</td>
-                        <td><if condition="$goods.is_recommend eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_recommend','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_recommend','status'=>'1'))}">启用</a>  否</if></td>
-
-                        <td><if condition="$goods.is_hot eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_hot','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_hot','status'=>'1'))}">启用</a>  否</if></td>
-
-                        <td><if condition="$goods.is_new eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'1'))}">启用</a>  否</if></td>
-                        </td>
                         <td>{$goods.add_time}</td>
+                        </td>
                         <td>
-                            <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('Sell/edit',array('id'=>$goods['id']))}">编辑</a>
+                            <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('Buy/edit',array('id'=>$goods['id']))}">编辑</a>
                             <eq name="goods.status" value="1">
                             <a style="display:none;" href="" class="ajax-get">禁用</a>
                             <else/>
                             <a style="display:none;" href="" class="ajax-get">启用</a>
                             </eq>
-                            <a class="confirm ajax-get" title="删除" href="{:U('Sell/del_one',array('id'=>$goods['id']))}">删除</a>
+                            <a class="confirm ajax-get" title="删除" href="{:U('Buy/del_one',array('id'=>$goods['id']))}">删除</a>
                         </td>
                     </tr>
                 </volist>
@@ -96,7 +87,7 @@
         </form>
         <!-- 分页 -->
         <div class="page">
-            {$page}
+            {$_page}
         </div>
     </div>
 </block>
@@ -142,8 +133,6 @@ $(function(){
         }
     });
 });
-
-
 
 
 function checks(){

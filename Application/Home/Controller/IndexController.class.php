@@ -22,6 +22,7 @@ class IndexController extends HomeController {
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
         $Document = M('document');
+        $member = M('member');
         $sell  = M('sell');
         $this->assign('category',$category);//栏目
         //print_r($lists);die;
@@ -48,6 +49,13 @@ class IndexController extends HomeController {
 				$selllist[$key]['brand_model'] =  $Document->where('id = '.$value['brand_model'])->getField('title');
 				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
+				//判断用户是商家还是个人，
+               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               if($status == 2){
+                  $selllist[$key]['status'] = '认证';  
+               }else{
+                    $selllist[$key]['status'] = ''; 
+               }
 
 		}
 		//print_r($selllist);die;
@@ -65,6 +73,13 @@ class IndexController extends HomeController {
 					//$selllist_new[$key]['brand_model'] =  $Document->where('id = '.$value['brand_model'])->getField('title');
 					$selllist_new[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_new[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
+					//判断用户是商家还是个人，
+	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               if($status == 2){
+	                  $selllist_new[$key]['status'] = '认证';  
+	               }else{
+	                    $selllist_new[$key]['status'] = ''; 
+	               }
 
 			}
 			//print_r($selllist_new);die;
@@ -82,6 +97,13 @@ class IndexController extends HomeController {
 					$selllist_hot[$key]['brand_model'] =  $Document->where('id = '.$value['brand_model'])->getField('title');
 					$selllist_hot[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_hot[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
+					//判断用户是商家还是个人，
+	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               if($status == 2){
+	                  $selllist_hot[$key]['status'] = '认证';  
+	               }else{
+	                    $selllist_hot[$key]['status'] = ''; 
+	               }
 
 			}
 			//print_r($selllist);die;

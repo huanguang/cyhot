@@ -1,0 +1,401 @@
+
+<extend name="Public/base"/>
+
+<block name="body">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="Public/Home/css/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="Public/Home/css/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="Public/Home/css/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<script type="text/javascript" src="__JS__/script.js"></script><!-- 筛选 -->
+<link rel="stylesheet" type="text/css" href="Public/Home/css/select.css"><!-- 筛选 -->
+<link href="Public/Home/css/diyupload/css/webuploader.css" rel="stylesheet"><!-- 9.1 多张图片批量上传 -->
+<link href="Public/Home/css/diyupload/css/diyUpload.css" rel="stylesheet"><!-- 9.1 多张图片批量上传 -->
+<script src="Public/Home/css/diyupload/js/webuploader.html5only.min.js"></script><!-- 9.1 多张图片批量上传 -->
+<script src="Public/Home/css/diyupload/js/diyUpload.js"></script><!-- 9.1 多张图片批量上传 -->
+<script src="__JS__/uploadpreview.js" type="text/javascript"></script><!-- 单张图片上传 -->
+<link href="Public/Home/css/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
+<script>
+   window.onload = function () { 
+        new uploadPreview({ UpBtn: "up_img", DivShow: "imgdiv", ImgShow: "imgShow" });
+        new uploadPreview({ UpBtn: "up_img1", DivShow: "imgdiv1", ImgShow: "imgShow1" });
+    }
+</script><!-- 单张图片上传 -->
+<div class="blank30"></div>
+<div class="w1200 release">
+    <h2>发布求购信息</h2>
+    <form action="{:U('Buy/updata')}" method="post" onsubmit="return checke();">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="rele_ta">
+        <tr>
+        <td class="rele_td"><i>*</i>标题</td>
+        <td><input class="inp_ty" name="title" id="title" value="{$buylinfo.title}" type="text"></td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>类型</td>
+        <td><input class="inp_ty" name="type_id" id="type_id" type="hidden" value="{$buylinfo.type_id}">
+            <div class="nice-select" name="select1" style="width:170px; float:left">
+                <input type="text" value="{$buylinfo.type}" readonly>
+                <ul>
+                <li data-value="0">不限</li>
+                <foreach name="lists" item="vo" >
+                <if condition="$vo.category_id  eq '40' ">
+                    <li data-value="{$vo['id']}">{$vo['title']}</li>
+                    </if>
+                    </foreach>
+                </ul>
+            </div>
+            <script>
+                $('[name="select1"]').click(function(e){
+                    $('[name="select1"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select1"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select1"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select1"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#type_id").val(value);
+                    $('[name="select1"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>品牌</td>
+        <td><input class="inp_ty" name="brand_id" id="brand_id" type="hidden" value="{$buylinfo.brand_id}">
+                <div class="nice-select" name="select" style="width:170px; float:left">
+                <input type="text"  value="{$buylinfo.brand}" readonly>
+                <ul>
+                    <foreach name="list" item="vo" >
+                        
+                        <li data-value="{$vo['id']}">{$vo['title']}</li>
+
+                    </foreach>
+
+                </ul>
+            </div>
+            <span style="float:left; margin-top:7px; margin-left:10px;"></span>
+            <script>
+                $('[name="select"]').click(function(e){
+                    $('[name="select"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#brand_id").val(value);
+                    $('[name="select"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>变速箱</td>
+        <td><input class="inp_ty" name="gearbox_id" id="gearbox_id" type="hidden" value="{$buylinfo.gearbox_id}">
+            <div class="nice-select" name="select2" style="width:170px; float:left">
+                <input type="text" value="{$buylinfo.gearbox}" readonly>
+                <ul>
+                    <li data-value="0">不限</li>
+                    
+                    <foreach name="lists" item="vo" >
+                        <if condition="$vo.category_id  eq '44' ">
+                        <li data-value="{$vo['id']}">{$vo['title']}</li>
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <script>
+                $('[name="select2"]').click(function(e){
+                    $('[name="select2"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select2"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select2"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select2"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#gearbox_id").val(value);
+                    $('[name="select2"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select2"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>车龄</td>
+        <td><input class="inp_ty" name="carage_id" id="carage_id" type="hidden" value="{$buylinfo.carage_id}">
+            <div class="nice-select" name="select3" style="width:170px; float:left">
+                <input type="text" value="{$buylinfo.carage}" readonly>
+                <ul>
+                    <li data-value="0">不限</li>
+                    <foreach name="lists" item="vo" >
+                        <if condition="$vo.category_id  eq '43' ">
+                        <li data-value="{$vo['id']}">{$vo['title']}</li>
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <script>
+                $('[name="select3"]').click(function(e){
+                    $('[name="select3"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select3"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select3"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select3"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#carage_id").val(value);
+                    $('[name="select3"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select3"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>行驶里程</td>
+        <td><input class="inp_ty" name="driven_id" id="driven_id" type="hidden" value="{$buylinfo.driven_id}">
+            <div class="nice-select" name="select4" style="width:170px; float:left">
+                <input type="text" value="{$buylinfo.driven}" readonly>
+                <ul>
+                    <li data-value="0">不限</li>
+                    <foreach name="lists" item="vo" >
+                        <if condition="$vo.category_id  eq '51' ">
+                        <li data-value="{$vo['id']}">{$vo['title']}</li>
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <script>
+                $('[name="select4"]').click(function(e){
+                    $('[name="select4"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select4"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select4"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select4"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#driven_id").val(value);
+                    $('[name="select4"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select4"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>期望价格</td>
+        <td><input class="inp_ty" name="price_id" id="price_id" type="hidden" value="{$buylinfo.price_id}">
+            <div class="nice-select" name="select5" style="width:170px; float:left">
+                <input type="text" value="{$buylinfo.price}" readonly>
+                <ul>
+                    <li data-value="0">不限</li>
+                    <foreach name="lists" item="vo" >
+                        <if condition="$vo.category_id  eq '42' ">
+                        <li data-value="{$vo['id']}">{$vo['title']}</li>
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <script>
+                $('[name="select5"]').click(function(e){
+                    $('[name="select5"]').find('ul').hide();
+                    $(this).find('ul').show();
+                    e.stopPropagation();
+
+                });
+                $('[name="select5"] li').hover(function(e){
+                    $(this).toggleClass('on');
+                    e.stopPropagation();
+                });
+                $('[name="select5"] li').click(function(e){
+                    var val = $(this).text();
+                    $(this).parents('[name="select5"]').find('input').val(val);
+                    var value = $(this).attr('data-value');
+                    $("#price_id").val(value);
+                    $('[name="select5"] ul').hide();
+                    
+                    e.stopPropagation();
+                });
+                $(document).click(function(){
+                    $('[name="select5"] ul').hide();
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td">是否定期保养</td>
+        <td>
+            <label for="" style="margin-right:20px"><input name="maintenance" value="1" <if condition="$buylinfo.maintenance eq '1' "> checked="true" </if> type="radio" id="checkbox_a1" class="chk_1 inp_fx" /><label for="checkbox_a1"></label>是</label>
+            <label for=""><input name="maintenance" type="radio" <if condition="$buylinfo.maintenance eq '0' "> checked="true" </if> value="0" id="checkbox_a2" class="chk_1 inp_fx" /><label for="checkbox_a2"></label>否</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td" >车辆颜色</td>
+        <td>
+            <input type="hidden" name="colour" id="color" value="{$buylinfo.colour}"/>
+            <div class="rele_ul">
+                <ul>
+                    <li><a <if condition="$buylinfo.colour eq 'black' "> class="a1"  </if> href="javascript:;" value="black"><i style="background:#000"></i>黑</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'white' "> class="a1"  </if> href="javascript:;" value="white"><i style="background:#fff"></i>白</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'red' "> class="a1"  </if> href="javascript:;" value="red"><i style="background:#f00"></i>红</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'blue' "> class="a1"  </if> href="javascript:;" value="blue"><i style="background:#00a2ff"></i>蓝</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'Pink' "> class="a1"  </if> href="javascript:;" value="Pink"><i style="background:#ff02b5"></i>粉红</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'Gray_white' "> class="a1"  </if> href="javascript:;" value="Gray_white"><i style="background:#cbcbcb"></i>灰白</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'Space_dust' "> class="a1"  </if> href="javascript:;" value="Space_dust"><i style="background:#5e5e5e"></i>太空灰</a></li>
+                    <li><a <if condition="$buylinfo.colour eq 'Other' "> class="a1"  </if> href="javascript:;" value="Other">其他</a></li>
+                </ul>
+            </div>
+            <script>
+                $(".rele_ul ul li").click(function(){
+                    
+                    $(this).siblings().find("a").removeClass('a1');
+                    $(this).find("a").addClass('a1');
+                    //将颜色赋值到表单内
+                    var value = $(this).find("a").attr('value');
+                    $("#color").val(value);
+                });
+            </script>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>联系人</td>
+        <td>
+            <input class="inp_ty" name="contacts" id="contacts" value="{$buylinfo.contacts}" type="text">
+            <label for="" style="margin:0 20px 0 10px">
+            <input  checked="true"  <if condition="$buylinfo.danx1 eq '1' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" value="1" />
+            <label for="checkbox_a3"></label>个人</label>
+            <label for=""><input name="danx1" <if condition="$buylinfo.danx1 eq '0' "> checked="true" </if> type="radio" id="checkbox_a4" class="chk_1 inp_fx" value="0" /><label for="checkbox_a4"></label>商家</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>联系电话</td>
+        <td><input class="inp_ty" name="contactnumber" id="contactnumber" value="{$buylinfo.contactnumber}" type="text"></td>
+      </tr>
+      <tr>
+        <td class="rele_td"><i>*</i>车辆所地址</td>
+        <td><input class="inp_ty" name="address" id="address" value="{$buylinfo.address}" type="text" style="width:650px"></td>
+      </tr>
+      <tr>
+        <td valign="top" class="rele_td">补充说明</td>
+        <td><textarea class="textarea_1" name="description" cols="" rows="">{$buylinfo.description}</textarea></td>
+      </tr>
+      <tr>
+        <td class="rele_td">&nbsp;</td>
+        <input type="hidden" name="id" value="{$buylinfo.id}">
+        <td><input class="sub_1" name="" type="submit" value="提交"></td>
+      </tr>
+
+    </table>
+    </form>
+    
+</div>
+<script type="text/javascript">
+    function checke(){
+        var brand_id = $("#brand_id").val();
+        var contacts = $("#contacts").val();
+        var contactnumber = $("#contactnumber").val();
+        var address = $("#address").val();
+        var msg = '';
+        if(brand_id == 0){
+            msg += '请选择品牌\n';
+        }
+        if(contacts == ''){
+            msg += '请输入联系人姓名\n';
+        }
+        if(contactnumber == ''){
+            msg += '请输入联系电话\n';
+        }else{
+            //验证是否是手机号码
+            if(!(/^1(3|4|5|7|8)\d{9}$/.test(contactnumber)) && !/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(contactnumber)){ 
+               // msg += '联系人电话不是一个手机号码或者电话号码\n';
+                
+                    msg += '联系人电话不是一个手机号码也不是一个电话号码，请重新检查\n';
+                
+            } 
+
+        }
+
+        if(address == ''){
+            msg += '请输入车辆所在地址\n';
+        }
+
+        if(msg.length > 0){
+            alert(msg);
+            return false;
+        }
+    }
+</script>
+
+<script>
+    $('[name="nice-select"]').click(function(e){
+        $('[name="nice-select"]').find('ul').hide();
+        $(this).find('ul').show();
+        e.stopPropagation();
+    });
+    $('[name="nice-select"] li').hover(function(e){
+        $(this).toggleClass('on');
+        e.stopPropagation();
+    });
+    $('[name="nice-select"] li').click(function(e){
+        var val = $(this).text();
+        $(this).parents('[name="nice-select"]').find('input').val(val);
+        $('[name="nice-select"] ul').hide();
+        e.stopPropagation();
+    });
+    $(document).click(function(){
+        $('[name="nice-select"] ul').hide();
+    });
+</script><!-- 下拉特效 -->
+<div class="blank40"></div>
+</block>

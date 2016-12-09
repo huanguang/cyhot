@@ -22,6 +22,7 @@ class SellController extends HomeController {
         $lists    = D('Document')->lists(null);
         $Document = M('document');
         $category = M('category');
+        $member = M('member');
         $document_attrib = M('document_attrib');
         //查询品牌出来
         $brandlist = $category->where('pid = 41')->select();
@@ -180,6 +181,14 @@ class SellController extends HomeController {
 				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 
+                //判断用户是商家还是个人，
+               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               if($status == 2){
+                  $selllist[$key]['status'] = '认证';  
+               }else{
+                    $selllist[$key]['status'] = ''; 
+               }
+
 		}
 
 		$this->assign('selllist',$selllist);// 赋值数据集
@@ -189,6 +198,9 @@ class SellController extends HomeController {
     }
     //发布信息
     public function add(){
+        if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
 
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
@@ -222,6 +234,7 @@ class SellController extends HomeController {
 
        $get = I('get.');
        $albumtable  = M('album');
+       $member  = M('member');
        $Document = M('document');
        $category = M('category');
        $imglist = $albumtable->where('sell_id = '.$get['id'])->select();
@@ -234,6 +247,8 @@ class SellController extends HomeController {
        $sellinfo['brand_model_title'] = $Document->where('id = '.$sellinfo['brand_model'])->getField('title') ? :'';
        $sellinfo['level'] = $Document->where('id = '.$sellinfo['level_id'])->getField('title') ? :'';
        $sellinfo['brand'] = $category->where('id = '.$sellinfo['brand_id'])->getField('title') ? :'';
+
+
  		
        //查询同品牌信息
        $sellbrandlist = $selltable->where('brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
@@ -248,6 +263,13 @@ class SellController extends HomeController {
 				$sellbrandlist[$key]['brand_model_title'] =  $Document->where('id = '.$value['brand_model'])->getField('title') ? :'';
 				$sellbrandlist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title') ? :'';
 				$sellbrandlist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
+                //判断用户是商家还是个人，
+               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               if($status == 2){
+                  $sellbrandlist[$key]['status'] = '认证';  
+               }else{
+                    $sellbrandlist[$key]['status'] = ''; 
+               }
 				if($value['id'] == $get['id']){
 					unset($sellbrandlist[$key]);
 				}
@@ -267,6 +289,13 @@ class SellController extends HomeController {
 
 
 				$selltypelist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
+                //判断用户是商家还是个人，
+               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               if($status == 2){
+                  $selltypelist[$key]['status'] = '认证';  
+               }else{
+                    $selltypelist[$key]['status'] = ''; 
+               }
 				if($value['id'] == $get['id']){
 					unset($selltypelist[$key]);
 				}
@@ -360,12 +389,19 @@ class SellController extends HomeController {
     	}
 
         $Document = M('document');
-        //$category = M('category');
+        $category = M('category');
         $post['type'] = $Document->where('id = '.$post['type_id'])->getField('title') ? :'';
 
         $post['gearbox'] = $Document->where('id = '.$post['gearbox_id'])->getField('title') ? :'';
         $post['level'] = $Document->where('id = '.$post['level_id'])->getField('title') ? :'';
         $post['brand_model_title'] = $Document->where('id = '.$post['brand_model'])->getField('title') ? :'';
+        $uid        =   is_login();
+        $post['uid'] = $uid;
+        //把有关信息，拼成一个title插入数据库 
+            //把相应的信息查询出来
+            $brand = $category->where('id = '.$post['brand_id'])->getField('title') ? :' ';
+            
+            $post['title'] = $brand.' '.$post['brand_model_title'].' '.$post['year_id'].' '.$post['displacement_id'].' '.$post['gearbox'].' '.$post['level'];
         
     	vendor("FileUpload.FileUpload");
 
@@ -389,11 +425,11 @@ class SellController extends HomeController {
 		  
 		    //使用对象中的upload方法， 就可以上传文件， 方法需要传一个上传表单的名子 pic, 如果成功返回true, 失败返回false
 		    if($up -> upload("license")) {
-		    	$post['license'] = $up->getFileName();
+		    	$post['license'] = $lu.'/'.$up->getFileName();
 		    }
 
 		    if($up -> upload("frame")) {
-		    	$post['frame'] = $up->getFileName();
+		    	$post['frame'] = $lu.'/'.$up->getFileName();
 		    }
 		    $img = $post['img'];
 

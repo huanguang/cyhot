@@ -124,7 +124,9 @@ class BuyController extends HomeController {
     }
     //发布信息
     public function add(){
-
+        if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
         $this->assign('category',$category);//栏目
@@ -186,7 +188,8 @@ class BuyController extends HomeController {
     //发布信息添加处理加入数据库
     public function addinfo(){
     	$post = I('post.');
-
+        $Document = M('document');
+        $category = M('category');
     	if($post['brand_id'] == 0){
     		$this->error('必须选择车辆品牌');
     	}
@@ -201,12 +204,23 @@ class BuyController extends HomeController {
     	if(!preg_match('#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$#', $post['contactnumber']) && !preg_match($isMob,$post['contactnumber']) && !preg_match($isTel,$post['contactnumber'])){
     		$this->error('联系电话不是一个手机号码，也不是一个电话号码，请重新填写');
     	}
-    	
+        $uid        =   is_login();
+        $post['uid'] = $uid;   	
+
 
     	if($post['address'] == ''){
     		$this->error('必须填写车辆所在地址');
     	}
-    	    	
+    	 //把有关信息，拼成一个title插入数据库 
+            //把相应的信息查询出来
+            $type = $Document->where('id = '.$post['type_id'])->getField('title') ? :' ';
+            $brand = $category->where('id = '.$post['brand_id'])->getField('title') ? :' ';
+
+            $gearbox = $Document->where('id = '.$post['gearbox_id'])->getField('title') ? :' ';
+            $price = $Document->where('id = '.$post['price_id'])->getField('title') ? :' ';
+            $driven = $Document->where('id = '.$post['driven_id'])->getField('title') ? :' ';
+            $carage = $Document->where('id = '.$post['carage_id'])->getField('title') ? :' ';
+           	$post['title'] = $type.' '.$brand.' '.$gearbox.' '.$carage.' '.$driven.' '.$price;
 		    $post['add_time'] = time();
 		    //插入数据库
 		    $m = M("buying");
