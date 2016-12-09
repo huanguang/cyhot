@@ -24,14 +24,12 @@
             <div class="clear"></div>
         </div>
         <div class="bot_2">
+        <volist name="erimg" id="img">
             <div class="div1 fl">
-                <img src="__IMG__/ewm.jpg" alt="">
-                <p>关注微信公众号</p>
+                <img src="{$img.cover_id|get_cover=###,path}" alt="">
+                <p>{$img.title}</p>
             </div>
-            <div class="div1 fr">
-                <img src="__IMG__/ewm.jpg" alt="">
-                <p>关注一哥车业手机版</p>
-            </div>
+    </volist>
             <div class="clear"></div>
         </div>
         <div class="bot_3">
@@ -43,16 +41,9 @@
         <div class="yqlj_div">
             <div class="div1 fl">友情链接 :</div>
             <div class="div2 fl">
-                <a href="">深圳二手车</a>
-                <a href="">深圳人才网</a>
-                <a href="">深圳二手车</a>
-                <a href="">深圳写字楼</a>
-                <a href="">深圳二手车估价</a>
-                <a href="">西游车展</a>
-                <a href="">深圳二手车</a>
-                <a href="">跟谁学深圳站</a>
-                <a href="">深圳汽车网</a>
-                <a href="">深圳家政</a>
+            <volist name="links" id="lis">
+                <a href="{$lis.links}">{$lis.title}</a>
+            </volist>
             </div>
             <div class="clear"></div>
         </div>

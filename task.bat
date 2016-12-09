@@ -1,0 +1,1 @@
+D:\wamp\bin\php\php5.3.10\php.exe -q D:\wamp\www\ot\tuiso.php

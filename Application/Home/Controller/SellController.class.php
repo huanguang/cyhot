@@ -44,7 +44,7 @@ class SellController extends HomeController {
         	$where['type_id'] = $get['type_id'];
         	$type_id = $get['type_id'];
         	$type_title = $Document->where('id = '.$type_id)->getField('title');
-        	
+
         }
         if(!empty($get['displacement_id'])){
 
@@ -65,35 +65,35 @@ class SellController extends HomeController {
         	$where['displacement_id'] = $get['displacement_id'];
         	$displacement_id = $get['displacement_id'];
         	$displacement_title = $Document->where('id = '.$displacement_id)->getField('title');
-        	
+
         }
         if(!empty($get['brand_id'])){
         	$where['brand_id'] = $get['brand_id'];
         	//$where .= " AND brand_id = ".$get['brand_id'];
         	$brand_id = $get['brand_id'];
         	$brand_title = $category->where('id = '.$brand_id)->getField('title');
-        	
+
         }
         if(!empty($get['gearbox_id'])){
         	$where['gearbox_id'] = $get['gearbox_id'];
         	//$where .= " AND gearbox_id = ".$get['gearbox_id'];
         	$gearbox_id = $get['gearbox_id'];
         	$gearbox_title = $Document->where('id = '.$gearbox_id)->getField('title');
-        	
+
         }
         if(!empty($get['carage_id'])){
         	$where['carage_id'] = $get['carage_id'];
         	//$where .= " AND carage_id = ".$get['carage_id'];
         	$carage_id = $get['carage_id'];
         	$carage_title = $Document->where('id = '.$carage_id)->getField('title');
-        	
+
         }
         if(!empty($get['driven_id'])){
         	$where['driven_id'] = $get['driven_id'];
         	//$where .= " AND driven_id = ".$get['driven_id'];
         	$driven_id = $get['driven_id'];
         	$driven_title = $Document->where('id = '.$driven_id)->getField('title');
-        	
+
         }
         if(!empty($get['price_id'])){
             $document_attrib_info = $document_attrib->where('id = '.$get['price_id'])->find();
@@ -113,7 +113,7 @@ class SellController extends HomeController {
         	//$where .= " AND price_id = ".$get['price_id'];
         	$price_id = $get['price_id'];
         	$price_title = $Document->where('id = '.$price_id)->getField('title');
-        	
+
 
         }
 
@@ -157,7 +157,7 @@ class SellController extends HomeController {
             $this->assign('keyword',$keyword);
         }
 
-        
+
 
 
         $this->assign('lists',$lists);//列表
@@ -168,7 +168,7 @@ class SellController extends HomeController {
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		$selllist = $User->join()->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
 
-        
+
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
@@ -234,7 +234,7 @@ class SellController extends HomeController {
        $sellinfo['brand_model_title'] = $Document->where('id = '.$sellinfo['brand_model'])->getField('title') ? :'';
        $sellinfo['level'] = $Document->where('id = '.$sellinfo['level_id'])->getField('title') ? :'';
        $sellinfo['brand'] = $category->where('id = '.$sellinfo['brand_id'])->getField('title') ? :'';
- 		
+
        //查询同品牌信息
        $sellbrandlist = $selltable->where('brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
        foreach ($sellbrandlist as $key => $value) {
@@ -273,6 +273,7 @@ class SellController extends HomeController {
 			}
 
        $this->assign('sellinfo',$sellinfo);
+       var_dump($sellinfo);
        $this->assign('selltypelist',$selltypelist);
        $this->assign('sellbrandlist',$sellbrandlist);
         $this->display();
@@ -303,12 +304,12 @@ class SellController extends HomeController {
         if(empty($post['type_id'])){
             $this->error('车辆类型必须填写');
         }
-    	
+
     	if(empty($post['gearbox_id'])){
     		$this->error('车辆变速箱必须填写');
     	}
 
-    	
+
     	if($post['colour'] == ''){
     		$this->error('车辆颜色必须选择');
     	}
@@ -366,12 +367,12 @@ class SellController extends HomeController {
         $post['gearbox'] = $Document->where('id = '.$post['gearbox_id'])->getField('title') ? :'';
         $post['level'] = $Document->where('id = '.$post['level_id'])->getField('title') ? :'';
         $post['brand_model_title'] = $Document->where('id = '.$post['brand_model'])->getField('title') ? :'';
-        
+
     	vendor("FileUpload.FileUpload");
 
 
 			$up = new \FileUpload;
-			
+
 
 		    //设置属性(上传的位置， 大小， 类型， 名是是否要随机生成)
 
@@ -386,7 +387,7 @@ class SellController extends HomeController {
 		    $up -> set("maxsize", 2000000);
 		    $up -> set("allowtype", array("gif", "png", "jpg","jpeg"));
 		    $up -> set("israndname", true);
-		  
+
 		    //使用对象中的upload方法， 就可以上传文件， 方法需要传一个上传表单的名子 pic, 如果成功返回true, 失败返回false
 		    if($up -> upload("license")) {
 		    	$post['license'] = $up->getFileName();
@@ -406,7 +407,7 @@ class SellController extends HomeController {
 
 			$a = M("album");
 			//加入相册信息
-			for ($i=0; $i < count($img); $i++) { 
+			for ($i=0; $i < count($img); $i++) {
 				$arr = array(
 						'imgurl'=>$img[$i],
 						'sell_id'=>$id
@@ -415,10 +416,10 @@ class SellController extends HomeController {
 			}
 
 			$this->success('提交成功！！',U('Sell/index'));
-			
 
 
-        
+
+
     }
 
     //文件上传
@@ -428,7 +429,7 @@ class SellController extends HomeController {
 
 
 			$up = new \FileUpload;
-			
+
 
 		    //设置属性(上传的位置， 大小， 类型， 名是是否要随机生成)
 
@@ -443,18 +444,18 @@ class SellController extends HomeController {
 		    $up -> set("maxsize", 2000000);
 		    $up -> set("allowtype", array("gif", "png", "jpg","jpeg"));
 		    $up -> set("israndname", true);
-		  
+
 		    //使用对象中的upload方法， 就可以上传文件， 方法需要传一个上传表单的名子 pic, 如果成功返回true, 失败返回false
 		    if($up -> upload("file")) {
 		        //获取上传后文件名子
 		        $imgname = $up->getFileName();
 		        $arr = array("imgname"=>$lu.'/'.$imgname,'error'=>'0','msg'=>'上传成功！');
-		        echo json_encode($arr);die; 
+		        echo json_encode($arr);die;
 		        //echo '</pre>';
 		    } else {
 
 		        //获取上传失败以后的错误提示
-		        
+
 		        $arr = array("imgname"=>$imgname,'error'=>1,'msg'=>$up->getErrorMsg());
 		        echo json_encode($arr);die;
 		    }

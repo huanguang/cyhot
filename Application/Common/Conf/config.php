@@ -36,7 +36,7 @@ return array(
 
     /* 数据库配置 */
     'DB_TYPE'   => 'mysql', // 数据库类型
-    'DB_HOST'   => '192.168.1.122', // 服务器地址
+    'DB_HOST'   => '192.168.0.159', // 服务器地址
     'DB_NAME'   => 'qbt_ot', // 数据库名
     'DB_USER'   => 'qbtcyh', // 用户名
     'DB_PWD'    => 'qbtcyh',  // 密码

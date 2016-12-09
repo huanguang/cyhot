@@ -1,6 +1,5 @@
-<!doctype html>
-<html>
-<head>
+<extend name="Base/common" />
+<block name="head">
 <meta charset="utf-8">
 <title>一哥车业</title>
 <meta name="keywords" content="wsg,hth">
@@ -9,26 +8,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="keywords" content="一哥车业">
 <Meta name="description" Content="一哥车业">
-<link href="css/css.css" rel="stylesheet" type="text/css">
-<link href="css/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
-<script src="js/jquery.js"></script><!-- 统一调用js -->
-<link href="css/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
-<script src="js/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
-<link href="css/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
-<link rel="stylesheet" href="css/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<link rel="stylesheet" href="__CSS__/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
 <link href="css/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
-<script type="text/javascript" src="css/Validform/js/Validform_v5.3.2_min.js"></script><!-- 13.0 表单提交验证 -->
-<script type="text/javascript" src="css/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
-<link href="css/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
-</head>
+<script type="text/javascript" src="__CSS__/Validform/js/Validform_v5.3.2_min.js"></script><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
+</block>
 
-
-<body>
-	<!--top-->
-	<?php require_once('gr_top.php'); ?>
-	<!--top end-->
-
-
+<block name="body">
 	<div class="sign_center">
 		<div class="w1200 personal_div">
 			<div class="w200 fl">
@@ -87,7 +80,7 @@
 					  </tr>
 					</table>
 					<div class="blank30"></div>
-					<?php require_once('paging.php'); ?>
+
                     </form>
 
                 </div>
@@ -116,8 +109,4 @@
 					$('[name="nice-select"] ul').hide();
 				});
 			</script>
-
-
-	<?php require_once('bottom.php'); ?>
-</body>
-</html>
+</block>
