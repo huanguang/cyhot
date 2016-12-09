@@ -251,8 +251,43 @@ public function business(){
 
 //  我的消息
 public function news(){
+         $uid        =   is_login();
+         if(!$uid){
+                $this->error( '用户id丢失',U('User/loing') );
+         }else{
+            //出售信息
+                  $sell = M('sell');
+                  $sell_info = $sell->where('uid='.$uid)->select();
+                  //var_dump($sell_info);
+                 foreach ($sell_info as $key => $value) {
+                      $sell_info[$key]['displacement'] =  M('Document')->where('id='.$value['displacement_id'])->getField('title') ? : '';
+                      $sell_info[$key]['gearbox'] = M('Document')->where('id='.$value['gearbox_id'])->getField('title') ? : '';
+                      $sell_info[$key]['brand_model_title'] =  M('Document')->where('id='.$value['brand_model'])->getField('title') ? : '';
+                      $sell_info[$key]['level'] =  M('Document')->where('id='.$value['level_id'])->getField('title') ? : '';
+                      $sell_info[$key]['brand'] =  M('Category')->where('id='.$value['brand_id'])->getField('title') ? : '';
+                       $sell_info[$key]['title'] = $sell_info[$key]['brand'] .' ' . $sell_info[$key]['brand_model_title'] .' '.$sell_info[$key]['displacement'].' '.$sell_info[$key]['gearbox'].' '. $sell_info[$key]['level'] ? : '';
+                  }
+                 // var_dump($sell_info);
 
-     $this->display('User/user_news');
+            //求购
+            $buying = M('buying');
+            $buying_info = $buying->where('uid='.$uid)->select();
+
+           foreach ($buying_info as $k => $v) {
+               $buying_info[$k]['type'] = M('Document')->where('id='.$v['type_id'])->getField('title') ? : '';
+               $buying_info[$k]['brand'] = M('Category')->where('id='.$v['brand_id'])->getField('title') ? : '';
+               $buying_info[$k]['gearbox'] = M('Document')->where('id='.$v['gearbox_id'])->getField('title') ? : '';
+               $buying_info[$k]['carage'] = M('Document')->where('id='.$v['carage_id'])->getField('title') ? : '';
+               $buying_info[$k]['driven'] = M('Document')->where('id='.$v['driven_id'])->getField('title') ? : '';
+              $buying_info[$k]['price'] = M('Document')->where('id='.$v['price_id'])->getField('title') ? : '';
+
+              $buying_info[$k]["title"] =$buying_info[$k]['type'].' '.$buying_info[$k]['brand'].' ' .$buying_info[$k]['gearbox'].' ' .$buying_info[$k]['price']? : '';
+            }
+           $data = array_merge_recursive($sell_info,$buying_info);
+           $this->assign('data',$data);
+             $this->display('User/user_news');
+         }
+
 }
 
 //系统消息

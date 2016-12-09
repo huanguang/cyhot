@@ -23,90 +23,50 @@
 
 <block name="body">
 	<div class="sign_center">
-		<div class="w1200 personal_div">
-			<div class="w200 fl">
-				<ul>
-					<li class="li1">个人中心</li>
-					<li><a class="a1" href="{:U('User/personal')}">个人信息</a></li>
-					<li><a class="a2" href="user_business.php">商家认证</a></li>
-					<li class="li_dq"><a class="a3" href="{:U('User/news')}">我的消息</a></li>
-					<li><a class="a4" href="{:U('User/system')}">系统消息</a></li>
-					<li class="li2">
-						<p class="p1">客服热线</p>
-						<p class="p2">0755-36631111</p>
-					</li>
-				</ul>
-			</div>
-			<div class="w970 fr">
-				<div class="div1"><h2>我的消息</h2></div>
-				<div class="div2">
-                	<form action="" method="post">
-                	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_news_ta">
-					  <tr>
-					    <th width="35%">信息标题</th>
-					    <th width="35%">内容</th>
-					    <th width="14%">发布时间</th>
-					    <th width="8%"></th>
-					    <th width="8%"></th>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>大众宝来 2013款 宝来 1.6 自动 舒适版</p></td>
-					  	<td class="td1"><p>大众宝来 2013款</p></td>
-					  	<td class="td1">2015-06-27</td>
-					  	<td class="td2"><a href="user_newsxx.php">查看详情</a></td>
+        <div class="w1200 personal_div">
+            <div class="w200 fl">
+                <ul>
+                    <li class="li1">个人中心</li>
+            <li><a class="a1" href="{:U('User/personal')}">个人信息</a></li>
+                    <li><a class="a2" href="{:U('User/business')}">商家认证</a></li>
+                    <li><a class="a3" href="{:U('User/news')}">我的消息</a></li>
+                    <li class="li_dq"><a class="a4" href="{:U('User/system')}">系统消息</a></li>
+                    <li class="li2">
+                        <p class="p1">客服热线</p>
+                        <p class="p2">0755-36631111</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="w970 fr">
+                <div class="div1"><h2>我的消息</h2></div>
+                <div class="div2">
+                    <form action="" method="post">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_news_ta">
+                      <tr>
+                        <th width="35%">信息标题</th>
+                        <th width="35%">内容</th>
+                        <th width="14%">发布时间</th>
+                        <th width="8%"></th>
+                        <th width="8%"></th>
+                      </tr>
+                      <volist name="data" id="vo">
+                      <tr>
+                        <td class="td1"><p> <if condition="$vo['status'] eq 1">求购<else />出售</if>{$vo.title}</p></td>
+                        <td class="td1"><p>{$vo.description}</p></td>
+                        <td class="td1">{$vo.add_time|date='Y-m-d',###}</td>
+                        <td class="td2"><a href="user_newsxx_chus.php">查看详情</a></td>
                         <td class="td2"><a href="" class="a_del">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>大众宝来 2013款 宝来 1.6 自动 舒适版</p></td>
-					  	<td class="td1"><p>大众宝来 2013款</p></td>
-					  	<td class="td1">2015-06-27</td>
-					  	<td class="td2"><a href="user_newsxx.php">查看详情</a></td>
-                        <td class="td2"><a href="" class="a_del">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>大众宝来 2013款 宝来 1.6 自动 舒适版</p></td>
-					  	<td class="td1"><p>大众宝来 2013款</p></td>
-					  	<td class="td1">2015-06-27</td>
-					  	<td class="td2"><a href="user_newsxx.php">查看详情</a></td>
-                        <td class="td2"><a href="" class="a_del">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>大众宝来 2013款 宝来 1.6 自动 舒适版</p></td>
-					  	<td class="td1"><p>大众宝来 2013款</p></td>
-					  	<td class="td1">2015-06-27</td>
-					  	<td class="td2"><a href="user_newsxx.php">查看详情</a></td>
-                        <td class="td2"><a href="" class="a_del">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>大众宝来 2013款 宝来 1.6 自动 舒适版</p></td>
-					  	<td class="td1"><p>大众宝来 2013款</p></td>
-					  	<td class="td1">2015-06-27</td>
-					  	<td class="td2"><a href="user_newsxx.php">查看详情</a></td>
-                        <td class="td2"><a href="" class="a_del">删除</a></td>
-					  </tr>
+                      </tr>
+                    </volist>
 
-					</table>
-					<div class="blank30"></div>
-						<div class="paging_div w1200">
-		<ul>
-			<li class="li1"><a href=""></a></li>
-			<li><a class="a1" href="">1</a></li>
-			<li><a href="">2</a></li>
-			<li><a href="">3</a></li>
-			<li><a href="">4</a></li>
-			<li><a href="">5</a></li>
-			<li><a href="">6</a></li>
-			<li>...</li>
-			<li><a href="">100</a></li>
-			<li class="li2"><a href=""></a></li>
-		</ul>
-		<div class="clear"></div>
-	</div>
+                    </table>
+                    <div class="blank30"></div>
+
                     </form>
                 </div>
                 <div class="clear"></div>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
 </block>

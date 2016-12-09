@@ -70,6 +70,27 @@ class HomeController extends Controller {
         }
          $this->assign('img',$img); // 首页轮播
 
+         //友情链接
+         $links = $document->where('category_id=62')->select();
+         foreach ($links as $key => $value) {
+             $links[$key]['links'] = M('document_links')->where('id='.$value['id'])->getField('links');
+         }
+         $this->assign('links', $links);//友情链接
+
+         //分站信息
+        $fenzhan = $document->where('category_id=63')->select();
+         foreach ($fenzhan as $key => $value) {
+             $fenzhan[$key]['links'] = M('document_links')->where('id='.$value['id'])->getField('links');
+         }
+              $this->assign('fenzhan', $fenzhan);//分站信息
+
+        $erimg = $docuement->where('category_id=60')->select();
+        $this->assign('erimg',$erimg);
+
+        //网站logo
+        $logo = $document->where('category_id=64')->find();
+        $this->assign('logo',$logo);
+
     }
 
 	/* 用户登录检测 */
