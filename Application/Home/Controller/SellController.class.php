@@ -248,11 +248,7 @@ class SellController extends HomeController {
        $sellinfo['level'] = $Document->where('id = '.$sellinfo['level_id'])->getField('title') ? :'';
        $sellinfo['brand'] = $category->where('id = '.$sellinfo['brand_id'])->getField('title') ? :'';
 
-<<<<<<< HEAD
 
- 		
-=======
->>>>>>> 05bbdae329a344e62880631715e3eab5b20a39cb
        //查询同品牌信息
        $sellbrandlist = $selltable->where('brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
        foreach ($sellbrandlist as $key => $value) {
@@ -399,7 +395,7 @@ class SellController extends HomeController {
         $post['gearbox'] = $Document->where('id = '.$post['gearbox_id'])->getField('title') ? :'';
         $post['level'] = $Document->where('id = '.$post['level_id'])->getField('title') ? :'';
         $post['brand_model_title'] = $Document->where('id = '.$post['brand_model'])->getField('title') ? :'';
-<<<<<<< HEAD
+
         $uid        =   is_login();
         $post['uid'] = $uid;
         //把有关信息，拼成一个title插入数据库 
@@ -408,9 +404,7 @@ class SellController extends HomeController {
             
             $post['title'] = $brand.' '.$post['brand_model_title'].' '.$post['year_id'].' '.$post['displacement_id'].' '.$post['gearbox'].' '.$post['level'];
         
-=======
 
->>>>>>> 05bbdae329a344e62880631715e3eab5b20a39cb
     	vendor("FileUpload.FileUpload");
 
 
