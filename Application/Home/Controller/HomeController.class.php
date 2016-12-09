@@ -23,6 +23,8 @@ class HomeController extends Controller {
 
 
     protected function _initialize(){
+        //检查是否登录
+
         /* 读取站点配置 */
         $config = api('Config/lists');
         C($config); //添加配置
@@ -39,6 +41,34 @@ class HomeController extends Controller {
         $category  = M('category');
         $hot_brand_list =  $category->where('pid = 41 and index_hot = 1')->limit(10)->select();
         $this->assign('hot_brand_list',$hot_brand_list);// 热门推荐品牌
+
+        //关于我们
+        $channel = M('Channel');
+        $channel_info = $channel->where('pid=5')->select();
+        $this->assign('channel_info',$channel_info); // 关于我们
+
+          //新闻资讯
+        $news = M('Channel');
+        $news_info = $news->where('pid=4')->select();
+        $this->assign('news_info',$news_info); // 新闻资讯
+
+        //联系电话
+        $phone = M('Channel');
+        $phone_info = $news->where('pid=6')->select();
+        $this->assign('phone_info',$phone_info); // 联系电话
+
+
+        //电话信息
+        $document = M('Document');
+        $phones = $document->alias('a')->field('a.title,b.miansh,b.time')->join('LEFT JOIN onethink_document_phone b ON a.id=b.id')->where('a.category_id=58')->find();
+        $this->assign('phones',$phones); // 电话信息
+
+        //首页轮播
+        $img = $document->where('category_id=61')->select();
+        foreach ($img as $key => $value) {
+            $img[$key]['links'] = M('document_newslun')->where('id='.$value['id'])->getField('links');
+        }
+         $this->assign('img',$img); // 首页轮播
 
     }
 

@@ -110,7 +110,7 @@ class BuyController extends HomeController {
 		
 		foreach ($buylist as $key => $value) {
 			$buylist[$key]['type'] =  $Document->where('id = '.$value['type_id'])->getField('title') ? :'不限';
-			$buylist[$key]['brand'] =  $Document->where('id = '.$value['brand_id'])->getField('title') ? :'不限';
+			$buylist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title') ? :'不限';
 			$buylist[$key]['gearbox'] =  $Document->where('id = '.$value['gearbox_id'])->getField('title') ? :'不限';
 			$buylist[$key]['carage'] =  $Document->where('id = '.$value['carage_id'])->getField('title') ? :'不限';
 			$buylist[$key]['driven'] =  $Document->where('id = '.$value['driven_id'])->getField('title') ? :'不限';
