@@ -43,53 +43,27 @@
 		<div class="clear"></div>
 	</div>
 	<div class="w300">
-		<h2 class="h2_title">热门推荐 <a href="">More+</a></h2>
+		<h2 class="h2_title">热门推荐 <a href="{:U('Sell/index')}">More+</a></h2>
 		<div class="blank20"></div>
 		<ul class="hot_ul product_ul">
-			<li>
-				<a href="">
-					<img src="__IMG__/1.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="__IMG__/2.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="__IMG__/3.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="__IMG__/4.jpg" />
-					<span class="span_poa">新</span>
-					<div class="li_product">
-						<h2>大众宝来 2013款 宝来 1.6 自动 舒适版</h2>
-						<p class="p1">2013年7月上牌 | 行驶11.7万公里</p>
-						<p class="p2"><b>7.00万</b> <em>13.90万</em><i>认证</i></p>
-					</div>
-				</a>
-			</li>
+			
+
+			<volist name="selllist" id="val">
+				<li>
+					<a href="{:U('Sell/details',array('id'=>$val['id']))}">
+						<img src="Uploads/sellimg/{$val.imgurl}" />
+						<span class="span_poa">新</span>
+						<div class="li_product">
+							<h2>{$val.brand} {$val.year_id}款 {$val.brand_model_title} {$val.displacement_id} {$val.gearbox} {$val.level}</h2>
+						<p class="p1">{$val.years}上牌 | 行驶{$val.driven}万公里</p>
+						<p class="p2"><b>{$val.sfer_price}万</b> <em>{$val.new_price}万</em><i>{$val.status}</i></p>
+						</div>
+					</a>
+				</li>
+				</volist>
+
+
+			
 		</ul>
 		<div class="clear"></div>
 
