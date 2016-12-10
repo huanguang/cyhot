@@ -17,7 +17,7 @@ if (!$conn)
 mysql_select_db($table_db,$conn);
 
 
-$time = 60;
+$time = 60*24;
 $sql = " SELECT id,is_outdate,add_time,uid FROM onethink_buying WHERE is_outdate = 0 ";
 $data = get_all($sql );
 if(!empty($data)){
@@ -32,7 +32,7 @@ if(!empty($data)){
                     'content' => '您发布的求购消息已过期',
                     'release_time'  =>  $value['add_time'],
                 );
-    $sql ="INSERT INTO onethink_xinxi (`uid`,`from`,`content`,`release_time`) VALUES('{$value['uid']}','管理员','您发布的求购消息已过期','{$value['add_time']}')";
+    $sql ="INSERT INTO onethink_xinxi (`uid`,`from`,`content`,`release_time`,`guoqi_id`) VALUES('{$value['uid']}','管理员','您发布的求购消息已过期','{$value['add_time']}','$value['id']')";
                $result = mysql_query($sql);
             }
         }
