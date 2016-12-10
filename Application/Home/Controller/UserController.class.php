@@ -251,7 +251,7 @@ public function business(){
 
 //  我的消息
 public function news(){
-         $uid        =   is_login();
+         $uid = I('get.uid');
          if(!$uid){
                 $this->error( '用户id丢失',U('User/loing') );
          }else{
@@ -265,9 +265,9 @@ public function news(){
                       $sell_info[$key]['brand_model_title'] =  M('Document')->where('id='.$value['brand_model'])->getField('title') ? : '';
                       $sell_info[$key]['level'] =  M('Document')->where('id='.$value['level_id'])->getField('title') ? : '';
                       $sell_info[$key]['brand'] =  M('Category')->where('id='.$value['brand_id'])->getField('title') ? : '';
-                       $sell_info[$key]['title'] = $sell_info[$key]['brand'] .' ' . $sell_info[$key]['brand_model_title'] .' '.$sell_info[$key]['displacement'].' '.$sell_info[$key]['gearbox'].' '. $sell_info[$key]['level'] ? : '';
+                       $sell_info[$key]['title'] = ' '.$sell_info[$key]['brand'] .' ' . $sell_info[$key]['brand_model_title'] .' '.$sell_info[$key]['displacement'].' '.$sell_info[$key]['gearbox'].' '. $sell_info[$key]['level'] ? : '';
                   }
-                 // var_dump($sell_info);
+                 //var_dump($sell_info);
 
             //求购
             $buying = M('buying');
@@ -281,10 +281,20 @@ public function news(){
                $buying_info[$k]['driven'] = M('Document')->where('id='.$v['driven_id'])->getField('title') ? : '';
               $buying_info[$k]['price'] = M('Document')->where('id='.$v['price_id'])->getField('title') ? : '';
 
-              $buying_info[$k]["title"] =$buying_info[$k]['type'].' '.$buying_info[$k]['brand'].' ' .$buying_info[$k]['gearbox'].' ' .$buying_info[$k]['price']? : '';
+              $buying_info[$k]["title"] = ' '.$buying_info[$k]['type'].' '.$buying_info[$k]['brand'].' ' .$buying_info[$k]['gearbox'].' ' .$buying_info[$k]['price']? : '';
             }
            $data = array_merge_recursive($sell_info,$buying_info);
-           $this->assign('data',$data);
+
+           // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用
+           $count      = count($data);// 查询满足要求的总记录数
+           $Page       = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+           $show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+
+           $list = array_slice($data, $Page->firstRow, $Page->listRows);
+
+           $this->assign('data',$list);
+           $this->assign('show',$show);// 赋值分页输出
+
              $this->display('User/user_news');
          }
 
@@ -292,9 +302,192 @@ public function news(){
 
 //系统消息
 public function system(){
+           if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
+         $uid        =   is_login();
+         $xin = M('xinxi');
+         $xin_info = $xin->where('uid='.$uid)->select();
+         $this->assign('xin_info',$xin_info);
 
     $this->display('User/user_system');
 }
+
+//求购信息
+public function buyign(){
+        if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
+        $get = I('get.id');
+        $member  = M('member');
+       $buytable  = M('buying');
+       $buylinfo = $buytable->where('id = '.$get)->find();
+       //格式化数据
+      $Document = M('document');
+      $buylinfo['type'] =  $Document->where('id = '.$buylinfo['type_id'])->getField('title') ? :'不限';
+      $buylinfo['brand'] =  M('Category')->where('id = '.$buylinfo['brand_id'])->getField('title') ? :'不限';
+      $buylinfo['gearbox'] =  $Document->where('id = '.$buylinfo['gearbox_id'])->getField('title') ? :'不限';
+      $buylinfo['carage'] =  $Document->where('id = '.$buylinfo['carage_id'])->getField('title') ? :'不限';
+      $buylinfo['driven'] =  $Document->where('id = '.$buylinfo['driven_id'])->getField('title') ? :'不限';
+      $buylinfo['price'] =  $Document->where('id = '.$buylinfo['price_id'])->getField('title') ? :'不限';
+
+      $buylinfo['title'] = ' '.$buylinfo['brand'].' '.$buylinfo['carage'].' '.$buylinfo['price'] ? : '';
+
+      if($buylinfo['maintenance'] == 1){
+          $buylinfo['maintenance'] = '是';
+      }else{
+        $buylinfo['maintenance'] = '否';
+      }
+
+      if($buylinfo['colour'] == 'black'){
+          $buylinfo['colour']  = '黑色';
+      }elseif ($buylinfo['colour'] == 'white') {
+        $buylinfo['colour']  = '白色';
+      }elseif($buylinfo['colour'] == 'red'){
+         $buylinfo['colour']  = '红色';
+      }elseif($buylinfo['colour'] == 'blue'){
+          $buylinfo['colour']  = '蓝色';
+      }elseif ($buylinfo['colour']  = 'Pink') {
+         $buylinfo['colour']  = '灰白';
+      }elseif ($buylinfo['colour']  = 'Space_dust') {
+        $buylinfo['colour']  = '太空灰';
+      }elseif ($buylinfo['colour']  = 'Other') {
+       $buylinfo['colour']  = '其他';
+      }
+
+      $status = $member->where('uid = '.$buylinfo['uid'])->getField('is_status');
+      if($status == 2){
+          $buylinfo['laiy'] = '商家';
+      }else{
+        $buylinfo['laiy'] = '个人';
+      }
+
+      $this->assign('buylinfo',$buylinfo);
+      $this->display('User/user_newsxx');
+}
+
+
+//出售信息
+public function sell(){
+        if ( !is_login() ) {
+            $this->error( '您还没有登陆',U('User/login') );
+        }
+      $get = I('get.id');
+       $albumtable  = M('album');
+       $imglist = $albumtable->where('sell_id = '.$get)->find();
+       $this->assign('imglist',$imglist);//相册
+       $Document = M('document');
+       $category = M('category');
+         $member  = M('member');
+       $selltable  = M('sell');
+       $sellinfo = $selltable->where('id = '.$get['id'])->find();
+       //print_r($sellinfo);
+       $sellinfo['displacement'] = $Document->where('id = '.$sellinfo['displacement_id'])->getField('title') ? :'';
+       $sellinfo['gearbox'] = $Document->where('id = '.$sellinfo['gearbox_id'])->getField('title') ? :'';
+       $sellinfo['brand_model_title'] = $Document->where('id = '.$sellinfo['brand_model'])->getField('title') ? :'';
+       $sellinfo['level'] = $Document->where('id = '.$sellinfo['level_id'])->getField('title') ? :'';
+       $sellinfo['brand'] = $category->where('id = '.$sellinfo['brand_id'])->getField('title') ? :'';
+       $sellinfo['title'] = ' '.$sellinfo['brand_model_title'].' '.$sellinfo['years'].'年'.' '.$sellinfo['sfer_price'].'万' ? : '';
+
+       if($buylinfo['colour'] == 'black'){
+          $buylinfo['colour']  = '黑色';
+      }elseif ($buylinfo['colour'] == 'white') {
+        $buylinfo['colour']  = '白色';
+      }elseif($buylinfo['colour'] == 'red'){
+         $buylinfo['colour']  = '红色';
+      }elseif($buylinfo['colour'] == 'blue'){
+          $buylinfo['colour']  = '蓝色';
+      }elseif ($buylinfo['colour']  = 'Pink') {
+         $buylinfo['colour']  = '灰白';
+      }elseif ($buylinfo['colour']  = 'Space_dust') {
+        $buylinfo['colour']  = '太空灰';
+      }elseif ($buylinfo['colour']  = 'Other') {
+       $buylinfo['colour']  = '其他';
+      }
+      $status = $member->where('uid = '.$sellinfo['uid'])->getField('is_status');
+      if($status == 2){
+          $sellinfo['laiy'] = '商家';
+      }else{
+        $sellinfo['laiy'] = '个人';
+      }
+$this->assign('sellinfo',$sellinfo);
+  $this->display('User/user_newsxx_chus');
+}
+
+//邮箱找回密码
+public function mails($verify = ''){
+  if(IS_POST){
+   $email = I('post.email');
+          if(!check_verify($verify)){
+        $this->error('验证码输入错误！');
+      }
+      $user = M('Ucenter_member');
+      $user_info = $user->where('email = "'.$email.'" ')->find();
+      if($user_info >0){
+        $toke = getRandChar();
+        $toke_time = time();
+        $data = array(
+            'toke'  => $toke,
+            'toke_time'  => $toke_time,
+          );
+        if($user->where('email = "'.$email.'" ')->save($data)){
+                $title = '一哥车业';
+                $to = $email;
+                $url = 'http://localhost'.U('User/wjmms?toke='.$toke);
+                $mail = newsendMail($to,$title,$url);
+                if($mail == false){
+                     $this->error('邮箱发送失败');
+                }else{
+                  $this->success('验证信息已经发送到您的邮箱');
+                }
+        }else{
+           $this->error('服务器错误！！');
+        }
+        $this->display('User/wjmm');
+    }else{
+               $this->error('邮箱错误，请重新输出正确的邮箱');
+      }
+
+  }else{
+
+     $this->display('User/wjmm');
+  }
+
+}
+
+public function wjmms(){
+  $toke = I('get.toke');
+        $member = M('Ucenter_member');
+        $member_info = $member->where('toke = "'.$toke.'" ')->find();
+        if($member_info > 0){
+          if(IS_POST){
+            //获取参数
+            $data['password'] = I('post.password');
+            $passwordds = I('post.passwordds');
+            $email = $member_info['id'];
+            empty($data['password']) && $this->error('请输入新密码');
+            empty($passwordds) && $this->error('请输入确认密码');
+
+            if($data['password'] !== $passwordds){
+                $this->error('您输入的新密码与确认密码不一致');
+            }
+            $data['password'] = think_ucenter_encrypts($data['password'], UC_AUTH_KEY);
+            $members = $member->where('email='.$email)->save($data);
+            if($members > 0){
+              $this->success('修改成功',U('User/login'));
+            }else{
+              $this->error('修改失败');
+            }
+
+          }else{
+            $this->display('User/wjmms');
+          }
+       }else{
+          $this->error('验证码已过期，请重新发送');
+       }
+
+}
+
 
  //文件上传
     public function fileupload(){

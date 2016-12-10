@@ -2,23 +2,23 @@
 <block name="head">
       <meta charset="utf-8">
       <title>一哥车业</title>
-      <meta name="keywords" content="wsg,hth">
-      <meta name="description" content="ASW">
-      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="keywords" content="一哥车业">
-      <Meta name="description" Content="一哥车业">
-      <link href="__CSS__/css.css" rel="stylesheet" type="text/css">
-      <link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
-      <script src="__JS__/jquery.js"></script><!-- 统一调用js -->
-      <link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
-      <script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
-      <link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
-      <link rel="stylesheet" href="__CSS__/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
-      <link href="__CSS__/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
-     <!--  <script type="text/javascript" src="css/Validform/js/Validform_v5.3.2_min.js"></script> --><!-- 13.0 表单提交验证 -->
-      <script type="text/javascript" src="__CSS__/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
-      <link href="__CSS__/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
+<meta name="keywords" content="wsg,hth">
+<meta name="description" content="ASW">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="一哥车业">
+<Meta name="description" Content="一哥车业">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<link rel="stylesheet" href="__CSS__/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/js/Validform_v5.3.2_min.js"></script><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
 </block>
 <block name="header">
       <div class="sign_top w1200">
@@ -46,13 +46,13 @@
       </div>
       <div class="bd">
         <div>
-          <form action="__SELF__" method="post"  class="login-form">
+          <form action="__SELF__" method="post"  id="form" class="registerform">
             <table width="500" border="0" cellspacing="0" cellpadding="0" class="sign_table">
                 <tr>
                   <td class="td1">手机号</td>
                   <td class="td2">
                     <div class="div1">
-                          <input type="text" value="" class="sign_inp inp_s1" name="phone" datatype="n6-18" placeholder="请输入手机号码" errormsg="手机号码有误！" />
+                          <input type="text" value="" class="sign_inp inp_s1" name="phone" datatype="m" placeholder="请输入手机号码" errormsg="手机号码有误！" />
                         </div>
                         <div class="Validform_checktip"></div>
                       </td>
@@ -61,7 +61,7 @@
                   <td class="td1">密码</td>
                   <td class="td2">
                     <div class="div1">
-                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="n6-18" placeholder="请输入密码" errormsg="密码有误！" />
+                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="s6-18" placeholder="请输入密码" errormsg="密码有误！" />
                     </div>
                     <div class="Validform_checktip"></div>
                   </td>
@@ -70,7 +70,7 @@
                   <td class="td1">验证码</td>
                   <td class="td2">
                     <div class="div1">
-                      <input type="password" value="" class="sign_inp inp_s1" name="verify" datatype="n6-18" placeholder="请输入验证码" errormsg="验证码有误！"
+                      <input type="password" value="" class="sign_inp inp_s1" name="verify"  placeholder="请输入验证码" errormsg="验证码有误！"
                       style="width:40%" />
                      <a href="javascript:void(0)"><span  class="agy14_1"><img class="verifyimgs" src="{:U('verify')}" alt=""></span>看不清？</a>
                     </div>
@@ -85,8 +85,8 @@
                 <tr>
                   <td class="td1">&nbsp;</td>
                   <td class="td2 td_xy">
-                  <a class="a2 fl" href="wjmm.php">忘记密码</a>
-                    <a class="a3 fr" href="register.php">还没有账号,马上注册！</a>
+                  <a class="a2 fl" href="{:U('User/mails')}">忘记密码</a>
+                    <a class="a3 fr" href="{:U('User/register')}">还没有账号,马上注册！</a>
 
                   </td>
                 </tr>
@@ -100,7 +100,7 @@
                   <td class="td1">电子邮箱</td>
                   <td class="td2">
                     <div class="div1">
-                          <input type="text" value="" class="sign_inp inp_s1" name="email" datatype="n6-18" placeholder="请输入邮箱地址" errormsg="邮箱有误！" />
+                          <input type="text" value="" class="sign_inp inp_s1" name="email" datatype="e" placeholder="请输入邮箱地址" errormsg="邮箱有误！" />
                         </div>
                         <div class="Validform_checktip"></div>
                       </td>
@@ -109,7 +109,7 @@
                   <td class="td1">密码</td>
                   <td class="td2">
                     <div class="div1">
-                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="n6-18" placeholder="请输入密码" errormsg="密码有误！" />
+                      <input type="password" value="" class="sign_inp inp_s1" name="password" datatype="s6-18" placeholder="请输入密码" errormsg="密码有误！" />
                     </div>
                     <div class="Validform_checktip"></div>
                   </td>
@@ -132,8 +132,8 @@
                 <tr>
                   <td class="td1">&nbsp;</td>
                   <td class="td2 td_xy">
-                  <a class="a2 fl" href="wjmm.php">忘记密码</a>
-                    <a class="a3 fr" href="register.php">还没有账号,马上注册！</a>
+                  <a class="a2 fl" href="{:U('User/mails')}">忘记密码</a>
+                    <a class="a3 fr" href="{:U('User/register')}">还没有账号,马上注册！</a>
                   </td>
                 </tr>
             </table>
@@ -170,7 +170,7 @@ $(function(){
         });
 
 
-      $("form").submit(function(){
+      $("#form").submit(function(){
         var self = $(this);
         $.post(self.attr("action"), self.serialize(), success, "json");
         return false;

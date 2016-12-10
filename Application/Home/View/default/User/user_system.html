@@ -48,36 +48,14 @@
 					    <th width="20%">发布时间</th>
 					    <th align="right" width="10%"></th>
 					  </tr>
+				<volist name="xin_info" id="v1">
 					  <tr>
-					  	<td class="td1"><p>管理员</p></td>
-					  	<td class="td1"><p>您发布的求购消息已过期</p></td>
-					  	<td class="td1">2015-06-27 14:50</td>
+					  	<td class="td1"><p>{$v1.from}</p></td>
+					  	<td class="td1"><p>{$v1.content}</p></td>
+					  	<td class="td1">{$v1.release_time|date='Y-m-d',###}</td>
 					  	<td class="td2"><a href="">删除</a></td>
 					  </tr>
-					  <tr>
-					  	<td class="td1"><p>管理员</p></td>
-					  	<td class="td1"><p>您发布的求购消息已过期</p></td>
-					  	<td class="td1">2015-06-27 14:50</td>
-					  	<td class="td2"><a href="">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>管理员</p></td>
-					  	<td class="td1"><p>您发布的求购消息已过期</p></td>
-					  	<td class="td1">2015-06-27 14:50</td>
-					  	<td class="td2"><a href="">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>管理员</p></td>
-					  	<td class="td1"><p>您发布的求购消息已过期</p></td>
-					  	<td class="td1">2015-06-27 14:50</td>
-					  	<td class="td2"><a href="">删除</a></td>
-					  </tr>
-					  <tr>
-					  	<td class="td1"><p>管理员</p></td>
-					  	<td class="td1"><p>您发布的求购消息已过期</p></td>
-					  	<td class="td1">2015-06-27 14:50</td>
-					  	<td class="td2"><a href="">删除</a></td>
-					  </tr>
+				</volist>
 					</table>
 					<div class="blank30"></div>
 

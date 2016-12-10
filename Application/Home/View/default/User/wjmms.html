@@ -1,0 +1,105 @@
+<extend name="Base/common" />
+<block name="head">
+<meta charset="utf-8">
+<title>一哥车业</title>
+<meta name="keywords" content="wsg,hth">
+<meta name="description" content="ASW">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="一哥车业">
+<Meta name="description" Content="一哥车业">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<link rel="stylesheet" href="__CSS__/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/js/Validform_v5.3.2_min.js"></script><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
+</block>
+
+
+<block name="body">
+	<div class="sign_center">
+		<div class="slide_box sign_div">
+			<div class="bd">
+				<div>
+					<div class="sign_bt"><h2>重 置 密 码</h2></div>
+					<form id="form" action="{:U('User/wjmms')}" method="post" class="registerform">
+						<table width="500" border="0" cellspacing="0" cellpadding="0" class="sign_table">
+							  <tr>
+							    <td class="td1">新密码</td>
+							    <td class="td2">
+							    	<div class="div1">
+							    		<input type="password" value="" class="sign_inp inp_s1" name="password" datatype="s6-18" placeholder="请输入密码" errormsg="密码有误！" />
+							    	</div>
+							    	<div class="Validform_checktip"></div>
+							    </td>
+							  </tr>
+							  <tr>
+							    <td class="td1">确认密码</td>
+							    <td class="td2">
+							    	<div class="div1">
+							    		<input type="password" value="" class="sign_inp inp_s1" name="passwordds" datatype="s6-18" placeholder="请输入密码" errormsg="密码有误！" />
+							    	</div>
+							    	<div class="Validform_checktip"></div>
+							    </td>
+							  </tr>
+							  <tr>
+							    <td class="td1">&nbsp;</td>
+							    <td class="td2"><input class="inp_anv1" name="" type="submit" value="确认"></td>
+							  </tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">jQuery(".slide_box").slide({trigger:"click"});</script>
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+
+	$(".registerform").Validform({
+		tiptype:2,
+		datatype:{
+			oldpassword:function(gets){
+				if(gets==$("#passwordold").val()){
+					return "新密码不能与旧密码一致！";
+				}
+			}
+		},
+		ajaxPost:true
+	});
+})
+
+
+ $(document)
+        .ajaxStart(function(){
+          $("button:submit").addClass("log-in").attr("disabled", true);
+        })
+        .ajaxStop(function(){
+          $("button:submit").removeClass("log-in").attr("disabled", false);
+        });
+
+
+      $("#form").submit(function(){
+        var self = $(this);
+        $.post(self.attr("action"), self.serialize(), success, "json");
+        return false;
+
+        function success(data){
+          if(data.status){
+            window.location.href = data.url;
+          } else {
+            //self.find(".Validform_checktip").text(data.info);
+            alert(data.info);
+            //刷新验证码
+          }
+        }
+      });
+</script>
+</block>

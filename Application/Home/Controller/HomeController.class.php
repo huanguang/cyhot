@@ -33,8 +33,9 @@ class HomeController extends Controller {
             $this->error('站点已经关闭，请稍后访问~');
         }
         $user = session('user_auth');
-
-
+    $uid        =   is_login();
+    $this->assign('uid',$uid);
+        $this->assign('user',$user);// 热门推荐品牌
 
 
         //查询热门品牌
@@ -84,7 +85,7 @@ class HomeController extends Controller {
          }
               $this->assign('fenzhan', $fenzhan);//分站信息
 
-        $erimg = $docuement->where('category_id=60')->select();
+        $erimg = $document->where('category_id=60')->select();
         $this->assign('erimg',$erimg);
 
         //网站logo

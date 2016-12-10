@@ -1,0 +1,81 @@
+<extend name="Base/common" />
+<block name="head">
+<meta charset="utf-8">
+<title>一哥车业</title>
+<meta name="keywords" content="wsg,hth">
+<meta name="description" content="ASW">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="一哥车业">
+<Meta name="description" Content="一哥车业">
+<link href="__CSS__/css.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/selectpick/cui.css" rel="stylesheet" type="text/css"><!--美化下拉框插件-->
+<script src="__JS__/jquery.js"></script><!-- 统一调用js -->
+<link href="__CSS__/banner-switch/lrtk.css" rel="stylesheet"><!-- banner切换 -->
+<script src="__JS__/banner-switch/jquery.superslide.2.1.1.js"></script><!-- banner切换 -->
+<link href="__CSS__/SuperSlide/style.css" rel="stylesheet"><!--标签切换，滚动 -->
+<link rel="stylesheet" href="__CSS__/Validform/style.css" type="text/css" media="all" /><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/Validform/demo.css" type="text/css" rel="stylesheet" /><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/js/Validform_v5.3.2_min.js"></script><!-- 13.0 表单提交验证 -->
+<script type="text/javascript" src="__CSS__/Validform/plugin/passwordStrength/passwordStrength-min.js"></script><!-- 13.0 表单提交验证 -->
+<link href="__CSS__/fxk.css" rel="stylesheet" type="text/css"><!-- 表单美化 -->
+</block>
+
+
+<block name="body">
+	<div class="sign_center">
+		<div class="w1200 personal_div">
+			<div class="w200 fl">
+                <ul>
+	                    <li class="li1">个人中心</li>
+	            <li><a class="a1" href="{:U('User/personal')}">个人信息</a></li>
+	                    <li><a class="a2" href="{:U('User/business')}">商家认证</a></li>
+	                    <li class="li_dq"><a class="a3" href="{:U('User/news')}">我的消息</a></li>
+	                    <li ><a class="a4" href="{:U('User/system')}">系统消息</a></li>
+	                    <li class="li2">
+	                        <p class="p1">客服热线</p>
+	                        <p class="p2">0755-36631111</p>
+	                    </li>
+                </ul>
+			</div>
+			<div class="w970 fr">
+				<div class="div_1"><h2>我的消息</h2></div>
+				<div class="user_news_text">
+					<div class="div1">
+						<h2>求购 {$buylinfo.title}</h2>
+						<p>发布时间：{$buylinfo.add_time|date='Y-m-d H:i',###}</p>
+					</div>
+					<div class="div2">
+						<ul>
+							<li>类型：<br><span>{$buylinfo.type}</span></li>
+							<li>品牌：<br><span>{$buylinfo.brand}</span></li>
+							<li>变速箱：<br><span>{$buylinfo.gearbox}</span></li>
+							<li>车龄：<br><span>{$buylinfo.carage}</span></li>
+							<li>里程：<br><span>{$buylinfo.driven}</span></li>
+							<li>价格：<br><span>{$buylinfo.price}</span></li>
+							<li>是否保养：<br><span>{$buylinfo.maintenance}</span></li>
+							<li>车辆颜色：<br><span>{$buylinfo.colour}</span></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="div3">
+						<ul>
+							<li>联系人：<br><span>{$buylinfo.contacts}</span></li>
+							<li>手机号：<br><span class="span1">{$buylinfo.contactnumber}</span></li>
+							<li>求购来源：<br><span>{$buylinfo.laiy}</span></li>
+							<li>车辆所在地：<br><span>{$buylinfo.address}</span></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="div4">
+						<h2>补充说明</h2>
+						<p>{$buylinfo.description}</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	</block>

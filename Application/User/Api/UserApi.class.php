@@ -97,4 +97,8 @@ class UserApi extends Api{
         return $return;
     }
 
+    public function jiemo($password){
+       return $this->model->updatjiemi($password);
+    }
+
 }

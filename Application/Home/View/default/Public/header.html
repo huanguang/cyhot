@@ -76,12 +76,12 @@
             </div>
             <div class="daoh_2 fr">
                 <ul>
-                    <if condition="$user eq null ">
+                    <if condition="$user eq ' ' ">
                         <li><a class="a1" href="{:U('User/login')}">登录</a></li>
                     <else />
                          <li><a class="a1" href="{:U('User/logout')}">退出</a></li>
+                         <li><a class="a1" href="{:U('User/news?uid='.$uid)}">个人中心</a></li>
                     </if>
-
                     <li><a href="{:U('User/register')}">注册</a></li>
                 </ul>
                 <div class="clear"></div>

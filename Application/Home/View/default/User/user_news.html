@@ -29,8 +29,8 @@
                     <li class="li1">个人中心</li>
             <li><a class="a1" href="{:U('User/personal')}">个人信息</a></li>
                     <li><a class="a2" href="{:U('User/business')}">商家认证</a></li>
-                    <li><a class="a3" href="{:U('User/news')}">我的消息</a></li>
-                    <li class="li_dq"><a class="a4" href="{:U('User/system')}">系统消息</a></li>
+                    <li class="li_dq"><a class="a3" href="{:U('User/news')}">我的消息</a></li>
+                    <li ><a class="a4" href="{:U('User/system')}">系统消息</a></li>
                     <li class="li2">
                         <p class="p1">客服热线</p>
                         <p class="p2">0755-36631111</p>
@@ -54,14 +54,14 @@
                         <td class="td1"><p> <if condition="$vo['status'] eq 1">求购<else />出售</if>{$vo.title}</p></td>
                         <td class="td1"><p>{$vo.description}</p></td>
                         <td class="td1">{$vo.add_time|date='Y-m-d',###}</td>
-                        <td class="td2"><a href="user_newsxx_chus.php">查看详情</a></td>
+                        <td class="td2"><a <if condition = "$vo['status'] eq 1">href="{:U('User/buyign?id='.$vo['id'])}"<else />href="{:U('User/sell?id='.$vo['id'])}"</if>>查看详情</a></td>
                         <td class="td2"><a href="" class="a_del">删除</a></td>
                       </tr>
                     </volist>
 
                     </table>
                     <div class="blank30"></div>
-
+                      {$show}
                     </form>
                 </div>
                 <div class="clear"></div>

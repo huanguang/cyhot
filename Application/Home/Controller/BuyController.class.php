@@ -24,7 +24,7 @@ class BuyController extends HomeController {
         $category = M('category');
         //查询品牌出来
         $brandlist = $category->where('pid = 41')->select();
-        
+
         $this->assign('brandlist',$brandlist);
         $get = I('get.');//接受筛选条件
         $type_id = 0;
@@ -39,42 +39,42 @@ class BuyController extends HomeController {
         	$where['type_id'] = $get['type_id'];
         	$type_id = $get['type_id'];
         	$type_title = $Document->where('id = '.$type_id)->getField('title');
-        	
+
         }
         if(!empty($get['brand_id'])){
         	$where['brand_id'] = $get['brand_id'];
         	//$where .= " AND brand_id = ".$get['brand_id'];
         	$brand_id = $get['brand_id'];
         	$brand_title = $category->where('id = '.$brand_id)->getField('title');
-        	
+
         }
         if(!empty($get['gearbox_id'])){
         	$where['gearbox_id'] = $get['gearbox_id'];
         	//$where .= " AND gearbox_id = ".$get['gearbox_id'];
         	$gearbox_id = $get['gearbox_id'];
         	$gearbox_title = $Document->where('id = '.$gearbox_id)->getField('title');
-        	
+
         }
         if(!empty($get['carage_id'])){
         	$where['carage_id'] = $get['carage_id'];
         	//$where .= " AND carage_id = ".$get['carage_id'];
         	$carage_id = $get['carage_id'];
         	$carage_title = $Document->where('id = '.$carage_id)->getField('title');
-        	
+
         }
         if(!empty($get['driven_id'])){
         	$where['driven_id'] = $get['driven_id'];
         	//$where .= " AND driven_id = ".$get['driven_id'];
         	$driven_id = $get['driven_id'];
         	$driven_title = $Document->where('id = '.$driven_id)->getField('title');
-        	
+
         }
         if(!empty($get['price_id'])){
         	$where['price_id'] = $get['price_id'];
         	//$where .= " AND price_id = ".$get['price_id'];
         	$price_id = $get['price_id'];
         	$price_title = $Document->where('id = '.$price_id)->getField('title');
-        	
+
 
         }
 
@@ -90,7 +90,7 @@ class BuyController extends HomeController {
 
         if(!empty($get['price_id'])) $where_html .= '<dd class="selected" id="selectF"><a href="'.U('Buy/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'gearbox_id'=>$gearbox_id,'carage_id'=>$carage_id,'driven_id'=>$driven_id,'price_id'=>0)).'">'.$price_title.'</a></dd>';
 
-   
+
         //把对应的选中的信息查出来
         $this->assign('type_id',$type_id);
         $this->assign('brand_id',$brand_id);
@@ -107,7 +107,7 @@ class BuyController extends HomeController {
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		$buylist = $Buy->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
 		//根据字段id查询属性名称
-		
+
 		foreach ($buylist as $key => $value) {
 			$buylist[$key]['type'] =  $Document->where('id = '.$value['type_id'])->getField('title') ? :'不限';
 			$buylist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title') ? :'不限';
@@ -133,7 +133,7 @@ class BuyController extends HomeController {
         $this->assign('lists',$lists);//列表
         $Category  = M('category');
         $list = $Category->where('pid = 41')->select();
-        
+
         //print_r($lists);die;
         $this->assign('list',$list);//品牌
         //print_r($lists)
@@ -205,13 +205,13 @@ class BuyController extends HomeController {
     		$this->error('联系电话不是一个手机号码，也不是一个电话号码，请重新填写');
     	}
         $uid        =   is_login();
-        $post['uid'] = $uid;   	
+        $post['uid'] = $uid;
 
 
     	if($post['address'] == ''){
     		$this->error('必须填写车辆所在地址');
     	}
-    	 //把有关信息，拼成一个title插入数据库 
+    	 //把有关信息，拼成一个title插入数据库
             //把相应的信息查询出来
             $type = $Document->where('id = '.$post['type_id'])->getField('title') ? :' ';
             $brand = $category->where('id = '.$post['brand_id'])->getField('title') ? :' ';
@@ -221,17 +221,16 @@ class BuyController extends HomeController {
             $driven = $Document->where('id = '.$post['driven_id'])->getField('title') ? :' ';
             $carage = $Document->where('id = '.$post['carage_id'])->getField('title') ? :' ';
            	$post['title'] = $type.' '.$brand.' '.$gearbox.' '.$carage.' '.$driven.' '.$price;
-		    $post['add_time'] = time();
+            $post['add_time'] = time();
 		    //插入数据库
 		    $m = M("buying");
+                            $result = $m->add($post);
+                            if(!$result){
+                                $this->error('服务器错误，请稍后重试！');
+                            }
 
-			if(empty($m->add($post))){
-				$this->error('服务器错误，请稍后重试！');
-			}
+		$this->success('提交成功！！',U('Buy/index'));
 
-
-			$this->success('提交成功！！',U('Buy/index'));			
-        
     }
 
     //文件上传
@@ -241,7 +240,7 @@ class BuyController extends HomeController {
 
 
 			$up = new \FileUpload;
-			
+
 
 		    //设置属性(上传的位置， 大小， 类型， 名是是否要随机生成)
 
@@ -256,18 +255,18 @@ class BuyController extends HomeController {
 		    $up -> set("maxsize", 2000000);
 		    $up -> set("allowtype", array("gif", "png", "jpg","jpeg"));
 		    $up -> set("israndname", true);
-		  
+
 		    //使用对象中的upload方法， 就可以上传文件， 方法需要传一个上传表单的名子 pic, 如果成功返回true, 失败返回false
 		    if($up -> upload("file")) {
 		        //获取上传后文件名子
 		        $imgname = $up->getFileName();
 		        $arr = array("imgname"=>$imgname,'error'=>'0','msg'=>'上传成功！');
-		        echo json_encode($arr);die; 
+		        echo json_encode($arr);die;
 		        //echo '</pre>';
 		    } else {
 
 		        //获取上传失败以后的错误提示
-		        
+
 		        $arr = array("imgname"=>$imgname,'error'=>1,'msg'=>$up->getErrorMsg());
 		        echo json_encode($arr);die;
 		    }
