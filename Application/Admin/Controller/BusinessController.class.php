@@ -28,7 +28,7 @@ class BusinessController extends AdminController {
             $map['shop_name']    =   array('like', '%'.(string)$shop_name.'%');
         }
          $list   = $this->lists('Business', $map);
-
+        
         $this->assign('list', $list);
         $this->meta_title = '店铺信息';
         $this->display();

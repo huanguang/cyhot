@@ -242,7 +242,7 @@ public function business(){
              $shop_s = $shop->where('id='.$shop_info['id'])->find();
              $this->assign('shop_s',$shop_s);
         }
-
+        
         $this->assign('shop_info',$shop_info);
          $this->display('User/user_business');
     }
