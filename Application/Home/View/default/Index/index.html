@@ -222,15 +222,16 @@
     <div class="article_fl">
         <div class="redian_article">
             <span class="span_poa"><img src="__IMG__/biaot_1.jpg" alt=""></span>
-            <div class="div1"><img src="__IMG__/t1.jpg" alt=""></div>
+            <volist name="document_article" id="val">
+            <if condition="$val.is_hot eq 1">
+            <div class="div1"><img src="{$val.exhibition_img|get_cover=###,path}" alt="{$val.title_new}"></div>
+            </if>
+            </volist>
             <div class="div2">
                 <ul>
-                    <li><a href="">QuestMobile二手车电商数据解读</a></li>
-                    <li><a href="">完成D轮1.5亿美元融资 王思聪参投</a></li>
-                    <li><a href="">用户自述两次购车经历：人人车，靠谱！</a></li>
-                    <li><a href="">没什么比善良更重要，产品也是</a></li>
-                    <li><a href="">二手车电商大战，，凭什么？</a></li>
-                    <li><a href="">完成D轮1.5亿美元融资 王思聪参投</a></li>
+                <volist name="document_article" id="val">
+                    <li><a href="{:U('News/detail?id='.$val['id'])}">{$val.title_new}</a></li>
+                </volist>
                 </ul>
             </div>
         </div>
@@ -238,21 +239,35 @@
     <div class="article_fr">
         <a href=""><div class="selected_div">
             <span class="span_poa"><img src="__IMG__/biaot_2.jpg" alt=""></span>
-            <div class="div1 fl"><img src="__IMG__/t2.jpg" alt=""></div>
-            <div class="div2 fr">
-                <h2>帅到飞起，用十年二手老车漂出绝尘弧线</h2>
-                <p>帅气有型的头部，硬朗不失动感的身姿，少见的原装尾翼，大鹏眼中永远的驾驶者之车。高智商学霸仅花3天购车，他的经验是？老李，对风险和不可靠因素有着灵敏的嗅觉。2016年8月他在得一辆大众迈腾。</p>
-            </div>
+            <volist name="document_article" id="val">
+            <if condition="$val.is_wen eq 1">
+                <div class="div1 fl"><img src="{$val.exhibition_img|get_cover=###,path}" alt="{$val.title_new}"></div>
+                <div class="div2 fr">
+                    <h2>{$val.title_new}</h2>
+                    <p>{$val.new_description}</p>
+                </div>
+
+            
+            </if>
+            </volist>
             <div class="clear"></div>
         </div></a>
         <div class="blank45"></div>
         <a href=""><div class="selected_div">
             <span class="span_poa"><img src="__IMG__/biaot_3.jpg" alt=""></span>
-            <div class="div1 fl"><img src="__IMG__/t3.jpg" alt=""></div>
-            <div class="div2 fr">
-                <h2>帅到飞起，用十年二手老车漂出绝尘弧线</h2>
-                <p>帅气有型的头部，硬朗不失动感的身姿，少见的原装尾翼，大鹏眼中永远的驾驶者之车。高智商学霸仅花3天购车，他的经验是？老李，对风险和不可靠因素有着灵敏的嗅觉。2016年8月他在得一辆大众迈腾。</p>
-            </div>
+
+            <volist name="document_article" id="val">
+            <if condition="$val.is_selected eq 1">
+ 
+                <div class="div1 fl"><img src="{$val.exhibition_img|get_cover=###,path}" alt="{$val.title_new}"></div>
+                <div class="div2 fr">
+                    <h2>{$val.title_new}</h2>
+                    <p>{$val.new_description}</p>
+                </div>
+
+            
+            </if>
+            </volist>
             <div class="clear"></div>
         </div></a>
     </div>

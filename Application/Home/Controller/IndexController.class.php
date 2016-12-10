@@ -116,7 +116,13 @@ class IndexController extends HomeController {
 			}
 			//print_r($selllist);die;
 			$this->assign('selllist_hot',$selllist_hot);// 热门推荐品牌
-                 
+
+			//查询首页热门，精选，推荐的文章
+			$document_article = M('document_article');
+			$document_article = $document_article->where(' is_recommend = 1')->limit(9)->select();
+
+			//print_r($document_article);die;
+            $this->assign('document_article',$document_article);// 热门推荐品牌
         $this->display();
     }
 
