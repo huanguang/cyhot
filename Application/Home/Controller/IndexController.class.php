@@ -46,7 +46,7 @@ class IndexController extends HomeController {
         
         $this->assign('brandlist',$brandlist);
         //查询首页推荐车源
-        $selllist = $sell->where(' is_recommend = 1')->order('add_time')->limit(12)->select();
+        $selllist = $sell->where(' is_recommend = 1 and is_status = 1')->order('add_time')->limit(12)->select();
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
@@ -71,7 +71,7 @@ class IndexController extends HomeController {
 
 
 		//查询最新车源
-			$selllist_new = $sell->where(' is_new = 1')->order('add_time')->limit(16)->select();
+			$selllist_new = $sell->where(' is_new = 1 and is_status = 1')->order('add_time')->limit(16)->select();
 
 			//查询信息的一张图片
 
@@ -95,7 +95,7 @@ class IndexController extends HomeController {
 
 
 			//查询最热车源
-			$selllist_hot = $sell->where(' is_hot = 1')->order('add_time')->limit(16)->select();
+			$selllist_hot = $sell->where(' is_hot = 1 and is_status = 1')->order('add_time')->limit(16)->select();
 
 			//查询信息的一张图片
 

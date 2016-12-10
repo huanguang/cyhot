@@ -50,6 +50,7 @@
                     <th>颜色</th>
                     <th>添加人</th>
                     <th>添加时间</th>
+                    <th>审核</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -69,6 +70,12 @@
                         <td>{$goods.colour}</td>
                         <td>{$goods.name}</td>
                         <td>{$goods.add_time}</td>
+                        <td>
+                            <if condition="$goods.is_status eq 1">审核通过
+                            <elseif condition="$goods.is_status eq 2"/>审核拒绝
+                            <else />未审核
+                            </if>
+                        </td>
                         </td>
                         <td>
                             <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('Buy/edit',array('id'=>$goods['id']))}">编辑</a>

@@ -107,7 +107,20 @@ namespace Admin\Controller;
             unset($post['id']);
 
             $sell->where('id='.$id)->save($post); // 根据条件更新记录
-
+            //增加用户信息，让用户知道自己发布的信息是否审核通过
+            if($post['is_status'] == 1){
+                $xinxi = M('xinxi');
+                $title = "您发布的出售二手车信息已经审核通过，信息已经显示";
+            }elseif($post['is_status'] == 2){
+                $xinxi = M('xinxi');
+                $title = "您发布的出售二手车信息审核不通过，请重新发布信息";
+            }
+            if($title){
+                $xinxi_array = array('uid'=>$post['uid'],'from'=>'管理员','content'=>$title,'release_time'=>time(),'guoqi_id'=>0);
+                $xinxi->add($xinxi_array);
+            }
+            unset($post['uid']);
+            
             //加入相册信息
             if(!empty($img)){
                 for ($i=0; $i < count($img); $i++) { 

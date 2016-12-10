@@ -157,7 +157,7 @@ class SellController extends HomeController {
             $where['_complex'] = $where1;
             $this->assign('keyword',$keyword);
         }
-
+        $where['is_status'] = 1;
 
 
 
@@ -167,7 +167,7 @@ class SellController extends HomeController {
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 		$show       = $Page->show();// 分页显示输出
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-		$selllist = $User->join()->where($where)->order('add_time')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$selllist = $User->join()->where($where)->order('add_time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
 
 
@@ -252,7 +252,7 @@ class SellController extends HomeController {
 
 
        //查询同品牌信息
-       $sellbrandlist = $selltable->where('brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
+       $sellbrandlist = $selltable->where('is_status = 1 and brand_id = '.$sellinfo['brand_id'])->order('add_time desc')->limit(12)->select();
        foreach ($sellbrandlist as $key => $value) {
        			//查询第一张图片
        			$sellbrandlist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
@@ -277,7 +277,7 @@ class SellController extends HomeController {
 			}
 
 			//查询同类型的热门二手车推荐
-			$selltypelist = $selltable->where('type_id = '.$sellinfo['type_id'])->order('add_time desc')->limit(6)->select();
+			$selltypelist = $selltable->where('is_status = 1 and type_id = '.$sellinfo['type_id'])->order('add_time desc')->limit(6)->select();
 			foreach ($sellbrandlist as $key => $value) {
        			//查询第一张图片
        			$selltypelist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
@@ -399,6 +399,14 @@ class SellController extends HomeController {
 
         $uid        =   is_login();
         $post['uid'] = $uid;
+        $business = M('business');
+        $business_status = $business->where('user_id = '.$post['uid'])->getField('is_status') ? :' ';
+            if($business_status == 2){
+                
+                $post['danx1'] = 1;
+            }else{
+                $post['danx1'] = 0;
+            }
         //把有关信息，拼成一个title插入数据库 
             //把相应的信息查询出来
             $brand = $category->where('id = '.$post['brand_id'])->getField('title') ? :' ';
