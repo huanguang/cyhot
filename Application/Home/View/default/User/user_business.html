@@ -54,9 +54,25 @@
 					  <tr>
 					    <td valign="top" class="td1">营业执照上传：</td>
 					    <td>
+					    
+					    
 						    <div class="div_sc">
+						    <if condition="$shop_info.is_status eq 2 ">
+						    	<div class="parentFileBox" style="width: 180px;"> 						
+									<ul class="fileBoxUl">
+										<li class="diyUploadHover" id="aaa{$val.id}"> 
+											<div class="viewThumb">
+												<img src="{$shop_info.img_id|get_cover=###,path}"/>
+											</div>
+														
+										</li>
+									</ul>					
+								</div>
+						<else/>
 								<h2>上传电脑中图片</h2>
+								
 								<div id="test1" ></div>
+								
 								<script type="text/javascript">
 									/*
 									* 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
@@ -93,6 +109,7 @@
 										accept: {}
 									});
 								</script>
+								</if>
 				                <div class="clear"></div>
 					    	</div>
 				    	</td>

@@ -313,9 +313,9 @@
         <td>
             <input class="inp_ty" name="contacts" id="contacts" value="{$buylinfo.contacts}" type="text">
             <label for="" style="margin:0 20px 0 10px">
-            <input  checked="true"  <if condition="$buylinfo.danx1 eq '1' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" value="1" />
+            <input  checked="true"  <if condition="$buylinfo.danx1 eq '0' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" value="0" />
             <label for="checkbox_a3"></label>个人</label>
-            <label for=""><input name="danx1" <if condition="$buylinfo.danx1 eq '0' "> checked="true" </if> type="radio" id="checkbox_a4" class="chk_1 inp_fx" value="0" /><label for="checkbox_a4"></label>商家</label>
+            <label for=""><input name="danx1" <if condition="$buylinfo.danx1 eq '1' "> checked="true" </if> type="radio" id="checkbox_a4" class="chk_1 inp_fx" value="1" /><label for="checkbox_a4"></label>商家</label>
         </td>
       </tr>
       <tr>
@@ -331,8 +331,17 @@
         <td><textarea class="textarea_1" name="description" cols="" rows="">{$buylinfo.description}</textarea></td>
       </tr>
       <tr>
+        <td class="rele_td"><i>*</i>审核</td>
+        <td>
+        <label for="" style="margin:0 20px 0 10px"><input value="0"  <if condition="$buylinfo.is_status eq '0' "> checked="true" </if> name="is_status" type="radio" id="checkbox_a7" class="chk_1 inp_fx" /><label for="checkbox_a7"></label>未审核</label>
+            <label for="" style="margin:0 20px 0 10px"><input <if condition="$buylinfo.is_status eq '1' "> checked="true" </if> value="1" name="is_status" type="radio" id="checkbox_a8" class="chk_1 inp_fx" /><label for="checkbox_a8"></label>审核通过</label>
+            <label for=""><input <if condition="$buylinfo.is_status eq '2' "> checked="true" </if> value="2" name="is_status" type="radio" id="checkbox_a9" class="chk_1 inp_fx" /><label for="checkbox_a9"></label>审核拒绝</label>
+            </td>
+      </tr>
+      <tr>
         <td class="rele_td">&nbsp;</td>
         <input type="hidden" name="id" value="{$buylinfo.id}">
+        <input type="hidden" name="uid" value="{$buylinfo.uid}">
         <td><input class="sub_1" name="" type="submit" value="提交"></td>
       </tr>
 

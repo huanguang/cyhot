@@ -100,6 +100,7 @@ class BuyController extends HomeController {
         $this->assign('price_id',$price_id);
         $this->assign('where_html',$where_html);
         $this->assign('lists',$lists);//列表
+        $where['is_status'] = 1;
         $Buy = M('buying'); // 实例化buying对象
 		$count      = $Buy->where($where)->count();// 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
@@ -205,7 +206,19 @@ class BuyController extends HomeController {
     		$this->error('联系电话不是一个手机号码，也不是一个电话号码，请重新填写');
     	}
         $uid        =   is_login();
+
         $post['uid'] = $uid;
+
+
+        $post['uid'] = $uid;
+        $business = M('business');
+        $business_status = $business->where('user_id = '.$post['uid'])->getField('is_status') ? :' ';
+            if($business_status == 2){
+
+                $post['danx1'] = 1;
+            }else{
+                $post['danx1'] = 0;
+            }
 
 
     	if($post['address'] == ''){

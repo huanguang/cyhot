@@ -22,6 +22,7 @@ class IndexController extends HomeController {
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
         $Document = M('document');
+        $business  = M('business');
         $member = M('member');
         $sell  = M('sell');
         $this->assign('category',$category);//栏目
@@ -35,10 +36,17 @@ class IndexController extends HomeController {
         $category = M('category');
         //查询品牌出来
         $brandlist = $category->where('pid = 41'.$where)->select();
+        if($getlist['brand_k']){
+	        foreach ($brandlist as $key => $value) {
+	        	$kk = substr($value['name'],0,1);
+
+	        	if($kk !=  $getlist['brand_k']) unset($brandlist[$key]);
+	        }
+        }
         
         $this->assign('brandlist',$brandlist);
         //查询首页推荐车源
-        $selllist = $sell->where(' is_recommend = 1')->order('add_time')->limit(12)->select();
+        $selllist = $sell->where(' is_recommend = 1 and is_status = 1')->order('add_time')->limit(12)->select();
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
@@ -50,7 +58,7 @@ class IndexController extends HomeController {
 				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 				//判断用户是商家还是个人，
-               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
                if($status == 2){
                   $selllist[$key]['status'] = '认证';  
                }else{
@@ -63,7 +71,7 @@ class IndexController extends HomeController {
 
 
 		//查询最新车源
-			$selllist_new = $sell->where(' is_new = 1')->order('add_time')->limit(16)->select();
+			$selllist_new = $sell->where(' is_new = 1 and is_status = 1')->order('add_time')->limit(16)->select();
 
 			//查询信息的一张图片
 
@@ -74,7 +82,7 @@ class IndexController extends HomeController {
 					$selllist_new[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_new[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 					//判断用户是商家还是个人，
-	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
 	               if($status == 2){
 	                  $selllist_new[$key]['status'] = '认证';  
 	               }else{
@@ -87,7 +95,7 @@ class IndexController extends HomeController {
 
 
 			//查询最热车源
-			$selllist_hot = $sell->where(' is_hot = 1')->order('add_time')->limit(16)->select();
+			$selllist_hot = $sell->where(' is_hot = 1 and is_status = 1')->order('add_time')->limit(16)->select();
 
 			//查询信息的一张图片
 
@@ -98,7 +106,7 @@ class IndexController extends HomeController {
 					$selllist_hot[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_hot[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 					//判断用户是商家还是个人，
-	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
 	               if($status == 2){
 	                  $selllist_hot[$key]['status'] = '认证';  
 	               }else{
@@ -108,8 +116,43 @@ class IndexController extends HomeController {
 			}
 			//print_r($selllist);die;
 			$this->assign('selllist_hot',$selllist_hot);// 热门推荐品牌
-                 
+
+			//查询首页热门，精选，推荐的文章
+			$document_article = M('document_article');
+			$document_article = $document_article->where(' is_recommend = 1')->limit(9)->select();
+
+			//print_r($document_article);die;
+            $this->assign('document_article',$document_article);// 热门推荐品牌
         $this->display();
+    }
+
+    //系统首页
+    public function brand_k(){
+    	$getlist = I('post.');
+    	$where = '';
+        if($getlist['brand_k']) $where = " and name LIKE '%".$getlist['brand_k']."%'";
+        //查询所有的品牌
+        $category = M('category');
+        //查询品牌出来
+        $brandlist = $category->where('pid = 41'.$where)->select();
+        if($getlist['brand_k']){
+	        foreach ($brandlist as $key => $value) {
+	        	$kk = substr($value['name'],0,1);
+
+	        	if($kk !=  $getlist['brand_k']) unset($brandlist[$key]);
+	        }
+        }
+        $arr  = array('brandlist' =>array(),'error'=>1,'msg'=>'数据为空');
+    	if(!empty($brandlist)){
+    		foreach ($brandlist as $key => $value) {
+    			$icon = get_cover($value['icon']);
+    			$brandlist[$key]['icon'] = '.'.$icon['path'];
+    			$brandlist[$key]['url'] = U('Index/index',array('brand_id'=>$value['id']));
+    		}
+    		$arr  = array('brandlist' =>$brandlist,'error'=>0,'msg'=>'获取成功');
+    	}
+
+    	echo json_encode($arr);die;
     }
 
 }

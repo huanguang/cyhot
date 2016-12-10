@@ -48,12 +48,13 @@
                     <th>系列</th>
                     <th>年份</th>
                     <th>排量(L)</th>
-                    <th>颜色</th>
                     <th>转让价格(万元)</th>
                     <th>首页推荐</th>
                     <th>首页热门</th>
                     <th>首页最新</th>
+                    <th>添加人</th>
                     <th>添加时间</th>
+                    <th>审核</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -68,7 +69,6 @@
                         <td>{$goods.brand_model}</td>
                         <td>{$goods.year_id}</td>
                         <td>{$goods.displacement_id}</td>
-                        <td>{$goods.colour}</td>
                         <td>{$goods.sfer_price}</td>
                         <td><if condition="$goods.is_recommend eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_recommend','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_recommend','status'=>'1'))}">启用</a>  否</if></td>
 
@@ -76,7 +76,14 @@
 
                         <td><if condition="$goods.is_new eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'1'))}">启用</a>  否</if></td>
                         </td>
+                        <td>{$goods.name}</td>
                         <td>{$goods.add_time}</td>
+                        <td>
+                            <if condition="$goods.is_status eq 1">审核通过
+                            <elseif condition="$goods.is_status eq 2"/>审核拒绝
+                            <else />未审核
+                            </if>
+                        </td>
                         <td>
                             <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('Sell/edit',array('id'=>$goods['id']))}">编辑</a>
                             <eq name="goods.status" value="1">

@@ -81,6 +81,31 @@ class NewsController extends HomeController {
 			$tmpl = 'Article/'. get_document_model($info['model_id'],'name') .'/detail';
 		}
 
+		$sell = M('sell');
+		//查询首页推荐车源
+        $selllist = $sell->where(' is_recommend = 1 and is_status = 1')->order('add_time')->limit(12)->select();
+
+		//查询信息的一张图片
+		$albumtable  = M('album');
+		$category  = M('category');
+		$business  = M('business');
+		foreach ($selllist as $key => $value) {
+				$selllist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
+				$selllist[$key]['gearbox'] =  $Document->where('id = '.$value['gearbox_id'])->getField('title');
+				$selllist[$key]['brand_model'] =  $Document->where('id = '.$value['brand_model'])->getField('title');
+				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
+				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
+				//判断用户是商家还是个人，
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
+               if($status == 2){
+                  $selllist[$key]['status'] = '认证';  
+               }else{
+                    $selllist[$key]['status'] = ''; 
+               }
+
+		}
+		//print_r($selllist);die;
+		$this->assign('selllist',$selllist);// 热门推荐品牌
 		/* 更新浏览数 */
 		$map = array('id' => $id);
 		$Document->where($map)->setInc('view');

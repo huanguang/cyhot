@@ -17,6 +17,7 @@ namespace Admin\Controller;
             $this->assign('k',$keyword);// 赋值数据集
         }
         $User = M('sell'); // 实例化User对象
+        $member = M('member'); // 实例化User对象
         $count      = $User->where($where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
@@ -31,6 +32,7 @@ namespace Admin\Controller;
                 $selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
                 $selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
                 $selllist[$key]['add_time'] =  date('Y-m-d',$value['add_time']);
+                $selllist[$key]['name'] =  $member->where('uid = '.$value['uid'])->getField('nickname');
 
         }
         $this->assign('page',$show);// 赋值分页输出
@@ -105,7 +107,20 @@ namespace Admin\Controller;
             unset($post['id']);
 
             $sell->where('id='.$id)->save($post); // 根据条件更新记录
-
+            //增加用户信息，让用户知道自己发布的信息是否审核通过
+            if($post['is_status'] == 1){
+                $xinxi = M('xinxi');
+                $title = "您发布的出售二手车信息已经审核通过，信息已经显示";
+            }elseif($post['is_status'] == 2){
+                $xinxi = M('xinxi');
+                $title = "您发布的出售二手车信息审核不通过，请重新发布信息";
+            }
+            if($title){
+                $xinxi_array = array('uid'=>$post['uid'],'from'=>'管理员','content'=>$title,'release_time'=>time(),'guoqi_id'=>0);
+                $xinxi->add($xinxi_array);
+            }
+            unset($post['uid']);
+            
             //加入相册信息
             if(!empty($img)){
                 for ($i=0; $i < count($img); $i++) { 

@@ -17,6 +17,7 @@ namespace Admin\Controller;
         $category = M('category');
         //查询用户的列表
          $Buy = M('buying'); // 实例化buying对象
+         $member = M('member'); // 实例化User对象
         $count      = $Buy->where($where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
@@ -31,6 +32,7 @@ namespace Admin\Controller;
             $buylist[$key]['driven'] =  $Document->where('id = '.$value['driven_id'])->getField('title') ? :'不限';
             $buylist[$key]['price'] =  $Document->where('id = '.$value['price_id'])->getField('title') ? :'不限';
             $buylist[$key]['add_time'] = date('Y-m-d',$value['add_time']);
+            $buylist[$key]['name'] =  $member->where('uid = '.$value['uid'])->getField('nickname');
         }
 
         $this->assign('buylist',$buylist);// 赋值数据集
@@ -75,6 +77,20 @@ namespace Admin\Controller;
             unset($post['id']);
             
             $buy->where('id='.$id)->save($post); // 根据条件更新记录
+
+            //增加用户信息，让用户知道自己发布的信息是否审核通过
+            if($post['is_status'] == 1){
+                $xinxi = M('xinxi');
+                $title = "您发布的求购二手车信息已经审核通过，信息已经显示";
+            }elseif($post['is_status'] == 2){
+                $xinxi = M('xinxi');
+                $title = "您发布的求购二手车信息审核不通过，请重新发布信息";
+            }
+            if($title){
+                $xinxi_array = array('uid'=>$post['uid'],'from'=>'管理员','content'=>$title,'release_time'=>time(),'guoqi_id'=>0);
+                $xinxi->add($xinxi_array);
+            }
+            unset($post['uid']);
 
 
         $this->success('提交成功！！',U('Buy/index'));

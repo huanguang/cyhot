@@ -119,8 +119,8 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sell_ta">
 					  <tr>
 					    <td><p>排量： {$sellinfo.displacement_id} </p></td>
-					    <td><p>长宽高： 4878*1925*1734</p></td>
-					    <td><p>驱动方式： 前置前驱</p></td>
+					    <td><p>长宽高： {$sellinfo.length}</p></td>
+					    <td><p>驱动方式： <if condition="$sellinfo.drive_info eq 0">前置驱动<else/>后置驱动</if></p></td>
 					    <td><p>变速箱： {$sellinfo.gearbox}  </p></td>
 					  </tr>
 					  <tr>

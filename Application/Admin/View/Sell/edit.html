@@ -31,7 +31,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="rele_ta">
 		<tr>
 	    <td class="rele_td"><i>*</i>标题</td>
-	    <td><input class="inp_ty" name="title" value="{$sellinfo.title}" type="text"></td>
+	    <td><input class="inp_ty" name="title" value="{$sellinfo.title}" type="text">格式（大众 宝来 2014 2.0 自动 至尊版）</td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>品牌</td>
@@ -325,30 +325,30 @@
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>首次上牌时间</td>
-	    <td><div class="div1"><input class="inp_gls" name="years" value="{$sellinfo.years}" type="text">年/月</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="years" value="{$sellinfo.years}" type="text">年/月</div>格式（2016年10月填写：201610）</td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>行驶里程</td>
-	    <td><div class="div1"><input class="inp_gls" name="driven" value="{$sellinfo.driven}" type="text">万公里</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="driven" value="{$sellinfo.driven}" type="text">万公里</div>格式（3.2）</td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>排量</td>
-	    <td><div class="div1"><input class="inp_gls" name="displacement_id" value="{$sellinfo.displacement_id}" type="text">L</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="displacement_id" value="{$sellinfo.displacement_id}" type="text">L</div>格式（1.6）</td>
 	  </tr>
 
 	  <tr>
 	    <td class="rele_td"><i>*</i>交强险到期时间</td>
-	    <td><div class="div1"><input class="inp_gls" name="insurance_endtime" value="{$sellinfo.insurance_endtime}" type="text">年/月</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="insurance_endtime" value="{$sellinfo.insurance_endtime}" type="text">年/月</div>格式（2016年10月填写：201610）</td>
 	  </tr>
 
 	  <tr>
 	    <td class="rele_td"><i>*</i>年检到期时间</td>
-	    <td><div class="div1"><input class="inp_gls" name="inspection_endtime" value="{$sellinfo.inspection_endtime}" type="text">年/月</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="inspection_endtime" value="{$sellinfo.inspection_endtime}" type="text">年/月</div>格式（2016年10月填写：201610）</td>
 	  </tr>
 
 	  <tr>
 	    <td class="rele_td"><i>*</i>商业险到期时间</td>
-	    <td><div class="div1"><input class="inp_gls" name="business_endtime" value="{$sellinfo.business_endtime}" type="text">年/月</div></td>
+	    <td><div class="div1"><input class="inp_gls" name="business_endtime" value="{$sellinfo.business_endtime}" type="text">年/月</div>格式（2016年10月填写：201610）</td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>转让价格</td>
@@ -360,6 +360,13 @@
 	  <tr>
 	    <td class="rele_td"><i>*</i>新车价格</td>
 	    <td><div class="div1"><input class="inp_gls" name="new_price" value="{$sellinfo.new_price}" type="text">万元</div></td>
+	  </tr>
+	  <tr>
+	    <td class="rele_td"><i>*</i>车辆长宽高</td>
+	    <td>
+	    	<input class="inp_ty" name="length" type="text" value="{$sellinfo.length}">格式（4878*1925*1734）
+			
+	    </td>
 	  </tr>
 	  <tr>
 	    <td valign="top" class="rele_td"><i>*</i>补充说明</td>
@@ -474,22 +481,38 @@
 	    <td>
 	    	<input class="inp_ty" name="contacts" value="{$sellinfo.contacts}" type="text">
 			<label for="" style="margin:0 20px 0 10px">
-			<input  <if condition="$sellinfo.danx1 eq '1' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" value="1" /><label for="checkbox_a3"></label>个人</label>
-        	<label for=""><input <if condition="$sellinfo.danx1 eq '0' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a4" class="chk_1 inp_fx" value="0" /><label for="checkbox_a4"></label>商家</label>
+			<input  <if condition="$sellinfo.danx1 eq '0' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a3" class="chk_1 inp_fx" value="0" /><label for="checkbox_a3"></label>个人</label>
+        	<label for=""><input <if condition="$sellinfo.danx1 eq '1' "> checked="true" </if> name="danx1" type="radio" id="checkbox_a4" class="chk_1 inp_fx" value="1" /><label for="checkbox_a4"></label>商家</label>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>联系电话</td>
-	    <td><input class="inp_ty" name="contact_number" value="{$sellinfo.contact_number}" type="text"></td>
+	    <td><input class="inp_ty" name="contact_number" value="{$sellinfo.contact_number}" type="text">
+	    	<label for="" style="margin:0 20px 0 10px"><input value="0"  <if condition="$sellinfo.drive_info eq '0' "> checked="true" </if> name="drive_info" type="radio" id="checkbox_a5" class="chk_1 inp_fx" /><label for="checkbox_a5"></label>前置前驱</label>
+        	<label for=""><input <if condition="$sellinfo.drive_info eq '1' "> checked="true" </if> value="1" name="drive_info" type="radio" id="checkbox_a6" class="chk_1 inp_fx" /><label for="checkbox_a6"></label>后置驱动</label>
+	    </td>
+
 	  </tr>
 	  <tr>
 	    <td class="rele_td"><i>*</i>看车地址</td>
 	    <td><input class="inp_ty" name="address" value="{$sellinfo.address}" type="text" style="width:650px"></td>
 	  </tr>
 	  <tr>
+	    <td class="rele_td"><i>*</i>审核</td>
+	    <td>
+	    <label for="" style="margin:0 20px 0 10px"><input value="0"  <if condition="$sellinfo.is_status eq '0' "> checked="true" </if> name="is_status" type="radio" id="checkbox_a7" class="chk_1 inp_fx" /><label for="checkbox_a7"></label>未审核</label>
+        	<label for="" style="margin:0 20px 0 10px"><input <if condition="$sellinfo.is_status eq '1' "> checked="true" </if> value="1" name="is_status" type="radio" id="checkbox_a8" class="chk_1 inp_fx" /><label for="checkbox_a8"></label>审核通过</label>
+        	<label for=""><input <if condition="$sellinfo.is_status eq '2' "> checked="true" </if> value="2" name="is_status" type="radio" id="checkbox_a9" class="chk_1 inp_fx" /><label for="checkbox_a9"></label>审核拒绝</label>
+        	</td>
+	  </tr>
+
+	  <tr>
 	    <td class="rele_td">&nbsp;</td>
 	    <input type="hidden" name="id" value="{$sellinfo.id}" />
-	    <td><input class="sub_1" name="" type="submit" value="提交"></td>
+	    <input type="hidden" name="uid" value="{$sellinfo.uid}">
+	    <td><input class="sub_1" name="" type="submit" value="提交">
+
+	    </td>
 	  </tr>
 	</table>
 	</form>
