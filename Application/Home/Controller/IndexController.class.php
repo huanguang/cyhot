@@ -22,6 +22,7 @@ class IndexController extends HomeController {
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
         $Document = M('document');
+        $business  = M('business');
         $member = M('member');
         $sell  = M('sell');
         $this->assign('category',$category);//栏目
@@ -57,7 +58,7 @@ class IndexController extends HomeController {
 				$selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 				//判断用户是商家还是个人，
-               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
                if($status == 2){
                   $selllist[$key]['status'] = '认证';  
                }else{
@@ -81,7 +82,7 @@ class IndexController extends HomeController {
 					$selllist_new[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_new[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 					//判断用户是商家还是个人，
-	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
 	               if($status == 2){
 	                  $selllist_new[$key]['status'] = '认证';  
 	               }else{
@@ -105,7 +106,7 @@ class IndexController extends HomeController {
 					$selllist_hot[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
 					$selllist_hot[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 					//判断用户是商家还是个人，
-	               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+	               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
 	               if($status == 2){
 	                  $selllist_hot[$key]['status'] = '认证';  
 	               }else{

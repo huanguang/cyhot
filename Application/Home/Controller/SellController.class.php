@@ -173,6 +173,7 @@ class SellController extends HomeController {
 
 		//查询信息的一张图片
 		$albumtable  = M('album');
+        $business  = M('business');
 		$category  = M('category');
 		foreach ($selllist as $key => $value) {
 				$selllist[$key]['imgurl'] =  $albumtable->where('sell_id = '.$value['id'])->getField('imgurl');
@@ -182,7 +183,7 @@ class SellController extends HomeController {
 				$selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
 
                 //判断用户是商家还是个人，
-               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
                if($status == 2){
                   $selllist[$key]['status'] = '认证';  
                }else{
@@ -237,6 +238,7 @@ class SellController extends HomeController {
        $member  = M('member');
        $Document = M('document');
        $category = M('category');
+       $business  = M('business');
        $imglist = $albumtable->where('sell_id = '.$get['id'])->select();
        $this->assign('imglist',$imglist);//相册
        $selltable  = M('sell');
@@ -263,7 +265,7 @@ class SellController extends HomeController {
 				$sellbrandlist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title') ? :'';
 				$sellbrandlist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
                 //判断用户是商家还是个人，
-               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
                if($status == 2){
                   $sellbrandlist[$key]['status'] = '认证';  
                }else{
@@ -289,7 +291,7 @@ class SellController extends HomeController {
 
 				$selltypelist[$key]['add_time'] = date('Y-m-d  H:i:s',$value['add_time']);
                 //判断用户是商家还是个人，
-               $status = $member->where('uid = '.$value['uid'])->getField('is_status');
+               $status = $business->where('user_id = '.$value['uid'])->getField('is_status');
                if($status == 2){
                   $selltypelist[$key]['status'] = '认证';  
                }else{
@@ -301,7 +303,6 @@ class SellController extends HomeController {
 			}
 
        $this->assign('sellinfo',$sellinfo);
-       var_dump($sellinfo);
        $this->assign('selltypelist',$selltypelist);
        $this->assign('sellbrandlist',$sellbrandlist);
         $this->display();
