@@ -84,7 +84,7 @@ class HomeController extends Controller {
          }
               $this->assign('fenzhan', $fenzhan);//分站信息
 
-        $erimg = $docuement->where('category_id=60')->select();
+        //$erimg = $docuement->where('category_id = 60')->select();
         $this->assign('erimg',$erimg);
 
         //网站logo

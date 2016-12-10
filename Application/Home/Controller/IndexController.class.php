@@ -35,6 +35,13 @@ class IndexController extends HomeController {
         $category = M('category');
         //查询品牌出来
         $brandlist = $category->where('pid = 41'.$where)->select();
+        if($getlist['brand_k']){
+	        foreach ($brandlist as $key => $value) {
+	        	$kk = substr($value['name'],0,1);
+
+	        	if($kk !=  $getlist['brand_k']) unset($brandlist[$key]);
+	        }
+        }
         
         $this->assign('brandlist',$brandlist);
         //查询首页推荐车源
@@ -110,6 +117,35 @@ class IndexController extends HomeController {
 			$this->assign('selllist_hot',$selllist_hot);// 热门推荐品牌
                  
         $this->display();
+    }
+
+    //系统首页
+    public function brand_k(){
+    	$getlist = I('post.');
+    	$where = '';
+        if($getlist['brand_k']) $where = " and name LIKE '%".$getlist['brand_k']."%'";
+        //查询所有的品牌
+        $category = M('category');
+        //查询品牌出来
+        $brandlist = $category->where('pid = 41'.$where)->select();
+        if($getlist['brand_k']){
+	        foreach ($brandlist as $key => $value) {
+	        	$kk = substr($value['name'],0,1);
+
+	        	if($kk !=  $getlist['brand_k']) unset($brandlist[$key]);
+	        }
+        }
+        $arr  = array('brandlist' =>array(),'error'=>1,'msg'=>'数据为空');
+    	if(!empty($brandlist)){
+    		foreach ($brandlist as $key => $value) {
+    			$icon = get_cover($value['icon']);
+    			$brandlist[$key]['icon'] = '.'.$icon['path'];
+    			$brandlist[$key]['url'] = U('Index/index',array('brand_id'=>$value['id']));
+    		}
+    		$arr  = array('brandlist' =>$brandlist,'error'=>0,'msg'=>'获取成功');
+    	}
+
+    	echo json_encode($arr);die;
     }
 
 }

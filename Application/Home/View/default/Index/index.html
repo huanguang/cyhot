@@ -38,41 +38,62 @@
     <div class="w1200 brand_div">
         <h2 class="h2_title">热门品牌</h2>
         <div class="div_sx">
-            <a href="{:U('Index',array('brand_k'=>'a'))}">A</a>
-            <a href="{:U('Index',array('brand_k'=>'b'))}">B</a>
-            <a href="{:U('Index',array('brand_k'=>'c'))}">C</a>
-            <a href="{:U('Index',array('brand_k'=>'d'))}">D</a>
-            <a href="{:U('Index',array('brand_k'=>'e'))}">E</a>
-            <a href="{:U('Index',array('brand_k'=>'f'))}">F</a>
-            <a href="{:U('Index',array('brand_k'=>'g'))}">G</a>
-            <a href="{:U('Index',array('brand_k'=>'h'))}">H</a>
-            <a href="{:U('Index',array('brand_k'=>'i'))}">I</a>
-            <a href="{:U('Index',array('brand_k'=>'j'))}">J</a>
-            <a href="{:U('Index',array('brand_k'=>'k'))}">K</a>
-            <a href="{:U('Index',array('brand_k'=>'l'))}">L</a>
-            <a href="{:U('Index',array('brand_k'=>'m'))}">M</a>
-            <a href="{:U('Index',array('brand_k'=>'n'))}">N</a>
-            <a href="{:U('Index',array('brand_k'=>'o'))}">O</a>
-            <a href="{:U('Index',array('brand_k'=>'p'))}">P</a>
-            <a href="{:U('Index',array('brand_k'=>'q'))}">Q</a>
-            <a href="{:U('Index',array('brand_k'=>'r'))}">R</a>
-            <a href="{:U('Index',array('brand_k'=>'s'))}">S</a>
-            <a href="{:U('Index',array('brand_k'=>'t'))}">T</a>
-            <a href="{:U('Index',array('brand_k'=>'u'))}">U</a>
-            <a href="{:U('Index',array('brand_k'=>'v'))}">V</a>
-            <a href="{:U('Index',array('brand_k'=>'w'))}">W</a>
-            <a href="{:U('Index',array('brand_k'=>'x'))}">X</a>
-            <a href="{:U('Index',array('brand_k'=>'y'))}">Y</a>
-            <a href="{:U('Index',array('brand_k'=>'z'))}">Z</a>
+            <a href="javascript:;" onclick="brand_k('a',this);">A</a>
+            <a href="javascript:;" onclick="brand_k('b',this);">B</a>
+            <a href="javascript:;" onclick="brand_k('c',this);">C</a>
+            <a href="javascript:;" onclick="brand_k('d',this);">D</a>
+            <a href="javascript:;" onclick="brand_k('e',this);">E</a>
+            <a href="javascript:;" onclick="brand_k('f',this);">F</a>
+            <a href="javascript:;" onclick="brand_k('g',this);">G</a>
+            <a href="javascript:;" onclick="brand_k('h',this);">H</a>
+            <a href="javascript:;" onclick="brand_k('i',this);">I</a>
+            <a href="javascript:;" onclick="brand_k('j',this);">J</a>
+            <a href="javascript:;" onclick="brand_k('k',this);">K</a>
+            <a href="javascript:;" onclick="brand_k('l',this);">L</a>
+            <a href="javascript:;" onclick="brand_k('m',this);">M</a>
+            <a href="javascript:;" onclick="brand_k('n',this);">N</a>
+            <a href="javascript:;" onclick="brand_k('o',this);">O</a>
+            <a href="javascript:;" onclick="brand_k('p',this);">P</a>
+            <a href="javascript:;" onclick="brand_k('q',this);">Q</a>
+            <a href="javascript:;" onclick="brand_k('r',this);">R</a>
+            <a href="javascript:;" onclick="brand_k('s',this);">S</a>
+            <a href="javascript:;" onclick="brand_k('t',this);">T</a>
+            <a href="javascript:;" onclick="brand_k('u',this);">U</a>
+            <a href="javascript:;" onclick="brand_k('v',this);">V</a>
+            <a href="javascript:;" onclick="brand_k('w',this);">W</a>
+            <a href="javascript:;" onclick="brand_k('x',this);">X</a>
+            <a href="javascript:;" onclick="brand_k('y',this);">Y</a>
+            <a href="javascript:;" onclick="brand_k('z',this);">Z</a>
         </div>
+        <script type="text/javascript">
+            function brand_k(k,obj){
+                $(obj).siblings().css('color','#444');
+                $(obj).css('color','blue');
+
+                $.ajax({
+                     type: "POST",
+                     url: "{:U('Index/brand_k')}",
+                     data: {brand_k:k},
+                     dataType: "json",
+                     success: function(data){
+                        var res = data.brandlist;
+                        var str = '';
+                         for (var i = 0; i < res.length; i++) {
+                            str += '<li><a style="color:#444;" href="'+res[i].url+'"><img src="'+res[i].icon+'" alt="'+res[i].title+'"><p>'+res[i].title+'</p></a></li>';
+                         }
+                         $('.brandlist').html(str);  
+                    }
+                });
+            }
+        </script>
     </div>
 </div>
 <div class="brand1">
     <div class="w1200">
         <div class="bra_cx1">
-            <ul>
+            <ul class="brandlist">
                 <volist name="brandlist" id="val">
-                    <li><a href="{:U('Sell/index',array('brand_id'=>$val['id']))}"><img src="{$val.icon|get_cover=###,path}" alt="{$val.title}"><p>{$val.title}</p></a></li>
+                    <li><a style="color:#444;" href="{:U('Sell/index',array('brand_id'=>$val['id']))}"><img src="{$val.icon|get_cover=###,path}" alt="{$val.title}"><p>{$val.title}</p></a></li>
                 </volist>
             </ul>
             <div class="clear"></div>
