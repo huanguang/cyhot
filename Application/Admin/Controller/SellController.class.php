@@ -17,6 +17,7 @@ namespace Admin\Controller;
             $this->assign('k',$keyword);// 赋值数据集
         }
         $User = M('sell'); // 实例化User对象
+        $member = M('member'); // 实例化User对象
         $count      = $User->where($where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
@@ -31,6 +32,7 @@ namespace Admin\Controller;
                 $selllist[$key]['level'] =  $Document->where('id = '.$value['level_id'])->getField('title');
                 $selllist[$key]['brand'] =  $category->where('id = '.$value['brand_id'])->getField('title');
                 $selllist[$key]['add_time'] =  date('Y-m-d',$value['add_time']);
+                $selllist[$key]['name'] =  $member->where('uid = '.$value['uid'])->getField('nickname');
 
         }
         $this->assign('page',$show);// 赋值分页输出

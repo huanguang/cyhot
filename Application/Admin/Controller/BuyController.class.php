@@ -17,6 +17,7 @@ namespace Admin\Controller;
         $category = M('category');
         //查询用户的列表
          $Buy = M('buying'); // 实例化buying对象
+         $member = M('member'); // 实例化User对象
         $count      = $Buy->where($where)->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出
@@ -31,6 +32,7 @@ namespace Admin\Controller;
             $buylist[$key]['driven'] =  $Document->where('id = '.$value['driven_id'])->getField('title') ? :'不限';
             $buylist[$key]['price'] =  $Document->where('id = '.$value['price_id'])->getField('title') ? :'不限';
             $buylist[$key]['add_time'] = date('Y-m-d',$value['add_time']);
+            $selllist[$key]['name'] =  $member->where('uid = '.$value['uid'])->getField('nickname');
         }
 
         $this->assign('buylist',$buylist);// 赋值数据集

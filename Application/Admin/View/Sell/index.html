@@ -53,6 +53,7 @@
                     <th>首页推荐</th>
                     <th>首页热门</th>
                     <th>首页最新</th>
+                    <th>添加人</th>
                     <th>添加时间</th>
                     <th>操作</th>
                 </tr>
@@ -76,6 +77,7 @@
 
                         <td><if condition="$goods.is_new eq '1'"><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'0'))}">关闭</a> 是<else/><a href="{:U('Sell/edit_index',array('id'=>$goods['id'],'type'=>'is_new','status'=>'1'))}">启用</a>  否</if></td>
                         </td>
+                        <td>{$goods.name}</td>
                         <td>{$goods.add_time}</td>
                         <td>
                             <!-- <a title="详情" href="{:U('xiangc?id='.$goods['id'])}">详情图片</a>| --><a title="编辑" href="{:U('Sell/edit',array('id'=>$goods['id']))}">编辑</a>
